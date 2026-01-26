@@ -44,6 +44,12 @@ public class PlayerMovementTPS : MonoBehaviour
 
         if (input.magnitude > 0f)
         {
+            if (cameraTransform == null)
+            {
+                Debug.LogError("PlayerMovement: Camera transform reference is missing!", this);
+                return;
+            }
+
             // Déplacement relatif à la caméra
             Vector3 camForward = cameraTransform.forward;
             Vector3 camRight = cameraTransform.right;

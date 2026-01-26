@@ -17,9 +17,11 @@ public class SpawnSwordOnInteract : MonoBehaviour
 
     void Update()
     {
+        if (player == null)
+            return;
+
         float distance = Vector3.Distance(player.position, transform.position);
 
-        // Utilise la showDistance du ProximityButton
         if (button != null && distance <= button.showDistance && Input.GetKeyDown(KeyCode.E))
         {
             SpawnSword();
@@ -28,6 +30,24 @@ public class SpawnSwordOnInteract : MonoBehaviour
 
     void SpawnSword()
     {
+        if (swordPrefab == null)
+        {
+            Debug.LogError("SpawnSwordOnInteract: Sword prefab is missing!", this);
+            return;
+        }
+
+        if (conveyorController == null)
+        {
+            Debug.LogError("SpawnSwordOnInteract: Conveyor controller reference is missing!", this);
+            return;
+        }
+
+        if (conveyorController.pausePoints == null || conveyorController.pausePoints.Length < 2)
+        {
+            Debug.LogError("SpawnSwordOnInteract: Conveyor pausePoints array is invalid (needs at least 2 points)!", this);
+            return;
+        }
+
         GameObject swordInstance = Instantiate(
             swordPrefab,
             transform.position,
@@ -36,6 +56,13 @@ public class SpawnSwordOnInteract : MonoBehaviour
         );
 
         MoveSword moveSword = swordInstance.GetComponent<MoveSword>();
+        
+        if (moveSword == null)
+        {
+            Debug.LogError("SpawnSwordOnInteract: Spawned sword prefab missing MoveSword component!", swordInstance);
+            Destroy(swordInstance);
+            return;
+        }
 
         moveSword.pausePoints = conveyorController.pausePoints;
         moveSword.SetSword(swordInstance.transform);

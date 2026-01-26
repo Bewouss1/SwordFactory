@@ -11,21 +11,39 @@ public class ProximityButton : MonoBehaviour
 
     void Start()
     {
-        mainCamera = Camera.main; // Récupère la caméra principale
-        uiButton.SetActive(false); // Cache le bouton au départ
+        mainCamera = Camera.main;
+        
+        if (mainCamera == null)
+        {
+            Debug.LogError("ProximityButton: Main camera not found!", this);
+            enabled = false;
+            return;
+        }
+        
+        if (uiButton == null)
+        {
+            Debug.LogError("ProximityButton: UI Button reference is missing!", this);
+            enabled = false;
+            return;
+        }
+        
+        uiButton.SetActive(false);
         uiButton.transform.position = transform.position + offset;
     }
 
     void Update()
     {
+        if (player == null || uiButton == null || mainCamera == null)
+            return;
+
         float distance = Vector3.Distance(player.position, transform.position);
 
         if (distance <= showDistance)
         {
             uiButton.SetActive(true);
-            // Faire face à la caméra
+            uiButton.transform.position = transform.position + offset;
             uiButton.transform.LookAt(mainCamera.transform);
-            uiButton.transform.Rotate(0, 180f, 0); // Pour corriger l'orientation si le bouton est à l'envers
+            uiButton.transform.Rotate(0, 180f, 0);
         }
         else
         {
