@@ -723,7 +723,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.24480057, y: 0.5227721}
+  m_AnchoredPosition: {x: -0.24480057, y: 0.5227719}
   m_SizeDelta: {x: 0.419, y: 0.1465}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1022267651666658002
@@ -795,7 +795,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Silver
+  m_text: MoldText
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -822,7 +822,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.3
+  m_fontSize: 1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -880,6 +880,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6700919752175982212}
   - component: {fileID: 4218944569236159100}
+  - component: {fileID: 2169354754630587177}
   m_Layer: 0
   m_Name: SwordPrefab
   m_TagString: Untagged
@@ -917,9 +918,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42f9be1d84da8df42ac03f45c5827c99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveSword
-  pausePoints: []
+  pausePoints:
+  - {fileID: 0}
   speed: 2
-  waitTime: 1
+  waitTime: 2
+  moldOptions:
+  - name: Wood
+    weight: 50
+  - name: Stone
+    weight: 30
+  - name: Copper
+    weight: 20
+--- !u!114 &2169354754630587177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3909451734926284577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c43a203ba5878634599a5e7aa9a9aed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SwordMold
+  moldText: Unknown
+  moldLabel: {fileID: 6994674359545782746}
 --- !u!1 &4072683543627669898
 GameObject:
   m_ObjectHideFlags: 0
@@ -1676,7 +1699,7 @@ Transform:
   - {fileID: 6814726758028362307}
   - {fileID: 3980642703036044564}
   - {fileID: 7458473442039128780}
-  - {fileID: 2194841012621330218}
   - {fileID: 3276379058147942816}
+  - {fileID: 2194841012621330218}
   m_Father: {fileID: 6700919752175982212}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
