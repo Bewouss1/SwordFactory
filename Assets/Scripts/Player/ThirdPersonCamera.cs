@@ -18,6 +18,13 @@ public class ThirdPersonCamera : MonoBehaviour
 
     void Update()
     {
+        if (target == null)
+        {
+            Debug.LogError("ThirdPersonCamera: Target transform is missing!", this);
+            enabled = false;
+            return;
+        }
+
         rotationX += Input.GetAxis("Mouse X") * mouseSensitivity;
         rotationY -= Input.GetAxis("Mouse Y") * mouseSensitivity;
         rotationY = Mathf.Clamp(rotationY, minY, maxY);
