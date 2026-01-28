@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float rotationSpeed = 10f;
 
     [SerializeField] private Transform cameraTransform;
+    [SerializeField] private Transform spawnPoint;  // Point de départ du joueur
 
     private CharacterController controller;
     private Vector3 velocity;
@@ -17,6 +18,13 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         controller = GetComponent<CharacterController>();
+        
+        // Téléporter le joueur au spawn point s'il existe
+        if (spawnPoint != null)
+        {
+            transform.position = spawnPoint.position;
+            transform.rotation = spawnPoint.rotation;
+        }
     }
 
     void Update()

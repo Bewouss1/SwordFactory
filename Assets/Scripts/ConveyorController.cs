@@ -16,6 +16,7 @@ public class ConveyorController : MonoBehaviour
     
     [Header("Dependencies")]
     [SerializeField] private SwordAssigner swordAssigner;  // Pour assigner les attributs
+    [SerializeField] private SellZone sellZone;            // Zone de vente pour placer les épées finies
 
     public Transform[] PausePoints => pausePoints;
 
@@ -92,6 +93,37 @@ public class ConveyorController : MonoBehaviour
     }
 
     /// <summary>
+    /// Place l'épée terminée dans la SellZone
+    /// </summary>
+    public void PlaceSwordInSellZone(Transform swordTransform)
+    {
+        if (sellZone == null)
+        {
+            Debug.LogWarning("ConveyorController: SellZone reference is missing! Destroying sword instead.", this);
+            Destroy(swordTransform.gameObject);
+            return;
+        }
+
+        Transform slot = sellZone.GetNextSlot();
+        if (slot != null)
+        {
+            swordTransform.position = slot.position;
+            swordTransform.rotation = slot.rotation;
+            swordTransform.SetParent(slot); // Optionnel : rendre l'épée enfant du slot
+
+            SwordStats stats = swordTransform.GetComponent<SwordStats>();
+            if (stats != null)
+            {
+                Debug.Log($"[Conveyor] Sword placed in SellZone: {stats.GetSummary()}");
+            }
+        }
+        else
+        {
+            Debug.LogError("ConveyorController: Could not get a slot from SellZone!", this);
+        }
+    }
+
+    /// <summary>
     /// Comportement de mouvement attaché dynamiquement à chaque épée
     /// </summary>
     private class MovementBehavior : MonoBehaviour
@@ -160,6 +192,9 @@ public class ConveyorController : MonoBehaviour
                 yield return new WaitForSeconds(waitTime);
                 currentIndex++;
             }
+
+            // Épée termine le parcours : la placer dans la SellZone
+            controller.PlaceSwordInSellZone(swordTransform);
 
             // Détruire ce comportement une fois le parcours terminé
             Destroy(this);
