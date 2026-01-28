@@ -2,21 +2,15 @@ using UnityEngine;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
-    public Transform target;
-    public float mouseSensitivity = 3f;
-    public float minY = -40f;
-    public float maxY = 70f;
+    [SerializeField] private Transform target;
+    [SerializeField] private float mouseSensitivity = 3f;
+    [SerializeField] private float minY = -40f;
+    [SerializeField] private float maxY = 70f;
 
     private float rotationX;
     private float rotationY;
 
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
-    void Update()
+    void Awake()
     {
         if (target == null)
         {
@@ -24,6 +18,18 @@ public class ThirdPersonCamera : MonoBehaviour
             enabled = false;
             return;
         }
+    }
+
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    void LateUpdate()
+    {
+        if (target == null)
+            return;
 
         rotationX += Input.GetAxis("Mouse X") * mouseSensitivity;
         rotationY -= Input.GetAxis("Mouse Y") * mouseSensitivity;

@@ -1,14 +1,14 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMovementTPS : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 6f;
-    public float jumpHeight = 2f;
-    public float gravity = -9.81f;
-    public float rotationSpeed = 10f;
+    [SerializeField] private float moveSpeed = 6f;
+    [SerializeField] private float jumpHeight = 2f;
+    [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float rotationSpeed = 10f;
 
-    public Transform cameraTransform;
+    [SerializeField] private Transform cameraTransform;
 
     private CharacterController controller;
     private Vector3 velocity;

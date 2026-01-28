@@ -1,28 +1,48 @@
 using UnityEngine;
 
+/// <summary>
+/// Gère le spawn d'épées lorsque le joueur appuie sur E à proximité.
+/// L'épée est ensuite déplacée par le ConveyorController.
+/// </summary>
 public class SpawnSwordOnInteract : MonoBehaviour
 {
-    public Transform player;                        // Joueur
-    public GameObject uiButton;                     // Bouton UI à distance
-    public GameObject swordPrefab;                  // Épée à instancier
-    public Transform SwordsSpawnedContainer;       // Parent des épées instanciées
-    public MoveSword conveyorController;           // Pour récupérer les pausePoints
+    [SerializeField] private Transform player;                          // Référence au joueur
+    [SerializeField] private GameObject swordPrefab;                    // Prefab d'épée (doit avoir SwordStats)
+    [SerializeField] private Transform swordsSpawnedContainer;          // Parent des épées dans la hiérarchie
+    [SerializeField] private ConveyorController conveyorController;     // Contrôleur du convoyeur
 
-    private ProximityButton button;       // Référence au script du même GameObject
+    private ProximityButton proximityButton;
 
     void Awake()
     {
-        button = GetComponent<ProximityButton>();
+        proximityButton = GetComponent<ProximityButton>();
+        ValidateReferences();
+    }
+
+    void ValidateReferences()
+    {
+        if (player == null)
+            Debug.LogError("SpawnSwordOnInteract: Player reference is missing!", this);
+
+        if (swordPrefab == null)
+            Debug.LogError("SpawnSwordOnInteract: Sword prefab is missing!", this);
+
+        if (conveyorController == null)
+            Debug.LogError("SpawnSwordOnInteract: Conveyor controller is missing!", this);
+
+        if (swordsSpawnedContainer == null)
+            Debug.LogWarning("SpawnSwordOnInteract: SwordsSpawnedContainer is null (swords will be at root)", this);
     }
 
     void Update()
     {
-        if (player == null)
+        if (player == null || proximityButton == null)
             return;
 
-        float distance = Vector3.Distance(player.position, transform.position);
+        float distanceSqr = (player.position - transform.position).sqrMagnitude;
 
-        if (button != null && distance <= button.showDistance && Input.GetKeyDown(KeyCode.E))
+        // Utiliser proximityButton pour la distance (pas de duplication)
+        if (distanceSqr <= proximityButton.ShowDistance * proximityButton.ShowDistance && Input.GetKeyDown(KeyCode.E))
         {
             SpawnSword();
         }
@@ -42,29 +62,21 @@ public class SpawnSwordOnInteract : MonoBehaviour
             return;
         }
 
-        if (conveyorController.pausePoints == null || conveyorController.pausePoints.Length < 2)
-        {
-            Debug.LogError("SpawnSwordOnInteract: Conveyor pausePoints array is invalid (needs at least 2 points)!", this);
-            return;
-        }
-
+        // Instancier l'épée
         GameObject swordInstance = Instantiate(
             swordPrefab,
             transform.position,
             Quaternion.identity,
-            SwordsSpawnedContainer
+            swordsSpawnedContainer
         );
 
-        MoveSword moveSword = swordInstance.GetComponent<MoveSword>();
-        
-        if (moveSword == null)
+        // Vérifier que l'épée a un composant SwordStats
+        if (swordInstance.GetComponent<SwordStats>() == null)
         {
-            Debug.LogError("SpawnSwordOnInteract: Spawned sword prefab missing MoveSword component!", swordInstance);
-            Destroy(swordInstance);
-            return;
+            Debug.LogWarning("SpawnSwordOnInteract: Sword prefab should have a SwordStats component!", swordInstance);
         }
 
-        moveSword.pausePoints = conveyorController.pausePoints;
-        moveSword.SetSword(swordInstance.transform);
+        // Démarrer le mouvement via le convoyeur
+        conveyorController.StartMovingSword(swordInstance.transform);
     }
 }

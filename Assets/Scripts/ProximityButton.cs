@@ -2,16 +2,20 @@ using UnityEngine;
 
 public class ProximityButton : MonoBehaviour
 {
-    public Transform player;        // Référence au joueur pour la distance
-    public GameObject uiButton;     // Le bouton UI à afficher
-    public float showDistance = 3f; // Distance à partir de laquelle le bouton apparaît
-    public Vector3 offset = new Vector3(0, 1, 0); // Décalage du bouton au-dessus du cube
+    [SerializeField] private Transform player;        // Référence au joueur pour la distance
+    [SerializeField] private GameObject uiButton;     // Le bouton UI à afficher
+    [SerializeField] private float showDistance = 3f; // Distance à partir de laquelle le bouton apparaît
+    [SerializeField] private Vector3 offset = new Vector3(0, 1, 0); // Décalage du bouton au-dessus du cube
 
     private Camera mainCamera;
+    private float showDistanceSqr; // Distance au carré pour optimisation
+
+    public float ShowDistance => showDistance;
 
     void Start()
     {
         mainCamera = Camera.main;
+        showDistanceSqr = showDistance * showDistance;
         
         if (mainCamera == null)
         {
@@ -36,9 +40,9 @@ public class ProximityButton : MonoBehaviour
         if (player == null || uiButton == null || mainCamera == null)
             return;
 
-        float distance = Vector3.Distance(player.position, transform.position);
+        float distanceSqr = (player.position - transform.position).sqrMagnitude;
 
-        if (distance <= showDistance)
+        if (distanceSqr <= showDistanceSqr)
         {
             uiButton.SetActive(true);
             uiButton.transform.position = transform.position + offset;
