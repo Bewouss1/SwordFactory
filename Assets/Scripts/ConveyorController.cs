@@ -119,7 +119,8 @@ public class ConveyorController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("ConveyorController: Could not get a slot from SellZone!", this);
+            Debug.LogWarning("ConveyorController: All slots are occupied. Destroying sword.", this);
+            Destroy(swordTransform.gameObject);
         }
     }
 

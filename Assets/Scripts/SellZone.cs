@@ -38,11 +38,43 @@ public class SellZone : MonoBehaviour
             Debug.LogError("SellZone: No slots available!", this);
             return null;
         }
+        return GetNextAvailableSlot();
+    }
 
-        Transform slot = slots[currentSlotIndex];
-        currentSlotIndex = (currentSlotIndex + 1) % slots.Count; // Boucle à travers les slots
+    /// <summary>
+    /// Cherche un slot libre. Retourne null si tous les slots sont occupés.
+    /// </summary>
+    private Transform GetNextAvailableSlot()
+    {
+        if (slots.Count == 0)
+            return null;
 
-        return slot;
+        int checkedCount = 0;
+        int index = currentSlotIndex;
+
+        while (checkedCount < slots.Count)
+        {
+            Transform slot = slots[index];
+            if (slot != null && !IsSlotOccupied(slot))
+            {
+                currentSlotIndex = (index + 1) % slots.Count;
+                return slot;
+            }
+
+            index = (index + 1) % slots.Count;
+            checkedCount++;
+        }
+
+        return null; // tous les slots sont occupés
+    }
+
+    private bool IsSlotOccupied(Transform slot)
+    {
+        if (slot == null)
+            return true;
+
+        // Un slot est occupé s'il contient une épée
+        return slot.GetComponentInChildren<SwordStats>() != null;
     }
 
     /// <summary>

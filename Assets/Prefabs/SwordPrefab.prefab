@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8705500836419555924}
   - component: {fileID: 5813154535671608636}
   - component: {fileID: 5347719464000107620}
+  - component: {fileID: 9047086784472710294}
   m_Layer: 0
   m_Name: LevelText
   m_TagString: Untagged
@@ -181,6 +182,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 5813154535671608636}
   m_maskType: 0
+--- !u!210 &9047086784472710294
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92429483669840328}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 10
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &2200010636700059495
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,6 +296,7 @@ GameObject:
   - component: {fileID: 6664564639155946779}
   - component: {fileID: 1731897713356523186}
   - component: {fileID: 7059386848869189143}
+  - component: {fileID: 2384103937718969034}
   m_Layer: 0
   m_Name: RarityQuality
   m_TagString: Untagged
@@ -452,6 +467,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1731897713356523186}
   m_maskType: 0
+--- !u!210 &2384103937718969034
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2410638935658709112}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 10
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &2680882293967618210
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,6 +527,7 @@ GameObject:
   - component: {fileID: 7568703015871401406}
   - component: {fileID: 2236529878128451268}
   - component: {fileID: 3545899562439555064}
+  - component: {fileID: 8306692914091626784}
   m_Layer: 0
   m_Name: Container
   m_TagString: Untagged
@@ -599,6 +628,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!210 &8306692914091626784
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2885276390395466020}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &3459337942597199312
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,6 +652,7 @@ GameObject:
   - component: {fileID: 7458473442039128780}
   - component: {fileID: 1117764169582857042}
   - component: {fileID: 7448155403531209925}
+  - component: {fileID: 4404047445244658310}
   m_Layer: 0
   m_Name: ClassText
   m_TagString: Untagged
@@ -780,6 +823,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1117764169582857042}
   m_maskType: 0
+--- !u!210 &4404047445244658310
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3459337942597199312}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 10
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &3490633728409180984
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,6 +937,7 @@ GameObject:
   - component: {fileID: 2194841012621330218}
   - component: {fileID: 1022267651666658002}
   - component: {fileID: 6994674359545782746}
+  - component: {fileID: 1272710655610975460}
   m_Layer: 0
   m_Name: MoldText
   m_TagString: Untagged
@@ -1051,6 +1108,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1022267651666658002}
   m_maskType: 0
+--- !u!210 &1272710655610975460
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3797308121427844481}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 10
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &3909451734926284577
 GameObject:
   m_ObjectHideFlags: 0
@@ -1103,9 +1173,7 @@ MonoBehaviour:
   swordClass: Unknown
   rarity: Unknown
   moldText: {fileID: 6994674359545782746}
-  qualityText: {fileID: 0}
   classText: {fileID: 7448155403531209925}
-  rarityText: {fileID: 0}
   rarityQualityText: {fileID: 7059386848869189143}
 --- !u!1 &4072683543627669898
 GameObject:
@@ -1118,6 +1186,7 @@ GameObject:
   - component: {fileID: 3276379058147942816}
   - component: {fileID: 7375241094843760131}
   - component: {fileID: 6510061764379667108}
+  - component: {fileID: 8140170374327617733}
   m_Layer: 0
   m_Name: MoneyText
   m_TagString: Untagged
@@ -1288,6 +1357,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 7375241094843760131}
   m_maskType: 0
+--- !u!210 &8140170374327617733
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4072683543627669898}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 10
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &5048458638691953350
 GameObject:
   m_ObjectHideFlags: 0
