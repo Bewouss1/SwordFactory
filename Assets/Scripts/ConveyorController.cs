@@ -105,7 +105,7 @@ public class ConveyorController : MonoBehaviour
         }
 
         Transform slot = sellZone.GetNextSlot();
-        if (slot != null)
+        if (slot != null) 
         {
             swordTransform.position = slot.position;
             swordTransform.rotation = slot.rotation;

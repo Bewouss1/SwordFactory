@@ -7,20 +7,24 @@ using System.Collections.Generic;
 /// </summary>
 public class SellZone : MonoBehaviour
 {
+    [SerializeField] private Transform slotsContainer;
     [SerializeField] private List<Transform> slots = new List<Transform>();
     private int currentSlotIndex = 0;
 
     void OnEnable()
     {
         // Récupérer automatiquement tous les enfants comme slots
-        foreach (Transform child in transform)
+        slots.Clear();
+        Transform root = slotsContainer != null ? slotsContainer : transform;
+
+        foreach (Transform child in root)
         {
             slots.Add(child);
         }
 
         if (slots.Count == 0)
         {
-            Debug.LogWarning("SellZone: No slots found! Create empty GameObjects as children.", this);
+            Debug.LogWarning("SellZone: No slots found! Add slots as children of the container.", this);
         }
     }
 
