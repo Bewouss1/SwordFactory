@@ -1,5 +1,7 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 /// <summary>
 /// Gère une zone de vente avec des slots pour les épées
@@ -10,6 +12,15 @@ public class SellZone : MonoBehaviour
     [SerializeField] private Transform slotsContainer;
     [SerializeField] private List<Transform> slots = new List<Transform>();
     private int currentSlotIndex = 0;
+
+    [Header("Sell Settings")]
+    [SerializeField] private float sellCountdownSeconds = 30f;
+    [SerializeField] private bool hideTimeTextWhenIdle = true;
+
+    [Header("Money")]
+    [SerializeField] private PlayerMoney playerMoney;
+
+    private readonly Dictionary<Transform, Coroutine> activeCountdowns = new Dictionary<Transform, Coroutine>();
 
     void OnEnable()
     {
@@ -26,6 +37,7 @@ public class SellZone : MonoBehaviour
         {
             Debug.LogWarning("SellZone: No slots found! Add slots as children of the container.", this);
         }
+
     }
 
     /// <summary>
@@ -83,5 +95,90 @@ public class SellZone : MonoBehaviour
     public void ResetSlots()
     {
         currentSlotIndex = 0;
+    }
+
+    public void StartSellCountdown(Transform swordTransform, Transform slot)
+    {
+        if (swordTransform == null)
+            return;
+
+        TMP_Text timeText = ResolveTimeText(slot, swordTransform);
+
+        if (activeCountdowns.TryGetValue(swordTransform, out Coroutine existing))
+        {
+            StopCoroutine(existing);
+            activeCountdowns.Remove(swordTransform);
+        }
+
+        Coroutine routine = StartCoroutine(SellCountdownRoutine(swordTransform, timeText));
+        activeCountdowns[swordTransform] = routine;
+    }
+
+    private TMP_Text ResolveTimeText(Transform slot, Transform swordTransform)
+    {
+        TMP_Text timeText = null;
+
+        if (swordTransform != null)
+        {
+            SwordStats stats = swordTransform.GetComponent<SwordStats>();
+            if (stats != null)
+                timeText = stats.TimeText;
+        }
+
+        if (timeText == null && slot != null)
+            timeText = slot.GetComponentInChildren<TMP_Text>(true);
+
+        if (timeText != null)
+        {
+            if (hideTimeTextWhenIdle)
+                timeText.gameObject.SetActive(true);
+        }
+
+        return timeText;
+    }
+
+    private IEnumerator SellCountdownRoutine(Transform swordTransform, TMP_Text timeText)
+    {
+        Transform swordKey = swordTransform;
+        float remaining = Mathf.Max(0f, sellCountdownSeconds);
+        int lastDisplayed = -1;
+
+        while (remaining > 0f)
+        {
+            if (swordTransform == null)
+                break;
+
+            int display = Mathf.CeilToInt(remaining);
+            if (display != lastDisplayed)
+            {
+                lastDisplayed = display;
+                if (timeText != null)
+                    timeText.text = display.ToString();
+            }
+
+            yield return new WaitForSeconds(1f);
+            remaining -= 1f;
+        }
+
+        if (timeText != null)
+            timeText.text = "0";
+
+        if (swordTransform != null)
+        {
+            SwordStats stats = swordTransform.GetComponent<SwordStats>();
+            float value = stats != null ? stats.GetValue() : 0f;
+
+            if (playerMoney != null)
+                playerMoney.AddMoney(value);
+            else if (value > 0f)
+                Debug.LogWarning("SellZone: PlayerMoney reference is missing, cannot add money.", this);
+
+            Destroy(swordTransform.gameObject);
+        }
+
+        if (timeText != null && hideTimeTextWhenIdle)
+            timeText.gameObject.SetActive(false);
+
+        activeCountdowns.Remove(swordKey);
     }
 }

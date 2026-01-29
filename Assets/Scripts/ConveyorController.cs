@@ -116,6 +116,8 @@ public class ConveyorController : MonoBehaviour
             {
                 Debug.Log($"[Conveyor] Sword placed in SellZone: {stats.GetSummary()}");
             }
+
+            sellZone.StartSellCountdown(swordTransform, slot);
         }
         else
         {

@@ -17,6 +17,7 @@ public class SwordStats : MonoBehaviour
     [SerializeField] private TMP_Text classText;          // Pour afficher la classe
     [SerializeField] private TMP_Text rarityQualityText;  // "Rarity / Quality"
     [SerializeField] private TMP_Text moneyText;          // Valeur de l'épée
+    [SerializeField] private TMP_Text timeText;           // Compte à rebours de vente
 
     [Header("Value Settings")]
     [SerializeField] private float baseValue = 10f;
@@ -26,6 +27,17 @@ public class SwordStats : MonoBehaviour
     public string Quality => quality;
     public string SwordClass => swordClass;
     public string Rarity => rarity;
+    public TMP_Text TimeText => timeText;
+
+    public float GetValue()
+    {
+        return CalculateValue();
+    }
+
+    public string GetFormattedValue()
+    {
+        return FormatMoneyValue(CalculateValue());
+    }
 
     public void SetMold(string value)
     {
@@ -91,7 +103,7 @@ public class SwordStats : MonoBehaviour
             return;
 
         float value = CalculateValue();
-        moneyText.text = FormatMoney(value);
+        moneyText.text = FormatMoneyValue(value);
     }
 
     private float CalculateValue()
@@ -122,7 +134,7 @@ public class SwordStats : MonoBehaviour
         return 1f;
     }
 
-    private string FormatMoney(float value)
+    public static string FormatMoneyValue(float value)
     {
         string[] suffixes = { "", "k", "M", "B", "T", "Qd", "Qn" };
         int suffixIndex = 0;
