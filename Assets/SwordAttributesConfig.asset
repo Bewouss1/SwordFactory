@@ -12,7 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e39b9937d0758bb41a835883045bc4d6, type: 3}
   m_Name: SwordAttributesConfig
   m_EditorClassIdentifier: Assembly-CSharp::SwordAttributesConfig
-  moldOptions: []
-  qualityOptions: []
-  classOptions: []
-  rarityOptions: []
+  moldOptions:
+  - name: Wood
+    weight: 10
+    multiplier: 1
+  qualityOptions:
+  - name: Broken
+    weight: 10
+    multiplier: 1
+  classOptions:
+  - name: Powerful
+    weight: 10
+    multiplier: 1
+  rarityOptions:
+  - name: Common
+    weight: 10
+    multiplier: 1
+  - name: Rare
+    weight: 10
+    multiplier: 2

@@ -2733,34 +2733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2026ecafc867f42a65240d7cca4dc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwordAssigner
-  moldOptions:
-  - name: Wood
-    weight: 50
-  - name: Stone
-    weight: 30
-  - name: Iron
-    weight: 20
-  qualityOptions:
-  - name: Broken
-    weight: 50
-  - name: Good
-    weight: 30
-  - name: Excellent
-    weight: 20
-  classOptions:
-  - name: Regular
-    weight: 50
-  - name: Strong
-    weight: 30
-  - name: Powerful
-    weight: 20
-  rarityOptions:
-  - name: Common
-    weight: 50
-  - name: Rare
-    weight: 30
-  - name: Epic
-    weight: 20
+  attributesConfig: {fileID: 11400000, guid: d58fadb07a023284c866cca544080719, type: 2}
 --- !u!4 &1078716134
 Transform:
   m_ObjectHideFlags: 0
