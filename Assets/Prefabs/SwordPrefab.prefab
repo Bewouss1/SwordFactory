@@ -1175,6 +1175,9 @@ MonoBehaviour:
   moldText: {fileID: 6994674359545782746}
   classText: {fileID: 7448155403531209925}
   rarityQualityText: {fileID: 7059386848869189143}
+  moneyText: {fileID: 6510061764379667108}
+  baseValue: 10
+  attributesConfig: {fileID: 11400000, guid: d58fadb07a023284c866cca544080719, type: 2}
 --- !u!1 &4072683543627669898
 GameObject:
   m_ObjectHideFlags: 0

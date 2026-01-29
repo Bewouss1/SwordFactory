@@ -6,45 +6,8 @@ using UnityEngine;
 /// </summary>
 public class SwordAssigner : MonoBehaviour
 {
-    [System.Serializable]
-    public struct MoldOption
-    {
-        public string name;         // wood, stone, iron, etc.
-        public float weight;
-    }
-
-    [System.Serializable]
-    public struct QualityOption
-    {
-        public string name;         // broken, good, excellent, etc.
-        public float weight;
-    }
-
-    [System.Serializable]
-    public struct ClassOption
-    {
-        public string name;         // regular, strong, powerful, etc.
-        public float weight;
-    }
-
-    [System.Serializable]
-    public struct RarityOption
-    {
-        public string name;         // common, rare, epic, etc.
-        public float weight;
-    }
-
-    [Header("Mold Settings")]
-    [SerializeField] private MoldOption[] moldOptions;
-
-    [Header("Quality Settings")]
-    [SerializeField] private QualityOption[] qualityOptions;
-
-    [Header("Class Settings")]
-    [SerializeField] private ClassOption[] classOptions;
-
-    [Header("Rarity Settings")]
-    [SerializeField] private RarityOption[] rarityOptions;
+    [Header("Config")]
+    [SerializeField] private SwordAttributesConfig attributesConfig;
 
     void OnEnable()
     {
@@ -53,16 +16,22 @@ public class SwordAssigner : MonoBehaviour
 
     private void ValidateOptions()
     {
-        if (moldOptions == null || moldOptions.Length == 0)
+        if (attributesConfig == null)
+        {
+            Debug.LogWarning("SwordAssigner: Attributes config is missing!", this);
+            return;
+        }
+
+        if (attributesConfig.moldOptions == null || attributesConfig.moldOptions.Length == 0)
             Debug.LogWarning("SwordAssigner: Mold options are not configured!", this);
 
-        if (qualityOptions == null || qualityOptions.Length == 0)
+        if (attributesConfig.qualityOptions == null || attributesConfig.qualityOptions.Length == 0)
             Debug.LogWarning("SwordAssigner: Quality options are not configured!", this);
 
-        if (classOptions == null || classOptions.Length == 0)
+        if (attributesConfig.classOptions == null || attributesConfig.classOptions.Length == 0)
             Debug.LogWarning("SwordAssigner: Class options are not configured!", this);
 
-        if (rarityOptions == null || rarityOptions.Length == 0)
+        if (attributesConfig.rarityOptions == null || attributesConfig.rarityOptions.Length == 0)
             Debug.LogWarning("SwordAssigner: Rarity options are not configured!", this);
     }
 
@@ -130,25 +99,37 @@ public class SwordAssigner : MonoBehaviour
 
     private string PickRandomMold()
     {
-        var option = PickRandomFromWeightedArray(moldOptions, opt => opt.weight);
+        if (attributesConfig == null)
+            return string.Empty;
+
+        var option = PickRandomFromWeightedArray(attributesConfig.moldOptions, opt => opt.weight);
         return option.name;
     }
 
     private string PickRandomQuality()
     {
-        var option = PickRandomFromWeightedArray(qualityOptions, opt => opt.weight);
+        if (attributesConfig == null)
+            return string.Empty;
+
+        var option = PickRandomFromWeightedArray(attributesConfig.qualityOptions, opt => opt.weight);
         return option.name;
     }
 
     private string PickRandomClass()
     {
-        var option = PickRandomFromWeightedArray(classOptions, opt => opt.weight);
+        if (attributesConfig == null)
+            return string.Empty;
+
+        var option = PickRandomFromWeightedArray(attributesConfig.classOptions, opt => opt.weight);
         return option.name;
     }
 
     private string PickRandomRarity()
     {
-        var option = PickRandomFromWeightedArray(rarityOptions, opt => opt.weight);
+        if (attributesConfig == null)
+            return string.Empty;
+
+        var option = PickRandomFromWeightedArray(attributesConfig.rarityOptions, opt => opt.weight);
         return option.name;
     }
 

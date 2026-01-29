@@ -16,6 +16,11 @@ public class SwordStats : MonoBehaviour
     [SerializeField] private TMP_Text moldText;           // Pour afficher le moule
     [SerializeField] private TMP_Text classText;          // Pour afficher la classe
     [SerializeField] private TMP_Text rarityQualityText;  // "Rarity / Quality"
+    [SerializeField] private TMP_Text moneyText;          // Valeur de l'épée
+
+    [Header("Value Settings")]
+    [SerializeField] private float baseValue = 10f;
+    [SerializeField] private SwordAttributesConfig attributesConfig;
 
     public string Mold => mold;
     public string Quality => quality;
@@ -76,5 +81,60 @@ public class SwordStats : MonoBehaviour
             string combined = $"{rarity} / {quality}";
             rarityQualityText.text = combined;
         }
+
+        UpdateMoneyDisplay();
+    }
+
+    private void UpdateMoneyDisplay()
+    {
+        if (moneyText == null)
+            return;
+
+        float value = CalculateValue();
+        moneyText.text = FormatMoney(value);
+    }
+
+    private float CalculateValue()
+    {
+        if (attributesConfig == null)
+            return baseValue;
+
+        float moldMult = GetMultiplier(mold, attributesConfig.moldOptions);
+        float qualityMult = GetMultiplier(quality, attributesConfig.qualityOptions);
+        float rarityMult = GetMultiplier(rarity, attributesConfig.rarityOptions);
+
+        return Mathf.Max(0f, baseValue * moldMult * qualityMult * rarityMult);
+    }
+
+    private float GetMultiplier(string key, SwordAttributesConfig.AttributeOption[] options)
+    {
+        if (options == null || options.Length == 0)
+            return 1f;
+
+        for (int i = 0; i < options.Length; i++)
+        {
+            if (string.Equals(options[i].name, key, System.StringComparison.OrdinalIgnoreCase))
+            {
+                return Mathf.Max(0f, options[i].multiplier);
+            }
+        }
+
+        return 1f;
+    }
+
+    private string FormatMoney(float value)
+    {
+        string[] suffixes = { "", "k", "M", "B", "T", "Qd", "Qn" };
+        int suffixIndex = 0;
+        float displayValue = value;
+
+        while (displayValue >= 1000f && suffixIndex < suffixes.Length - 1)
+        {
+            displayValue /= 1000f;
+            suffixIndex++;
+        }
+
+        string formatted = displayValue.ToString("F2", System.Globalization.CultureInfo.InvariantCulture);
+        return $"${formatted}{suffixes[suffixIndex]}";
     }
 }
