@@ -2264,6 +2264,7 @@ MonoBehaviour:
   gravity: -9.81
   rotationSpeed: 10
   cameraTransform: {fileID: 1878262763}
+  cameraYawSource: {fileID: 0}
   spawnPoint: {fileID: 301909892}
 --- !u!143 &756938110
 CharacterController:
@@ -4713,7 +4714,7 @@ Transform:
   m_GameObject: {fileID: 1878262762}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -6}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4733,8 +4734,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   target: {fileID: 338840383}
   mouseSensitivity: 3
-  minY: -40
-  maxY: 70
+  cameraDistance: 3.5
+  minY: -45
+  maxY: 80
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &1878262765
 MonoBehaviour:
   m_ObjectHideFlags: 0
