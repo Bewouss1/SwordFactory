@@ -20,6 +20,9 @@ public class SellZone : MonoBehaviour
     [Header("Money")]
     [SerializeField] private PlayerMoney playerMoney;
 
+    [Header("Level / XP")]
+    [SerializeField] private PlayerLevel playerLevel;
+
     private readonly Dictionary<Transform, Coroutine> activeCountdowns = new Dictionary<Transform, Coroutine>();
 
     void OnEnable()
@@ -172,6 +175,9 @@ public class SellZone : MonoBehaviour
                 playerMoney.AddMoney(value);
             else if (value > 0f)
                 Debug.LogWarning("SellZone: PlayerMoney reference is missing, cannot add money.", this);
+
+            if (playerLevel != null)
+                playerLevel.AddXp(10);
 
             Destroy(swordTransform.gameObject);
         }

@@ -14,9 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SwordAttributesConfig
   moldOptions:
   - name: Wood
+    weight: 40
+    multiplier: 1
+  - name: Stone
+    weight: 30
+    multiplier: 2
+  - name: Iron
+    weight: 20
+    multiplier: 3
+  - name: Gold
+    weight: 10
+    multiplier: 4
+  qualityOptions:
+  - name: Broken
     weight: 10
     multiplier: 1
-  qualityOptions:
   - name: Broken
     weight: 10
     multiplier: 1

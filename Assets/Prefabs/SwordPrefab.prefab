@@ -1177,7 +1177,7 @@ MonoBehaviour:
   rarityQualityText: {fileID: 7059386848869189143}
   moneyText: {fileID: 6510061764379667108}
   timeText: {fileID: 7035022650758298957}
-  baseValue: 10
+  baseValue: 542.21
   attributesConfig: {fileID: 11400000, guid: d58fadb07a023284c866cca544080719, type: 2}
 --- !u!1 &4072683543627669898
 GameObject:
