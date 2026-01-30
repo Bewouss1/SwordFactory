@@ -15,27 +15,27 @@ MonoBehaviour:
   moldOptions:
   - name: Wood
     weight: 40
-    multiplier: 2
+    multiplier: 1
   - name: Stone
     weight: 30
     multiplier: 2
   - name: Iron
     weight: 20
-    multiplier: 3
+    multiplier: 2
   - name: Gold
     weight: 10
-    multiplier: 4
+    multiplier: 2
   qualityOptions:
   - name: Broken
     weight: 10
-    multiplier: 2
+    multiplier: 1
   - name: Good
     weight: 10
-    multiplier: 3
+    multiplier: 2
   classOptions:
   - name: Powerful
     weight: 10
-    multiplier: 2
+    multiplier: 1
   rarityOptions:
   - name: Common
     weight: 10
@@ -46,10 +46,10 @@ MonoBehaviour:
   enchantOptions:
   - name: 
     weight: 30
-    multiplier: 2
+    multiplier: 1
   - name: Sharpness I
     weight: 20
     multiplier: 2
   - name: Sharpness II
     weight: 10
-    multiplier: 3
+    multiplier: 2
