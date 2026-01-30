@@ -97,6 +97,24 @@ public class SwordAssigner : MonoBehaviour
         swordStats.SetRarity(rarityName);
     }
 
+    /// <summary>
+    /// Assigne le niveau de l'épée en fonction du niveau du joueur
+    /// </summary>
+    public void AssignLevel(SwordStats swordStats, PlayerLevel playerLevel)
+    {
+        int swordLevel = playerLevel != null ? playerLevel.GetCurrentLevel() : 1;
+        swordStats.SetLevel(swordLevel);
+    }
+
+    /// <summary>
+    /// Assigne un enchantement aléatoire
+    /// </summary>
+    public void AssignEnchant(SwordStats swordStats)
+    {
+        string enchantName = PickRandomEnchant();
+        swordStats.SetEnchant(enchantName);
+    }
+
     private string PickRandomMold()
     {
         if (attributesConfig == null)
@@ -130,6 +148,15 @@ public class SwordAssigner : MonoBehaviour
             return string.Empty;
 
         var option = PickRandomFromWeightedArray(attributesConfig.rarityOptions, opt => opt.weight);
+        return option.name;
+    }
+
+    private string PickRandomEnchant()
+    {
+        if (attributesConfig == null)
+            return string.Empty;
+
+        var option = PickRandomFromWeightedArray(attributesConfig.enchantOptions, opt => opt.weight);
         return option.name;
     }
 

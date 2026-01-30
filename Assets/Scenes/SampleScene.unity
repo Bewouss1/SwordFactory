@@ -5385,10 +5385,11 @@ MonoBehaviour:
   - {fileID: 459201482}
   - {fileID: 558834979}
   - {fileID: 573758164}
-  speed: 4
-  waitTime: 1
+  speed: 1.5
+  waitTime: 2
   swordAssigner: {fileID: 1078716133}
   sellZone: {fileID: 1335918730}
+  playerLevel: {fileID: 756938116}
 --- !u!1001 &1961748699
 PrefabInstance:
   m_ObjectHideFlags: 0

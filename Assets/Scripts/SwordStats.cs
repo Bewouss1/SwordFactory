@@ -11,11 +11,15 @@ public class SwordStats : MonoBehaviour
     [SerializeField] private string quality = "";      // broken, good, excellent, etc.
     [SerializeField] private string swordClass = "";   // regular, strong, powerful, etc.
     [SerializeField] private string rarity = "";       // common, rare, epic, etc.
+    [SerializeField] private int level = 1;            // niveau de l'épée
+    [SerializeField] private string enchant = "";      // enchantement
 
     [Header("Text Display")]
     [SerializeField] private TMP_Text moldText;           // Pour afficher le moule
     [SerializeField] private TMP_Text classText;          // Pour afficher la classe
     [SerializeField] private TMP_Text rarityQualityText;  // "Rarity / Quality"
+    [SerializeField] private TMP_Text levelText;          // Pour afficher le niveau
+    [SerializeField] private TMP_Text enchantText;        // Pour afficher l'enchantement
     [SerializeField] private TMP_Text moneyText;          // Valeur de l'épée
     [SerializeField] private TMP_Text timeText;           // Compte à rebours de vente
 
@@ -27,6 +31,8 @@ public class SwordStats : MonoBehaviour
     public string Quality => quality;
     public string SwordClass => swordClass;
     public string Rarity => rarity;
+    public int Level => level;
+    public string Enchant => enchant;
     public TMP_Text TimeText => timeText;
 
     public float GetValue()
@@ -63,6 +69,18 @@ public class SwordStats : MonoBehaviour
         UpdateDisplay();
     }
 
+    public void SetLevel(int value)
+    {
+        level = value;
+        UpdateDisplay();
+    }
+
+    public void SetEnchant(string value)
+    {
+        enchant = value;
+        UpdateDisplay();
+    }
+
     void OnEnable()
     {
         UpdateDisplay();
@@ -73,7 +91,7 @@ public class SwordStats : MonoBehaviour
     /// </summary>
     public string GetSummary()
     {
-        return $"[{rarity.ToUpper()}] {mold} | Quality: {quality} | Class: {swordClass}";
+        return $"[{rarity.ToUpper()}] {mold} Lvl{level} {enchant} | Quality: {quality} | Class: {swordClass}";
     }
 
     /// <summary>
@@ -94,6 +112,12 @@ public class SwordStats : MonoBehaviour
             rarityQualityText.text = combined;
         }
 
+        if (levelText != null)
+            levelText.text = "Level " + level;
+
+        if (enchantText != null)
+            enchantText.text = enchant;
+
         UpdateMoneyDisplay();
     }
 
@@ -113,9 +137,12 @@ public class SwordStats : MonoBehaviour
 
         float moldMult = GetMultiplier(mold, attributesConfig.moldOptions);
         float qualityMult = GetMultiplier(quality, attributesConfig.qualityOptions);
+        float classMult = GetMultiplier(swordClass, attributesConfig.classOptions);
         float rarityMult = GetMultiplier(rarity, attributesConfig.rarityOptions);
+        float enchantMult = GetMultiplier(enchant, attributesConfig.enchantOptions);
+        float levelMult = 1f + (level * 0.01f);
 
-        return Mathf.Max(0f, baseValue * moldMult * qualityMult * rarityMult);
+        return Mathf.Max(0f, baseValue * moldMult * qualityMult * classMult * rarityMult * enchantMult * levelMult);
     }
 
     private float GetMultiplier(string key, SwordAttributesConfig.AttributeOption[] options)

@@ -46,4 +46,9 @@ public class PlayerLevel : MonoBehaviour
         if (levelText != null)
             levelText.text = "Level " + level + " | " + currentXp + "/" + xpToNext + " EXP";
     }
+
+    public int GetCurrentLevel()
+    {
+        return level;
+    }
 }

@@ -17,6 +17,7 @@ public class ConveyorController : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private SwordAssigner swordAssigner;  // Pour assigner les attributs
     [SerializeField] private SellZone sellZone;            // Zone de vente pour placer les épées finies
+    [SerializeField] private PlayerLevel playerLevel;      // Référence pour le niveau du joueur
 
     public Transform[] PausePoints => pausePoints;
 
@@ -44,10 +45,12 @@ public class ConveyorController : MonoBehaviour
 
     /// <summary>
     /// Assigne les attributs en fonction du point de pause atteint
-    /// Point 0 (pausePoint 1): Mold
-    /// Point 1 (pausePoint 2): Quality
-    /// Point 2 (pausePoint 3): Class
-    /// Point 3 (pausePoint 4): Rarity
+    /// Point 0: Mold
+    /// Point 1: Quality
+    /// Point 2: Class
+    /// Point 3: Level
+    /// Point 4: Enchant
+    /// Point 5: Rarity
     /// </summary>
     public void AssignAttributeAtPoint(Transform swordTransform, int pointIndex)
     {
@@ -82,12 +85,22 @@ public class ConveyorController : MonoBehaviour
                 break;
 
             case 3:
+                swordAssigner.AssignLevel(swordStats, playerLevel);
+                Debug.Log($"[Conveyor] Point 3: Assigned Level - {swordStats.Level}");
+                break;
+
+            case 4:
+                swordAssigner.AssignEnchant(swordStats);
+                Debug.Log($"[Conveyor] Point 4: Assigned Enchant - {swordStats.Enchant}");
+                break;
+
+            case 5:
                 swordAssigner.AssignRarity(swordStats);
-                Debug.Log($"[Conveyor] Point 3: Assigned Rarity - {swordStats.Rarity}");
+                Debug.Log($"[Conveyor] Point 5: Assigned Rarity - {swordStats.Rarity}");
                 break;
 
             default:
-                // Points supplémentaires (pas d'assignement)
+                // Points supplémentaires: pas d'assignement
                 break;
         }
     }

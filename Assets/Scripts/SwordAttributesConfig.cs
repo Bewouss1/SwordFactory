@@ -22,4 +22,7 @@ public class SwordAttributesConfig : ScriptableObject
 
     [Header("Rarity Options")]
     public AttributeOption[] rarityOptions;
+
+    [Header("Enchant Options")]
+    public AttributeOption[] enchantOptions;
 }
