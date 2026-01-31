@@ -38,49 +38,23 @@ public class SwordStats : MonoBehaviour
     public string Enchant => enchant;
     public TMP_Text TimeText => timeText;
 
-    public float GetValue()
-    {
-        return CalculateValue();
-    }
+    public float GetValue() => CalculateValue();
+    public string GetFormattedValue() => FormatMoneyValue(CalculateValue());
 
-    public string GetFormattedValue()
-    {
-        return FormatMoneyValue(CalculateValue());
-    }
-
-    public void SetMold(string value)
-    {
-        mold = value;
-        UpdateDisplay();
-    }
-
-    public void SetQuality(string value)
-    {
-        quality = value;
-        UpdateDisplay();
-    }
-
-    public void SetSwordClass(string value)
-    {
-        swordClass = value;
-        UpdateDisplay();
-    }
-
-    public void SetRarity(string value)
-    {
-        rarity = value;
-        UpdateDisplay();
-    }
-
+    public void SetMold(string value) => UpdateAttribute(ref mold, value);
+    public void SetQuality(string value) => UpdateAttribute(ref quality, value);
+    public void SetSwordClass(string value) => UpdateAttribute(ref swordClass, value);
+    public void SetRarity(string value) => UpdateAttribute(ref rarity, value);
+    public void SetEnchant(string value) => UpdateAttribute(ref enchant, value);
     public void SetLevel(int value)
     {
         level = value;
         UpdateDisplay();
     }
 
-    public void SetEnchant(string value)
+    private void UpdateAttribute(ref string attribute, string value)
     {
-        enchant = value;
+        attribute = value;
         UpdateDisplay();
     }
 
@@ -224,7 +198,9 @@ public class SwordStats : MonoBehaviour
         {
             if (string.Equals(options[i].name, attributeName, System.StringComparison.OrdinalIgnoreCase))
             {
-                return options[i].color;
+                Color color = options[i].color;
+                color.a = 1f; // Force l'opacité à 1 pour que le texte soit visible
+                return color;
             }
         }
 

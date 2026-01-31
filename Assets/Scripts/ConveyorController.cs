@@ -39,7 +39,7 @@ public class ConveyorController : MonoBehaviour
         }
 
         // Attacher le comportement de mouvement à l'épée
-        MovementBehavior behavior = swordTransform.gameObject.AddComponent<MovementBehavior>();
+        SwordMovementBehavior behavior = swordTransform.gameObject.AddComponent<SwordMovementBehavior>();
         behavior.Initialize(this, swordTransform, pausePoints, speed, waitTime);
     }
 
@@ -136,84 +136,6 @@ public class ConveyorController : MonoBehaviour
         {
             Debug.LogWarning("ConveyorController: All slots are occupied. Destroying sword.", this);
             Destroy(swordTransform.gameObject);
-        }
-    }
-
-    /// <summary>
-    /// Comportement de mouvement attaché dynamiquement à chaque épée
-    /// </summary>
-    private class MovementBehavior : MonoBehaviour
-    {
-        private ConveyorController controller;
-        private Transform swordTransform;
-        private Transform[] pausePoints;
-        private float speed;
-        private float waitTime;
-        private int currentIndex = 0;
-
-        public void Initialize(ConveyorController ctrl, Transform sword, Transform[] points, float spd, float wait)
-        {
-            controller = ctrl;
-            swordTransform = sword;
-            pausePoints = points;
-            speed = spd;
-            waitTime = wait;
-
-            // Positionner au premier point
-            swordTransform.position = pausePoints[0].position;
-
-            // Démarrer le mouvement
-            StartCoroutine(MoveRoutine());
-        }
-
-        private IEnumerator MoveRoutine()
-        {
-            while (currentIndex < pausePoints.Length - 1)
-            {
-                if (swordTransform == null)
-                {
-                    Debug.LogWarning("ConveyorController: Sword was destroyed during movement!");
-                    Destroy(this);
-                    yield break;
-                }
-
-                if (pausePoints[currentIndex + 1] == null)
-                {
-                    Debug.LogError($"ConveyorController: PausePoint at index {currentIndex + 1} is null!");
-                    yield break;
-                }
-
-                Vector3 target = pausePoints[currentIndex + 1].position;
-
-                // Déplacement fluide vers le point suivant
-                while ((swordTransform.position - target).sqrMagnitude > 0.0001f)
-                {
-                    if (swordTransform == null)
-                    {
-                        Destroy(this);
-                        yield break;
-                    }
-
-                    swordTransform.position = Vector3.MoveTowards(
-                        swordTransform.position,
-                        target,
-                        speed * Time.deltaTime
-                    );
-                    yield return null;
-                }
-
-                // Assigner les attributs progressivement à chaque point
-                controller.AssignAttributeAtPoint(swordTransform, currentIndex);
-
-                yield return new WaitForSeconds(waitTime);
-                currentIndex++;
-            }
-
-            // Épée termine le parcours : la placer dans la SellZone
-            controller.PlaceSwordInSellZone(swordTransform);
-
-            // Détruire ce comportement une fois le parcours terminé
-            Destroy(this);
         }
     }
 }

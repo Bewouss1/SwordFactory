@@ -67,7 +67,7 @@ MonoBehaviour:
   - name: Common
     weight: 40
     multiplier: 1
-    color: {r: 1, g: 0.36320752, b: 0.36320752, a: 0}
+    color: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 0}
   - name: Rare
     weight: 30
     multiplier: 2

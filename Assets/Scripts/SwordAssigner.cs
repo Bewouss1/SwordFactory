@@ -117,46 +117,38 @@ public class SwordAssigner : MonoBehaviour
 
     private string PickRandomMold()
     {
-        if (attributesConfig == null)
-            return string.Empty;
-
-        var option = PickRandomFromWeightedArray(attributesConfig.moldOptions, opt => opt.weight);
-        return option.name;
+        return PickRandomAttribute(attributesConfig?.moldOptions) ?? string.Empty;
     }
 
     private string PickRandomQuality()
     {
-        if (attributesConfig == null)
-            return string.Empty;
-
-        var option = PickRandomFromWeightedArray(attributesConfig.qualityOptions, opt => opt.weight);
-        return option.name;
+        return PickRandomAttribute(attributesConfig?.qualityOptions) ?? string.Empty;
     }
 
     private string PickRandomClass()
     {
-        if (attributesConfig == null)
-            return string.Empty;
-
-        var option = PickRandomFromWeightedArray(attributesConfig.classOptions, opt => opt.weight);
-        return option.name;
+        return PickRandomAttribute(attributesConfig?.classOptions) ?? string.Empty;
     }
 
     private string PickRandomRarity()
     {
-        if (attributesConfig == null)
-            return string.Empty;
-
-        var option = PickRandomFromWeightedArray(attributesConfig.rarityOptions, opt => opt.weight);
-        return option.name;
+        return PickRandomAttribute(attributesConfig?.rarityOptions) ?? string.Empty;
     }
 
     private string PickRandomEnchant()
     {
-        if (attributesConfig == null)
-            return string.Empty;
+        return PickRandomAttribute(attributesConfig?.enchantOptions) ?? string.Empty;
+    }
 
-        var option = PickRandomFromWeightedArray(attributesConfig.enchantOptions, opt => opt.weight);
+    /// <summary>
+    /// Méthode générique pour choisir un attribut aléatoire pondéré
+    /// </summary>
+    private string PickRandomAttribute(SwordAttributesConfig.AttributeOption[] options)
+    {
+        if (options == null || options.Length == 0)
+            return null;
+
+        var option = PickRandomFromWeightedArray(options, opt => opt.weight);
         return option.name;
     }
 
