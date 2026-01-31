@@ -16,40 +16,85 @@ MonoBehaviour:
   - name: Wood
     weight: 40
     multiplier: 1
+    color: {r: 0.3490566, g: 0.143964, b: 0.0049394714, a: 0}
   - name: Stone
     weight: 30
     multiplier: 2
+    color: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 0}
   - name: Iron
     weight: 20
-    multiplier: 2
+    multiplier: 3
+    color: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 0}
   - name: Gold
     weight: 10
-    multiplier: 2
+    multiplier: 4
+    color: {r: 1, g: 0.7206769, b: 0, a: 0}
   qualityOptions:
   - name: Broken
-    weight: 10
+    weight: 40
     multiplier: 1
+    color: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 0}
   - name: Good
-    weight: 10
+    weight: 30
     multiplier: 2
-  classOptions:
-  - name: Powerful
+    color: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0}
+  - name: Excellent
+    weight: 20
+    multiplier: 3
+    color: {r: 0.2968219, g: 1, b: 0.21226418, a: 0}
+  - name: Perfect
     weight: 10
+    multiplier: 4
+    color: {r: 1, g: 0.41844082, b: 0, a: 0}
+  classOptions:
+  - name: Ordinary
+    weight: 40
     multiplier: 1
+    color: {r: 0.34117648, g: 0.34117648, b: 0.34117648, a: 0}
+  - name: Strong
+    weight: 30
+    multiplier: 2
+    color: {r: 0, g: 1, b: 0.8329468, a: 0}
+  - name: Powerful
+    weight: 20
+    multiplier: 3
+    color: {r: 1, g: 0, b: 0, a: 0}
+  - name: Impossible
+    weight: 10
+    multiplier: 4.14
+    color: {r: 1, g: 0, b: 0.9371724, a: 0}
   rarityOptions:
   - name: Common
-    weight: 10
-    multiplier: 2
+    weight: 40
+    multiplier: 1
+    color: {r: 1, g: 0.36320752, b: 0.36320752, a: 0}
   - name: Rare
-    weight: 10
+    weight: 30
     multiplier: 2
+    color: {r: 0, g: 0.15667725, b: 1, a: 0}
+  - name: Epic
+    weight: 20
+    multiplier: 3
+    color: {r: 0.45141172, g: 0, b: 1, a: 0}
+  - name: Legendary
+    weight: 10
+    multiplier: 4
+    color: {r: 1, g: 0.666701, b: 0, a: 0}
   enchantOptions:
   - name: 
-    weight: 30
+    weight: 40
     multiplier: 1
+    color: {r: 0.6402731, g: 0, b: 1, a: 0}
   - name: Sharpness I
-    weight: 20
+    weight: 30
     multiplier: 2
+    color: {r: 0.6269412, g: 0, b: 1, a: 0}
   - name: Sharpness II
+    weight: 20
+    multiplier: 3
+    color: {r: 0.627451, g: 0, b: 1, a: 0}
+  - name: Sharpness III
     weight: 10
-    multiplier: 2
+    multiplier: 4
+    color: {r: 0.627451, g: 0, b: 1, a: 0}
+  enchantTextColor: {r: 0.77682203, g: 0.4009434, b: 1, a: 1}

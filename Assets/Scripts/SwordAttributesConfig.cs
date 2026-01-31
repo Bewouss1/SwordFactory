@@ -9,6 +9,7 @@ public class SwordAttributesConfig : ScriptableObject
         public string name;      // wood, stone, epic, etc.
         public float weight;     // pour le tirage aléatoire
         public float multiplier; // pour la valeur
+        public Color color;      // couleur associée à cet attribut
     }
 
     [Header("Mold Options")]
@@ -25,4 +26,7 @@ public class SwordAttributesConfig : ScriptableObject
 
     [Header("Enchant Options")]
     public AttributeOption[] enchantOptions;
+
+    [Header("Fixed Colors")]
+    public Color enchantTextColor = new Color(1f, 0.84f, 0f); // Couleur dorée par défaut
 }

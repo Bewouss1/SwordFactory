@@ -1376,7 +1376,8 @@ MonoBehaviour:
   enchantText: {fileID: 7197975894344986470}
   moneyText: {fileID: 6510061764379667108}
   timeText: {fileID: 7035022650758298957}
-  baseValue: 542.21
+  containerRenderer: {fileID: 2236529878128451268}
+  baseValue: 10
   attributesConfig: {fileID: 11400000, guid: d58fadb07a023284c866cca544080719, type: 2}
 --- !u!1 &4072683543627669898
 GameObject:
@@ -1485,7 +1486,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: $85.98
+  m_text: $10.00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a5f121edb7a3de9439b10f29c4b4ce34, type: 2}
   m_sharedMaterial: {fileID: 1851310325135207337, guid: a5f121edb7a3de9439b10f29c4b4ce34, type: 2}

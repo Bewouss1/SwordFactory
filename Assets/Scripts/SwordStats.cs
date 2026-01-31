@@ -23,6 +23,9 @@ public class SwordStats : MonoBehaviour
     [SerializeField] private TMP_Text moneyText;          // Valeur de l'épée
     [SerializeField] private TMP_Text timeText;           // Compte à rebours de vente
 
+    [Header("Container")]
+    [SerializeField] private MeshRenderer containerRenderer;  // Container (cube transparent) pour changer sa couleur
+
     [Header("Value Settings")]
     [SerializeField] private float baseValue = 10f;
     [SerializeField] private SwordAttributesConfig attributesConfig;
@@ -99,24 +102,56 @@ public class SwordStats : MonoBehaviour
     /// </summary>
     private void UpdateDisplay()
     {
+        Color moldColor = Color.white;
+
         if (moldText != null)
+        {
             moldText.text = mold;
+            moldColor = GetColorForAttribute(mold, attributesConfig?.moldOptions);
+            moldText.color = moldColor;
+        }
 
         if (classText != null)
+        {
             classText.text = swordClass;
+            classText.color = GetColorForAttribute(swordClass, attributesConfig?.classOptions);
+        }
 
         // Mettre à jour le texte combiné Rarity / Quality
+        Color rarityColor = Color.white;
         if (rarityQualityText != null)
         {
             string combined = $"{rarity} / {quality}";
             rarityQualityText.text = combined;
+            rarityColor = GetColorForAttribute(rarity, attributesConfig?.rarityOptions);
+            rarityQualityText.color = rarityColor;
         }
 
         if (levelText != null)
             levelText.text = "Level " + level;
 
         if (enchantText != null)
+        {
             enchantText.text = enchant;
+            if (attributesConfig != null)
+                enchantText.color = attributesConfig.enchantTextColor;
+        }
+
+        // Appliquer la couleur du mold au moneyText
+        if (moneyText != null)
+            moneyText.color = moldColor;
+
+        // Appliquer la couleur de la rarity au container
+        if (containerRenderer != null)
+        {
+            Material mat = containerRenderer.material;
+            if (mat != null)
+            {
+                Color containerColor = rarityColor;
+                containerColor.a = mat.color.a; // Conserver la transparence
+                mat.color = containerColor;
+            }
+        }
 
         UpdateMoneyDisplay();
     }
@@ -175,5 +210,24 @@ public class SwordStats : MonoBehaviour
 
         string formatted = displayValue.ToString("F2", System.Globalization.CultureInfo.InvariantCulture);
         return $"${formatted}{suffixes[suffixIndex]}";
+    }
+
+    /// <summary>
+    /// Récupère la couleur associée à un attribut
+    /// </summary>
+    private Color GetColorForAttribute(string attributeName, SwordAttributesConfig.AttributeOption[] options)
+    {
+        if (options == null || options.Length == 0 || string.IsNullOrEmpty(attributeName))
+            return Color.white;
+
+        for (int i = 0; i < options.Length; i++)
+        {
+            if (string.Equals(options[i].name, attributeName, System.StringComparison.OrdinalIgnoreCase))
+            {
+                return options[i].color;
+            }
+        }
+
+        return Color.white;
     }
 }
