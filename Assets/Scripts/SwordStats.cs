@@ -30,6 +30,9 @@ public class SwordStats : MonoBehaviour
     [SerializeField] private float baseValue = 10f;
     [SerializeField] private SwordAttributesConfig attributesConfig;
 
+    [Header("Default Colors")]
+    [SerializeField] private Color defaultColor = Color.white; // Couleur par défaut quand pas de correspondance
+
     public string Mold => mold;
     public string Quality => quality;
     public string SwordClass => swordClass;
@@ -76,28 +79,27 @@ public class SwordStats : MonoBehaviour
     /// </summary>
     private void UpdateDisplay()
     {
-        Color moldColor = Color.white;
-
+        // Couleurs pour les textes - toujours blanc ou couleur de l'attribut assigné
         if (moldText != null)
         {
             moldText.text = mold;
-            moldColor = GetColorForAttribute(mold, attributesConfig?.moldOptions);
-            moldText.color = moldColor;
+            moldText.color = IsAttributeEmpty(mold) ? Color.white : GetColorForAttribute(mold, attributesConfig?.moldOptions);
         }
 
         if (classText != null)
         {
             classText.text = swordClass;
-            classText.color = GetColorForAttribute(swordClass, attributesConfig?.classOptions);
+            classText.color = IsAttributeEmpty(swordClass) ? Color.white : GetColorForAttribute(swordClass, attributesConfig?.classOptions);
         }
 
+        // Calculer la couleur de rareté (utilisée pour le texte ET le container)
+        Color rarityColor = IsAttributeEmpty(rarity) ? Color.white : GetColorForAttribute(rarity, attributesConfig?.rarityOptions);
+
         // Mettre à jour le texte combiné Rarity / Quality
-        Color rarityColor = Color.white;
         if (rarityQualityText != null)
         {
             string combined = $"{rarity} / {quality}";
             rarityQualityText.text = combined;
-            rarityColor = GetColorForAttribute(rarity, attributesConfig?.rarityOptions);
             rarityQualityText.color = rarityColor;
         }
 
@@ -111,23 +113,32 @@ public class SwordStats : MonoBehaviour
                 enchantText.color = attributesConfig.enchantTextColor;
         }
 
-        // Appliquer la couleur du mold au moneyText
+        // moneyText: blanc si mold vide, sinon couleur du mold
         if (moneyText != null)
-            moneyText.color = moldColor;
+            moneyText.color = IsAttributeEmpty(mold) ? Color.white : GetColorForAttribute(mold, attributesConfig?.moldOptions);
 
-        // Appliquer la couleur de la rarity au container
+        // Container: defaultColor tant que rareté non assignée, puis couleur de la rareté
         if (containerRenderer != null)
         {
             Material mat = containerRenderer.material;
             if (mat != null)
             {
-                Color containerColor = rarityColor;
+                Color containerColor = IsAttributeEmpty(rarity) ? defaultColor : rarityColor;
+                Debug.Log($"[SwordStats] Rarity: '{rarity}' | IsEmpty: {IsAttributeEmpty(rarity)} | DefaultColor: {defaultColor} | RarityColor: {rarityColor} | ContainerColor: {containerColor}");
                 containerColor.a = mat.color.a; // Conserver la transparence
                 mat.color = containerColor;
             }
         }
 
         UpdateMoneyDisplay();
+    }
+
+    /// <summary>
+    /// Vérifie si un attribut est considéré comme vide (null, vide, ou "Unknown")
+    /// </summary>
+    private bool IsAttributeEmpty(string attribute)
+    {
+        return string.IsNullOrEmpty(attribute) || attribute.Equals("Unknown", System.StringComparison.OrdinalIgnoreCase);
     }
 
     private void UpdateMoneyDisplay()
@@ -188,6 +199,9 @@ public class SwordStats : MonoBehaviour
 
     /// <summary>
     /// Récupère la couleur associée à un attribut
+    /// ATTENTION: Cette méthode retourne Color.white si aucune correspondance,
+    /// car elle est utilisée pour les TEXTES uniquement.
+    /// Pour le container, utiliser defaultColor directement dans UpdateDisplay().
     /// </summary>
     private Color GetColorForAttribute(string attributeName, SwordAttributesConfig.AttributeOption[] options)
     {

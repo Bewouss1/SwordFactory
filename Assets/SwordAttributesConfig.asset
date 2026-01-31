@@ -84,17 +84,17 @@ MonoBehaviour:
   - name: 
     weight: 40
     multiplier: 1
-    color: {r: 0.6402731, g: 0, b: 1, a: 0}
+    color: {r: 0, g: 0, b: 0, a: 0}
   - name: Sharpness I
     weight: 30
     multiplier: 2
-    color: {r: 0.6269412, g: 0, b: 1, a: 0}
+    color: {r: 0, g: 0, b: 0, a: 0}
   - name: Sharpness II
     weight: 20
     multiplier: 3
-    color: {r: 0.627451, g: 0, b: 1, a: 0}
+    color: {r: 0, g: 0, b: 0, a: 0}
   - name: Sharpness III
     weight: 10
     multiplier: 4
-    color: {r: 0.627451, g: 0, b: 1, a: 0}
+    color: {r: 0, g: 0, b: 0, a: 0}
   enchantTextColor: {r: 0.77682203, g: 0.4009434, b: 1, a: 1}
