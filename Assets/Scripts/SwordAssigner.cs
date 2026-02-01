@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 /// <summary>
 /// Gère l'assignement de tous les attributs d'une épée (moule, qualité, classe, rareté, etc.)
@@ -8,6 +9,7 @@ public class SwordAssigner : MonoBehaviour
 {
     [Header("Config")]
     [SerializeField] private SwordAttributesConfig attributesConfig;
+    [SerializeField] private EnchantmentConfig enchantmentConfig;
 
     void OnEnable()
     {
@@ -57,6 +59,7 @@ public class SwordAssigner : MonoBehaviour
         AssignQuality(swordStats);
         AssignClass(swordStats);
         AssignRarity(swordStats);
+        AssignEnchantments(swordStats);
 
         Debug.Log($"[SwordAssigner] New sword created: {swordStats.GetSummary()}");
     }
@@ -107,12 +110,59 @@ public class SwordAssigner : MonoBehaviour
     }
 
     /// <summary>
-    /// Assigne un enchantement aléatoire
+    /// Assigne 1-3 enchantements aléatoires
     /// </summary>
-    public void AssignEnchant(SwordStats swordStats)
+    public void AssignEnchantments(SwordStats swordStats)
     {
-        string enchantName = PickRandomEnchant();
-        swordStats.SetEnchant(enchantName);
+        if (enchantmentConfig == null)
+        {
+            Debug.LogWarning("SwordAssigner: EnchantmentConfig is missing!", this);
+            swordStats.SetEnchantments(new List<Enchantment>());
+            return;
+        }
+
+        int enchantCount = enchantmentConfig.PickEnchantCount();
+        List<Enchantment> enchantments = new List<Enchantment>();
+        List<string> usedTypes = new List<string>();
+
+        for (int i = 0; i < enchantCount; i++)
+        {
+            // Choisir un type d'enchant pas encore utilisé
+            string enchantType = PickRandomEnchantType(usedTypes);
+            if (string.IsNullOrEmpty(enchantType))
+                break;
+
+            usedTypes.Add(enchantType);
+
+            // Choisir un niveau aléatoire pour cet enchant
+            int level = enchantmentConfig.PickRandomLevel();
+
+            enchantments.Add(new Enchantment
+            {
+                type = enchantType,
+                level = level
+            });
+        }
+
+        swordStats.SetEnchantments(enchantments);
+    }
+
+    private string PickRandomEnchantType(List<string> excludedTypes)
+    {
+        if (enchantmentConfig == null || enchantmentConfig.enchantmentTypes == null)
+            return null;
+
+        List<string> availableTypes = new List<string>();
+        foreach (var type in enchantmentConfig.enchantmentTypes)
+        {
+            if (!excludedTypes.Contains(type))
+                availableTypes.Add(type);
+        }
+
+        if (availableTypes.Count == 0)
+            return null;
+
+        return availableTypes[Random.Range(0, availableTypes.Count)];
     }
 
     private string PickRandomMold()
@@ -135,11 +185,6 @@ public class SwordAssigner : MonoBehaviour
         return PickRandomAttribute(attributesConfig?.rarityOptions) ?? string.Empty;
     }
 
-    private string PickRandomEnchant()
-    {
-        return PickRandomAttribute(attributesConfig?.enchantOptions) ?? string.Empty;
-    }
-
     /// <summary>
     /// Méthode générique pour choisir un attribut aléatoire pondéré
     /// </summary>
@@ -149,7 +194,30 @@ public class SwordAssigner : MonoBehaviour
             return null;
 
         var option = PickRandomFromWeightedArray(options, opt => opt.weight);
+        
+        // DEBUG: Log les poids pour vérifier
+        LogWeightDebug(options, option.name);
+        
         return option.name;
+    }
+    
+    private void LogWeightDebug(SwordAttributesConfig.AttributeOption[] options, string selected)
+    {
+        float totalWeight = 0f;
+        foreach (var opt in options)
+            totalWeight += Mathf.Max(0f, opt.weight);
+        
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        sb.AppendLine($"[SwordAssigner] Tirage - Sélectionné: {selected} (total weight: {totalWeight})");
+        
+        foreach (var opt in options)
+        {
+            float w = Mathf.Max(0f, opt.weight);
+            float percentage = totalWeight > 0 ? (w / totalWeight) * 100f : 0f;
+            sb.AppendLine($"  {opt.name}: weight={w:F10} ({percentage:F6}%)");
+        }
+        
+        Debug.Log(sb.ToString());
     }
 
     /// <summary>

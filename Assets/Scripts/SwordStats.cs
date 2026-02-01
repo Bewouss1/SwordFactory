@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 /// <summary>
 /// Stocke tous les attributs/statistiques d'une épée et gère leur affichage
@@ -12,7 +13,7 @@ public class SwordStats : MonoBehaviour
     [SerializeField] private string swordClass = "";   // regular, strong, powerful, etc.
     [SerializeField] private string rarity = "";       // common, rare, epic, etc.
     [SerializeField] private int level = 1;            // niveau de l'épée
-    [SerializeField] private string enchant = "";      // enchantement
+    [SerializeField] private List<Enchantment> enchantments = new List<Enchantment>();  // Liste d'enchantements
 
     [Header("Text Display")]
     [SerializeField] private TMP_Text moldText;           // Pour afficher le moule
@@ -29,6 +30,7 @@ public class SwordStats : MonoBehaviour
     [Header("Value Settings")]
     [SerializeField] private float baseValue = 10f;
     [SerializeField] private SwordAttributesConfig attributesConfig;
+    [SerializeField] private EnchantmentConfig enchantmentConfig;
 
     [Header("Default Colors")]
     [SerializeField] private Color defaultColor = Color.white; // Couleur par défaut quand pas de correspondance
@@ -38,7 +40,7 @@ public class SwordStats : MonoBehaviour
     public string SwordClass => swordClass;
     public string Rarity => rarity;
     public int Level => level;
-    public string Enchant => enchant;
+    public List<Enchantment> Enchantments => enchantments;
     public TMP_Text TimeText => timeText;
 
     public float GetValue() => CalculateValue();
@@ -48,7 +50,11 @@ public class SwordStats : MonoBehaviour
     public void SetQuality(string value) => UpdateAttribute(ref quality, value);
     public void SetSwordClass(string value) => UpdateAttribute(ref swordClass, value);
     public void SetRarity(string value) => UpdateAttribute(ref rarity, value);
-    public void SetEnchant(string value) => UpdateAttribute(ref enchant, value);
+    public void SetEnchantments(List<Enchantment> value)
+    {
+        enchantments = value ?? new List<Enchantment>();
+        UpdateDisplay();
+    }
     public void SetLevel(int value)
     {
         level = value;
@@ -71,7 +77,10 @@ public class SwordStats : MonoBehaviour
     /// </summary>
     public string GetSummary()
     {
-        return $"[{rarity.ToUpper()}] {mold} Lvl{level} {enchant} | Quality: {quality} | Class: {swordClass}";
+        string enchantsStr = enchantments != null && enchantments.Count > 0 
+            ? string.Join(", ", enchantments.ConvertAll(e => e.GetDisplayName()))
+            : "None";
+        return $"[{rarity.ToUpper()}] {mold} Lvl{level} [{enchantsStr}] | Quality: {quality} | Class: {swordClass}";
     }
 
     /// <summary>
@@ -108,7 +117,16 @@ public class SwordStats : MonoBehaviour
 
         if (enchantText != null)
         {
-            enchantText.text = enchant;
+            if (enchantments != null && enchantments.Count > 0)
+            {
+                string enchantDisplay = string.Join("\n", enchantments.ConvertAll(e => e.GetDisplayName()));
+                enchantText.text = enchantDisplay;
+            }
+            else
+            {
+                enchantText.text = "";
+            }
+            
             if (attributesConfig != null)
                 enchantText.color = attributesConfig.enchantTextColor;
         }
@@ -159,7 +177,18 @@ public class SwordStats : MonoBehaviour
         float qualityMult = GetMultiplier(quality, attributesConfig.qualityOptions);
         float classMult = GetMultiplier(swordClass, attributesConfig.classOptions);
         float rarityMult = GetMultiplier(rarity, attributesConfig.rarityOptions);
-        float enchantMult = GetMultiplier(enchant, attributesConfig.enchantOptions);
+        
+        // Calcul du multiplicateur d'enchantement (produit de tous les enchants)
+        float enchantMult = 1f;
+        if (enchantments != null && enchantmentConfig != null)
+        {
+            foreach (var ench in enchantments)
+            {
+                var levelData = enchantmentConfig.GetLevelData(ench.level);
+                enchantMult *= levelData.valueMultiplier;
+            }
+        }
+        
         float levelMult = 1f + (level * 0.01f);
 
         return Mathf.Max(0f, baseValue * moldMult * qualityMult * classMult * rarityMult * enchantMult * levelMult);

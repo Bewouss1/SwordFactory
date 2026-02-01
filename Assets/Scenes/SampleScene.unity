@@ -2894,6 +2894,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwordAssigner
   attributesConfig: {fileID: 11400000, guid: d58fadb07a023284c866cca544080719, type: 2}
+  enchantmentConfig: {fileID: 11400000, guid: 53722016c9b6f6d47806980142f1fc3e, type: 2}
 --- !u!4 &1078716134
 Transform:
   m_ObjectHideFlags: 0

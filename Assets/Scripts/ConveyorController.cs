@@ -90,8 +90,11 @@ public class ConveyorController : MonoBehaviour
                 break;
 
             case 4:
-                swordAssigner.AssignEnchant(swordStats);
-                Debug.Log($"[Conveyor] Point 4: Assigned Enchant - {swordStats.Enchant}");
+                swordAssigner.AssignEnchantments(swordStats);
+                string enchantsStr = swordStats.Enchantments != null && swordStats.Enchantments.Count > 0
+                    ? string.Join(", ", swordStats.Enchantments.ConvertAll(e => e.GetDisplayName()))
+                    : "None";
+                Debug.Log($"[Conveyor] Point 4: Assigned Enchantments - {enchantsStr}");
                 break;
 
             case 5:

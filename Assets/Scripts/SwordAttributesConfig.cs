@@ -6,6 +6,7 @@ public class SwordAttributesConfig : ScriptableObject
     [System.Serializable]
     public struct AttributeOption
     {
+        [ReadOnly]
         public string name;      // wood, stone, epic, etc.
         
         [ReadOnly]
@@ -53,8 +54,8 @@ public class SwordAttributesConfig : ScriptableObject
 
     /// <summary>
     /// Calcule les poids pour chaque catégorie d'attributs selon le ratio de rareté
-    /// Le dernier tier (le plus rare) a un poids de 1, et chaque tier précédent est divisé par le ratio
-    /// Exemple avec ratio 1.35 et 4 tiers : [2.46, 1.82, 1.35, 1.0]
+    /// IMPORTANT: Le ratio 1.35 s'applique UNIQUEMENT à rarityOptions
+    /// Les moldOptions gardent leurs poids tels quels (basés sur les chances 1/1, 1/10, etc.)
     /// </summary>
     private void RecalculateWeights()
     {
@@ -64,11 +65,16 @@ public class SwordAttributesConfig : ScriptableObject
         if (rarityMultiplierRatio <= 1f)
             rarityMultiplierRatio = 1.21f;
 
-        CalculateWeightsForArray(moldOptions);
-        CalculateWeightsForArray(qualityOptions);
-        CalculateWeightsForArray(classOptions);
+        // Les moldOptions gardent leurs poids d'origine, PAS de ratio appliqué
+        // CalculateWeightsForArray(moldOptions); <- SUPPRIMÉ
+
+        // Les autres catégories non-rareté gardent aussi leurs poids d'origine
+        // CalculateWeightsForArray(qualityOptions); <- SUPPRIMÉ
+        // CalculateWeightsForArray(classOptions); <- SUPPRIMÉ
+        // CalculateWeightsForArray(enchantOptions); <- SUPPRIMÉ
+        
+        // SEULE la rareté utilise le ratio
         CalculateWeightsForArray(rarityOptions);
-        CalculateWeightsForArray(enchantOptions);
         
         // Calcule les multiplicateurs pour la rareté uniquement
         CalculateMultipliersForRarity();

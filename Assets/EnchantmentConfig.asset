@@ -1,0 +1,202 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e29a2e000b5097843be9460da25cd7d7, type: 3}
+  m_Name: EnchantmentConfig
+  m_EditorClassIdentifier: Assembly-CSharp::EnchantmentConfig
+  enchantmentTypes:
+  - Sharpness
+  - Power
+  - Resistance
+  levels:
+  - level: 1
+    weight: 1
+    valueMultiplier: 1.01
+    damageMultiplier: 1.44
+    healthMultiplier: 1.1
+  - level: 2
+    weight: 0.36900368
+    valueMultiplier: 1.02
+    damageMultiplier: 1.96
+    healthMultiplier: 1.2
+  - level: 3
+    weight: 0.13550135
+    valueMultiplier: 1.03
+    damageMultiplier: 2.56
+    healthMultiplier: 1.3
+  - level: 4
+    weight: 0.0498008
+    valueMultiplier: 1.04
+    damageMultiplier: 3.24
+    healthMultiplier: 1.4
+  - level: 5
+    weight: 0.018318374
+    valueMultiplier: 1.05
+    damageMultiplier: 4
+    healthMultiplier: 1.5
+  - level: 6
+    weight: 0.0067380904
+    valueMultiplier: 1.06
+    damageMultiplier: 4.84
+    healthMultiplier: 1.6
+  - level: 7
+    weight: 0.0024788063
+    valueMultiplier: 1.07
+    damageMultiplier: 5.76
+    healthMultiplier: 1.7
+  - level: 8
+    weight: 0.000911577
+    valueMultiplier: 1.08
+    damageMultiplier: 6.76
+    healthMultiplier: 1.8
+  - level: 9
+    weight: 0.0003354579
+    valueMultiplier: 1.09
+    damageMultiplier: 7.84
+    healthMultiplier: 1.9
+  - level: 10
+    weight: 0.00012341108
+    valueMultiplier: 1.1
+    damageMultiplier: 9
+    healthMultiplier: 2
+  - level: 11
+    weight: 0.00004540089
+    valueMultiplier: 1.11
+    damageMultiplier: 10.24
+    healthMultiplier: 2.1
+  - level: 12
+    weight: 0.00001670174
+    valueMultiplier: 1.12
+    damageMultiplier: 11.56
+    healthMultiplier: 2.2
+  - level: 13
+    weight: 0.0000061442047
+    valueMultiplier: 1.13
+    damageMultiplier: 12.96
+    healthMultiplier: 2.3
+  - level: 14
+    weight: 0.0000022603315
+    valueMultiplier: 1.14
+    damageMultiplier: 14.44
+    healthMultiplier: 2.4
+  - level: 15
+    weight: 0.0000008315289
+    valueMultiplier: 1.15
+    damageMultiplier: 16
+    healthMultiplier: 2.5
+  - level: 16
+    weight: 0.00000030590235
+    valueMultiplier: 1.16
+    damageMultiplier: 17.64
+    healthMultiplier: 2.6
+  - level: 17
+    weight: 0.00000011253517
+    valueMultiplier: 1.17
+    damageMultiplier: 19.36
+    healthMultiplier: 2.7
+  - level: 18
+    weight: 0.000000041399378
+    valueMultiplier: 1.18
+    damageMultiplier: 21.16
+    healthMultiplier: 2.8
+  - level: 19
+    weight: 0.000000015229979
+    valueMultiplier: 1.19
+    damageMultiplier: 23.04
+    healthMultiplier: 2.9
+  - level: 20
+    weight: 0.0000000056027964
+    valueMultiplier: 1.2
+    damageMultiplier: 25
+    healthMultiplier: 3
+  - level: 21
+    weight: 0.0000000020611537
+    valueMultiplier: 1.21
+    damageMultiplier: 27.04
+    healthMultiplier: 3.1
+  - level: 22
+    weight: 7.6335877e-10
+    valueMultiplier: 1.22
+    damageMultiplier: 29.16
+    healthMultiplier: 3.2
+  - level: 23
+    weight: 2.7932961e-10
+    valueMultiplier: 1.23
+    damageMultiplier: 31.36
+    healthMultiplier: 3.3
+  - level: 24
+    weight: 1.0266941e-10
+    valueMultiplier: 1.24
+    damageMultiplier: 33.64
+    healthMultiplier: 3.4
+  - level: 25
+    weight: 3.776435e-11
+    valueMultiplier: 1.25
+    damageMultiplier: 36
+    healthMultiplier: 3.5
+  - level: 26
+    weight: 1.3888889e-11
+    valueMultiplier: 1.26
+    damageMultiplier: 38.44
+    healthMultiplier: 3.6
+  - level: 27
+    weight: 5.109862e-12
+    valueMultiplier: 1.27
+    damageMultiplier: 40.96
+    healthMultiplier: 3.7
+  - level: 28
+    weight: 1.8796993e-12
+    valueMultiplier: 1.28
+    damageMultiplier: 43.56
+    healthMultiplier: 3.8
+  - level: 29
+    weight: 6.9444445e-13
+    valueMultiplier: 1.29
+    damageMultiplier: 46.24
+    healthMultiplier: 3.9
+  - level: 30
+    weight: 2.5445293e-13
+    valueMultiplier: 1.3
+    damageMultiplier: 49
+    healthMultiplier: 4
+  - level: 31
+    weight: 9.363296e-14
+    valueMultiplier: 1.31
+    damageMultiplier: 51.84
+    healthMultiplier: 4.1
+  - level: 32
+    weight: 3.443526e-14
+    valueMultiplier: 1.32
+    damageMultiplier: 54.76
+    healthMultiplier: 4.2
+  - level: 33
+    weight: 1.266464e-14
+    valueMultiplier: 1.33
+    damageMultiplier: 57.76
+    healthMultiplier: 4.3
+  - level: 34
+    weight: 4.6598323e-15
+    valueMultiplier: 1.34
+    damageMultiplier: 60.84
+    healthMultiplier: 4.4
+  - level: 35
+    weight: 1.7140899e-15
+    valueMultiplier: 1.35
+    damageMultiplier: 64
+    healthMultiplier: 4.5
+  - level: 36
+    weight: 6.329114e-16
+    valueMultiplier: 1.36
+    damageMultiplier: 67.24
+    healthMultiplier: 4.6
+  weight1Enchant: 1
+  weight2Enchants: 0.5
+  weight3Enchants: 0.25

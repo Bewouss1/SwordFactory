@@ -223,7 +223,7 @@ RectTransform:
   m_GameObject: {fileID: 369564540965660609}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0.25}
-  m_LocalScale: {x: 1, y: 1, z: 3.8695197}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9175353173780152011}
@@ -231,7 +231,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.24480057, y: 0.5227719}
-  m_SizeDelta: {x: 0.45, y: 0.12}
+  m_SizeDelta: {x: 0.45, y: 0.11}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &3994926672261190948
 MeshRenderer:
@@ -302,7 +302,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Unknown
+  m_text: 'Sharpness X
+
+    Power X
+
+    Resistance I
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a5f121edb7a3de9439b10f29c4b4ce34, type: 2}
   m_sharedMaterial: {fileID: 1851310325135207337, guid: a5f121edb7a3de9439b10f29c4b4ce34, type: 2}
@@ -330,11 +336,11 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   m_fontSize: 0.95
-  m_fontSizeBase: 36
+  m_fontSizeBase: 0.96
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 0
-  m_fontSizeMax: 72
+  m_fontSizeMin: 0.75
+  m_fontSizeMax: 0.95
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
@@ -368,7 +374,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: -0.098472595, z: -0.10425255, w: -0.17560577}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -515,7 +521,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.208, y: 0.5227721}
+  m_AnchoredPosition: {x: 0.15, y: 0.5227721}
   m_SizeDelta: {x: 0.95, y: 0.12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1731897713356523186
@@ -871,7 +877,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.055, y: 0.5227721}
+  m_AnchoredPosition: {x: -0.0030005649, y: 0.5227721}
   m_SizeDelta: {x: 0.95, y: 0.12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1117764169582857042
@@ -1368,7 +1374,7 @@ MonoBehaviour:
   swordClass: Unknown
   rarity: Unknown
   level: 0
-  enchant: 
+  enchantments: []
   moldText: {fileID: 6994674359545782746}
   classText: {fileID: 7448155403531209925}
   rarityQualityText: {fileID: 7059386848869189143}
@@ -1379,6 +1385,7 @@ MonoBehaviour:
   containerRenderer: {fileID: 2236529878128451268}
   baseValue: 10
   attributesConfig: {fileID: 11400000, guid: d58fadb07a023284c866cca544080719, type: 2}
+  enchantmentConfig: {fileID: 11400000, guid: 53722016c9b6f6d47806980142f1fc3e, type: 2}
   defaultColor: {r: 0.36862746, g: 0.3647059, b: 0.3647059, a: 0.34117648}
 --- !u!1 &4072683543627669898
 GameObject:
