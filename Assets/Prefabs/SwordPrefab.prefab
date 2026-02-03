@@ -1374,7 +1374,7 @@ MonoBehaviour:
   quality: Unknown
   swordClass: Unknown
   rarity: Unknown
-  level: 1
+  level: 0
   enchantments: []
   moldText: {fileID: 6994674359545782746}
   classText: {fileID: 7448155403531209925}

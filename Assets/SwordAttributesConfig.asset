@@ -18,43 +18,43 @@ MonoBehaviour:
   - name: Normal
     weight: 1
     multiplier: 1
-    color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    color: {r: 0, g: 1, b: 0, a: 1}
   - name: Bronze
     weight: 0.1
     multiplier: 2.5
-    color: {r: 0.8, g: 0.55, b: 0.2, a: 1}
+    color: {r: 0.8039216, g: 0.49803922, b: 0.19607843, a: 1}
   - name: Silver
     weight: 0.01
     multiplier: 6
-    color: {r: 0.75, g: 0.75, b: 0.75, a: 1}
+    color: {r: 0.7529412, g: 0.7529412, b: 0.7529412, a: 1}
   - name: Gold
     weight: 0.001
     multiplier: 15
-    color: {r: 1, g: 0.85, b: 0, a: 1}
+    color: {r: 1, g: 1, b: 0, a: 1}
   - name: Sapphire
     weight: 0.0001
     multiplier: 35
-    color: {r: 0.1, g: 0.5, b: 0.9, a: 1}
+    color: {r: 0, g: 0, b: 1, a: 1}
   - name: Emerald
     weight: 0.00001
     multiplier: 60
-    color: {r: 0.3, g: 0.9, b: 0.3, a: 1}
+    color: {r: 0.47058824, g: 1, b: 0.47058824, a: 1}
   - name: Ruby
     weight: 0.000001
     multiplier: 100
-    color: {r: 0.9, g: 0.1, b: 0.1, a: 1}
+    color: {r: 1, g: 0, b: 0, a: 1}
   - name: Amethyst
     weight: 0.0000001
     multiplier: 145
-    color: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+    color: {r: 0.5019608, g: 0, b: 0.5019608, a: 1}
   - name: Diamond
     weight: 0.00000001
     multiplier: 190
-    color: {r: 0.9, g: 0.95, b: 1, a: 1}
+    color: {r: 0, g: 1, b: 1, a: 1}
   - name: Opal
     weight: 0.000000001
     multiplier: 250
-    color: {r: 0.95, g: 0.8, b: 0.9, a: 1}
+    color: {r: 0, g: 0, b: 0, a: 1}
   - name: Uranium
     weight: 2e-10
     multiplier: 300
@@ -62,23 +62,23 @@ MonoBehaviour:
   - name: Crystal
     weight: 1e-10
     multiplier: 350
-    color: {r: 0.7, g: 0.9, b: 1, a: 1}
+    color: {r: 0, g: 0.70980394, b: 0.8862745, a: 1}
   - name: Moonstone
     weight: 2e-11
     multiplier: 420
-    color: {r: 0.9, g: 0.9, b: 1, a: 1}
+    color: {r: 0.9019608, g: 0.9019608, b: 1, a: 1}
   - name: Topaz
     weight: 1e-11
     multiplier: 490
-    color: {r: 1, g: 0.7, b: 0.2, a: 1}
+    color: {r: 0.62352943, g: 0.31764707, b: 0.16470589, a: 1}
   - name: Painite
     weight: 1e-12
     multiplier: 700
-    color: {r: 0.8, g: 0.3, b: 0.3, a: 1}
+    color: {r: 0.8, g: 0.3019608, b: 0.3019608, a: 1}
   - name: Anhydrite
     weight: 6.6666665e-13
     multiplier: 850
-    color: {r: 0.9, g: 0.8, b: 0.2, a: 1}
+    color: {r: 0.9019608, g: 0.8, b: 0.2, a: 1}
   - name: Azure
     weight: 1e-13
     multiplier: 950
@@ -86,11 +86,11 @@ MonoBehaviour:
   - name: Volcanic
     weight: 1e-13
     multiplier: 1175
-    color: {r: 0.3, g: 0.1, b: 0.05, a: 1}
+    color: {r: 0.3019608, g: 0.101960786, b: 0.050980393, a: 1}
   - name: Jade
     weight: 9.5238094e-14
     multiplier: 1200
-    color: {r: 0.2, g: 0.8, b: 0.4, a: 1}
+    color: {r: 0, g: 1, b: 0, a: 1}
   - name: Shale
     weight: 3.3333335e-14
     multiplier: 1250
@@ -98,15 +98,15 @@ MonoBehaviour:
   - name: Platinum
     weight: 1.6666668e-14
     multiplier: 1300
-    color: {r: 0.9, g: 0.9, b: 0.95, a: 1}
+    color: {r: 1, g: 1, b: 1, a: 1}
   - name: Quartz
     weight: 1e-14
     multiplier: 1400
-    color: {r: 0.9, g: 0.9, b: 0.9, a: 1}
+    color: {r: 0.9019608, g: 0.9019608, b: 0.9019608, a: 1}
   - name: Asgarite
     weight: 4e-15
     multiplier: 1500
-    color: {r: 0.8, g: 0.7, b: 1, a: 1}
+    color: {r: 0.8, g: 0.7019608, b: 1, a: 1}
   - name: Stardust
     weight: 2.5e-15
     multiplier: 1750
@@ -114,11 +114,11 @@ MonoBehaviour:
   - name: Zeolite
     weight: 2e-15
     multiplier: 1900
-    color: {r: 0.7, g: 0.8, b: 0.9, a: 1}
+    color: {r: 0.7019608, g: 0.8, b: 1, a: 1}
   - name: Ammolite
     weight: 1e-15
     multiplier: 2000
-    color: {r: 0.9, g: 0.6, b: 0.8, a: 1}
+    color: {r: 0.9019608, g: 0.6039216, b: 1, a: 1}
   qualityOptions:
   - name: Broken
     weight: 1
