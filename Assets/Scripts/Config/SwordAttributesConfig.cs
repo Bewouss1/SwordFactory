@@ -15,6 +15,7 @@ public class SwordAttributesConfig : ScriptableObject
         [ReadOnly]
         public float multiplier; // pour la valeur (auto-calculé)
         
+        [ReadOnly]
         public Color color;      // couleur associée à cet attribut
     }
 

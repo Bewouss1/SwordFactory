@@ -2241,6 +2241,7 @@ GameObject:
   - component: {fileID: 756938109}
   - component: {fileID: 756938115}
   - component: {fileID: 756938116}
+  - component: {fileID: 756938117}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2265,7 +2266,6 @@ MonoBehaviour:
   gravity: -9.81
   rotationSpeed: 10
   cameraTransform: {fileID: 1878262763}
-  cameraYawSource: {fileID: 0}
   spawnPoint: {fileID: 301909892}
 --- !u!143 &756938110
 CharacterController:
@@ -2411,6 +2411,20 @@ MonoBehaviour:
   xpIncrementPerLevel: 20
   xpBar: {fileID: 783913845}
   levelText: {fileID: 1274754397}
+--- !u!114 &756938117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756938108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b6159581d83f6a4d9b1b7299013b14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMoney
+  moneyText: {fileID: 1440843855}
+  currentMoney: 0
 --- !u!1001 &776496363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2845,9 +2859,9 @@ RectTransform:
   - {fileID: 1440843854}
   m_Father: {fileID: 1625758006}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -585.9}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1070520628
@@ -2873,7 +2887,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1078716134}
-  - component: {fileID: 1078716133}
+  - component: {fileID: 1078716135}
   m_Layer: 0
   m_Name: SwordAssigner
   m_TagString: Untagged
@@ -2881,20 +2895,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1078716133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1078716132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d2026ecafc867f42a65240d7cca4dc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SwordAssigner
-  attributesConfig: {fileID: 11400000, guid: d58fadb07a023284c866cca544080719, type: 2}
-  enchantmentConfig: {fileID: 11400000, guid: 53722016c9b6f6d47806980142f1fc3e, type: 2}
 --- !u!4 &1078716134
 Transform:
   m_ObjectHideFlags: 0
@@ -2910,6 +2910,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1078716135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078716132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83ae6b1666d73964e89aff4e1ca4cc14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SwordAssigner
+  attributesConfig: {fileID: 11400000, guid: d58fadb07a023284c866cca544080719, type: 2}
+  enchantmentConfig: {fileID: 11400000, guid: 53722016c9b6f6d47806980142f1fc3e, type: 2}
 --- !u!1001 &1083919508
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3381,7 +3395,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Level 0 | 0/100 EXP
+  m_text: 'Level 300 | 100.0B/100.0B EXP
 
 '
   m_isRightToLeft: 0
@@ -3608,7 +3622,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1335918731}
-  - component: {fileID: 1335918730}
+  - component: {fileID: 1335918732}
   m_Layer: 0
   m_Name: SellZone
   m_TagString: Untagged
@@ -3616,7 +3630,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1335918730
+--- !u!4 &1335918731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335918729}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.29832, y: 0.39, z: 3.73}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 661016253}
+  - {fileID: 2096773448}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1335918732
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3625,7 +3656,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1335918729}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e7a3a72e1fe09041a931d690b12e378, type: 3}
+  m_Script: {fileID: 11500000, guid: a4205e4bfba50f7429d727d3bae4ad1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SellZone
   slotsContainer: {fileID: 661016253}
@@ -3666,27 +3697,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  sellCountdownSeconds: 10
-  hideTimeTextWhenIdle: 1
-  playerMoney: {fileID: 1070520628}
+  sellCountdownSeconds: 30
+  hideTimeTextWhenIdle: 0
+  playerMoney: {fileID: 756938117}
   playerLevel: {fileID: 756938116}
---- !u!4 &1335918731
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1335918729}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.29832, y: 0.39, z: 3.73}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 661016253}
-  - {fileID: 2096773448}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1340067954
 GameObject:
   m_ObjectHideFlags: 0
@@ -4102,7 +4116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 1}
+  m_Color: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4159,10 +4173,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1070520627}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 470}
-  m_SizeDelta: {x: 300, y: 150}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 1.4494, y: 422.9406}
+  m_SizeDelta: {x: 328.5884, y: 75.1188}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1440843855
 MonoBehaviour:
@@ -4184,7 +4198,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: $1,576
+  m_text: $121,576,547
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 93244e86e1f38db4e95aefd5af86fc15, type: 2}
   m_sharedMaterial: {fileID: 1851310325135207337, guid: 93244e86e1f38db4e95aefd5af86fc15, type: 2}
@@ -4211,7 +4225,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 57.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4250,7 +4264,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0.20263672, y: 0.11425781, z: 0.015258789, w: 0.0758667}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4646,16 +4660,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1719739907
-Transform:
+--- !u!224 &1719739907
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1719739906}
-  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 407.7, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4663,6 +4676,11 @@ Transform:
   - {fileID: 1274754396}
   m_Father: {fileID: 1625758006}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 359.9}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1751407401
 GameObject:
   m_ObjectHideFlags: 0
@@ -5272,10 +5290,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1906058392}
-  - component: {fileID: 1906058394}
-  - component: {fileID: 1906058393}
+  - component: {fileID: 1906058396}
+  - component: {fileID: 1906058395}
   m_Layer: 0
-  m_Name: SpawnButton
+  m_Name: SwordSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5298,7 +5316,7 @@ Transform:
   - {fileID: 1866647252}
   m_Father: {fileID: 1912181163}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1906058393
+--- !u!114 &1906058395
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5307,29 +5325,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1906058391}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 138430a4a68750648aa01d858712fcde, type: 3}
+  m_Script: {fileID: 11500000, guid: d5094875dc4f0c3449fd0cde4a0195bf, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpawnCubeOnInteract
+  m_EditorClassIdentifier: Assembly-CSharp::ProximityButton
+  player: {fileID: 756938114}
+  uiButton: {fileID: 1866647251}
+  showDistance: 3
+  offset: {x: 0, y: 1, z: 0}
+--- !u!114 &1906058396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906058391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a402c063a55d4e242bc027b1bb970dbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnSwordOnInteract
   player: {fileID: 756938114}
   swordPrefab: {fileID: 3909451734926284577, guid: 03008dbe2bc09ef45ba43fb01eccc338, type: 3}
   swordsSpawnedContainer: {fileID: 2010495719}
   conveyorController: {fileID: 1912181164}
---- !u!114 &1906058394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1906058391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a66c44ced32bf2f42a6088efb7610f4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ProximityButton
-  player: {fileID: 756938114}
-  uiButton: {fileID: 1343438338}
-  showDistance: 3
-  offset: {x: 0, y: 1, z: 0}
 --- !u!1 &1912181162
 GameObject:
   m_ObjectHideFlags: 0
@@ -5374,7 +5392,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1912181162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee22dcf49fb43544db96eafa09aaf6d9, type: 3}
+  m_Script: {fileID: 11500000, guid: dddeef52c38ac2c49acfdaf1329fffd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ConveyorController
   pausePoints:
@@ -5386,10 +5404,10 @@ MonoBehaviour:
   - {fileID: 459201482}
   - {fileID: 558834979}
   - {fileID: 573758164}
-  speed: 1.5
-  waitTime: 2
-  swordAssigner: {fileID: 1078716133}
-  sellZone: {fileID: 1335918730}
+  speed: 2
+  waitTime: 1
+  swordAssigner: {fileID: 1078716135}
+  sellZone: {fileID: 1335918732}
   playerLevel: {fileID: 756938116}
 --- !u!1001 &1961748699
 PrefabInstance:
@@ -5604,7 +5622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.972549}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

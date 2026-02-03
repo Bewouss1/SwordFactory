@@ -1331,7 +1331,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6700919752175982212}
-  - component: {fileID: 2460999512737681559}
+  - component: {fileID: 2344415689034694825}
+  - component: {fileID: 6165718626229683777}
   m_Layer: 0
   m_Name: SwordPrefab
   m_TagString: Untagged
@@ -1357,7 +1358,7 @@ Transform:
   - {fileID: 9175353173780152011}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2460999512737681559
+--- !u!114 &2344415689034694825
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1366,14 +1367,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3909451734926284577}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5a36c280c73d084bac6670572c31608, type: 3}
+  m_Script: {fileID: 11500000, guid: d8aac88465b415a4696a944543efcca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwordStats
   mold: Unknown
   quality: Unknown
   swordClass: Unknown
   rarity: Unknown
-  level: 0
+  level: 1
   enchantments: []
   moldText: {fileID: 6994674359545782746}
   classText: {fileID: 7448155403531209925}
@@ -1387,6 +1388,18 @@ MonoBehaviour:
   attributesConfig: {fileID: 11400000, guid: d58fadb07a023284c866cca544080719, type: 2}
   enchantmentConfig: {fileID: 11400000, guid: 53722016c9b6f6d47806980142f1fc3e, type: 2}
   defaultColor: {r: 0.36862746, g: 0.3647059, b: 0.3647059, a: 0.34117648}
+--- !u!114 &6165718626229683777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3909451734926284577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea32aeb602e885438bb28a474d1a9a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SwordMovementBehavior
 --- !u!1 &4072683543627669898
 GameObject:
   m_ObjectHideFlags: 0

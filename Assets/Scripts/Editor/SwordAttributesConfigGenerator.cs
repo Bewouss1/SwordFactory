@@ -197,32 +197,32 @@ public class SwordAttributesConfigGenerator : EditorWindow
         // Données: Name, Chance (dénominateur), Multiplicateur
         var moldData = new (string name, string chance, float multiplier, Color color)[]
         {
-            ("Normal", "1", 1f, new Color(0.5f, 0.5f, 0.5f)),              // Gris
-            ("Bronze", "10", 2.5f, new Color(0.8f, 0.55f, 0.2f)),         // Marron bronze
-            ("Silver", "100", 6f, new Color(0.75f, 0.75f, 0.75f)),        // Gris clair
-            ("Gold", "1000", 15f, new Color(1f, 0.85f, 0f)),              // Jaune or
-            ("Sapphire", "10000", 35f, new Color(0.1f, 0.5f, 0.9f)),      // Bleu saphir
-            ("Emerald", "100000", 60f, new Color(0.3f, 0.9f, 0.3f)),      // Vert émeraude
-            ("Ruby", "1000000", 100f, new Color(0.9f, 0.1f, 0.1f)),       // Rouge rubis
-            ("Amethyst", "10000000", 145f, new Color(0.6f, 0.2f, 0.8f)),  // Violet améthyste
-            ("Diamond", "100000000", 190f, new Color(0.9f, 0.95f, 1f)),   // Blanc diamant
-            ("Opal", "1000000000", 250f, new Color(0.95f, 0.8f, 0.9f)),   // Rose opal
-            ("Uranium", "5000000000", 300f, new Color(0.4f, 0.8f, 0.2f)), // Vert uranium
-            ("Crystal", "10000000000", 350f, new Color(0.7f, 0.9f, 1f)),  // Cyan cristal
-            ("Moonstone", "50000000000", 420f, new Color(0.9f, 0.9f, 1f)), // Blanc lune
-            ("Topaz", "100000000000", 490f, new Color(1f, 0.7f, 0.2f)),   // Orange topaze
-            ("Painite", "1000000000000", 700f, new Color(0.8f, 0.3f, 0.3f)), // Rose-rouge
-            ("Anhydrite", "1500000000000", 850f, new Color(0.9f, 0.8f, 0.2f)), // Jaune pâle
-            ("Azure", "10000000000000", 950f, new Color(0.2f, 0.6f, 1f)), // Bleu azur
-            ("Volcanic", "10000000000000", 1175f, new Color(0.3f, 0.1f, 0.05f)), // Noir volcanique
-            ("Jade", "10500000000000", 1200f, new Color(0.2f, 0.8f, 0.4f)), // Vert jade
-            ("Shale", "30000000000000", 1250f, new Color(0.4f, 0.4f, 0.4f)), // Gris shale
-            ("Platinum", "60000000000000", 1300f, new Color(0.9f, 0.9f, 0.95f)), // Gris platine
-            ("Quartz", "100000000000000", 1400f, new Color(0.9f, 0.9f, 0.9f)), // Blanc quartz
-            ("Asgarite", "250000000000000", 1500f, new Color(0.8f, 0.7f, 1f)), // Violet asgarite
-            ("Stardust", "400000000000000", 1750f, new Color(1f, 0.8f, 0.2f)), // Or stardust
-            ("Zeolite", "500000000000000", 1900f, new Color(0.7f, 0.8f, 0.9f)), // Bleu clair zeolite
-            ("Ammolite", "1000000000000000", 2000f, new Color(0.9f, 0.6f, 0.8f)), // Rose ammolite
+            ("Normal", "1", 1f, ParseHexColor("00FF00")),                      // Gris
+            ("Bronze", "10", 2.5f, ParseHexColor("cd7f32")),                   // Marron bronze
+            ("Silver", "100", 6f, ParseHexColor("c0c0c0")),                    // Gris clair
+            ("Gold", "1000", 15f, ParseHexColor("ffff00")),                    // Jaune or
+            ("Sapphire", "10000", 35f, ParseHexColor("0000ff")),              // Bleu saphir
+            ("Emerald", "100000", 60f, ParseHexColor("78ff78")),              // Vert émeraude
+            ("Ruby", "1000000", 100f, ParseHexColor("ff0000")),               // Rouge rubis
+            ("Amethyst", "10000000", 145f, ParseHexColor("800080")),          // Violet améthyste
+            ("Diamond", "100000000", 190f, ParseHexColor("00ffff")),          // Blanc diamant
+            ("Opal", "1000000000", 250f, ParseHexColor("000000")),            // Rose opal
+            ("Uranium", "5000000000", 300f, ParseHexColor("66cc33")),         // Vert uranium
+            ("Crystal", "10000000000", 350f, ParseHexColor("00b5e2")),        // Cyan cristal
+            ("Moonstone", "50000000000", 420f, ParseHexColor("e6e6ff")),      // Blanc lune
+            ("Topaz", "100000000000", 490f, ParseHexColor("9f512a")),         // Orange topaze
+            ("Painite", "1000000000000", 700f, ParseHexColor("cc4d4d")),      // Rose-rouge
+            ("Anhydrite", "1500000000000", 850f, ParseHexColor("e6cc33")),    // Jaune pâle
+            ("Azure", "10000000000000", 950f, ParseHexColor("3399ff")),       // Bleu azur
+            ("Volcanic", "10000000000000", 1175f, ParseHexColor("4d1a0d")),   // Noir volcanique
+            ("Jade", "10500000000000", 1200f, ParseHexColor("00ff00")),       // Vert jade
+            ("Shale", "30000000000000", 1250f, ParseHexColor("666666")),      // Gris shale
+            ("Platinum", "60000000000000", 1300f, ParseHexColor("ffffff")),   // Gris platine
+            ("Quartz", "100000000000000", 1400f, ParseHexColor("e6e6e6")),    // Blanc quartz
+            ("Asgarite", "250000000000000", 1500f, ParseHexColor("ccb3ff")),  // Violet asgarite
+            ("Stardust", "400000000000000", 1750f, ParseHexColor("ffcc33")),  // Or stardust
+            ("Zeolite", "500000000000000", 1900f, ParseHexColor("b3ccff")),   // Bleu clair zeolite
+            ("Ammolite", "1000000000000000", 2000f, ParseHexColor("e69aff")), // Rose ammolite
         };
 
         var moldOptions = new SwordAttributesConfig.AttributeOption[moldData.Length];

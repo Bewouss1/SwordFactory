@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float rotationSpeed = 10f;
 
     [SerializeField] private Transform cameraTransform;
-    [SerializeField] private Transform cameraYawSource;
     [SerializeField] private Transform spawnPoint;  // Point de départ du joueur
 
     private CharacterController controller;
@@ -60,13 +59,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             // Déplacement relatif au yaw de la caméra (ignore le pitch pour éviter l'inversion)
-            Transform yawSource = cameraYawSource != null
-                ? cameraYawSource
-                : (cameraTransform != null ? cameraTransform.parent : null);
-
-            if (yawSource == null)
-                yawSource = cameraTransform;
-
+            Transform yawSource = cameraTransform.parent != null ? cameraTransform.parent : cameraTransform;
             float yaw = yawSource.eulerAngles.y;
             Quaternion yawRotation = Quaternion.Euler(0f, yaw, 0f);
             Vector3 moveDir = (yawRotation * input).normalized;
