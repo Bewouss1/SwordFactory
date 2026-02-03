@@ -189,7 +189,7 @@ public class SwordStats : MonoBehaviour
             }
         }
         
-        float levelMult = 1f + (level * 0.01f);
+        float levelMult = 1f + (Mathf.Max(0, level - 1) * 0.01f);
 
         return Mathf.Max(0f, baseValue * moldMult * qualityMult * classMult * rarityMult * enchantMult * levelMult);
     }
