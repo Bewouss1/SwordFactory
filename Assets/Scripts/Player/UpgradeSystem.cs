@@ -67,38 +67,31 @@ public class UpgradeSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// Calcule le multiplicateur de chance basé sur le niveau d'upgrade et la rareté de base
-    /// LOGIQUE INVERSÉE : On multiplie les weights des rares pour les favoriser
-    /// 
-    /// Progressions observées (appliquées à l'INVERSE - on augmente les rares):
-    /// - Très rare (weight faible) : multiplicateur agressif (1.036 par niveau)
-    /// - Moyenne : multiplicateur modéré (1.026 par niveau)
-    /// - Commune (weight élevé) : multiplicateur faible (1.024 par niveau)
+    /// Calcule le multiplicateur de chance basé sur le niveau d'upgrade
+    /// REDISTRIBUTION : les rares augmentent, les communs diminuent
     /// </summary>
     public float CalculateUpgradedWeight(float baseWeight, int upgradeLevel, int totalOptions)
     {
-        if (upgradeLevel <= 0 || totalOptions <= 1)
+        if (upgradeLevel <= 0)
             return baseWeight;
 
-        // Déterminer le multiplicateur basé sur la rareté relative de l'option
-        // Plus le weight est FAIBLE (rare), plus on le MULTIPLIE fortement
-        // Plus le weight est ÉLEVÉ (commun), moins on le multiplie (ou on le diminue)
-        
+        // Stratégie : favoriser les rares (weight faible) et défavoriser les communs (weight élevé)
         float multiplier;
-        if (baseWeight < 0.001f)
+        
+        if (baseWeight >= 0.1f) // Communs (Normal, Bronze...)
         {
-            // Très rare : forte augmentation (inverse de 0.965)
-            multiplier = Mathf.Pow(1.036f, upgradeLevel); // 1/0.965 ≈ 1.036
+            // DIMINUER : 0.96^level
+            multiplier = Mathf.Pow(0.96f, upgradeLevel);
         }
-        else if (baseWeight < 0.1f)
+        else if (baseWeight >= 0.001f) // Rares moyens (Silver, Gold, Sapphire...)
         {
-            // Rare à moyenne : augmentation modérée (inverse de 0.975)
-            multiplier = Mathf.Pow(1.026f, upgradeLevel); // 1/0.975 ≈ 1.026
+            // AUGMENTER modérément : 1.02^level
+            multiplier = Mathf.Pow(1.02f, upgradeLevel);
         }
-        else
+        else // Ultra rares (Ruby, Diamond...)
         {
-            // Commun : légère augmentation ou diminution (inverse de 0.977)
-            multiplier = Mathf.Pow(0.977f, upgradeLevel); // On DIMINUE les communs
+            // AUGMENTER fortement : 1.04^level
+            multiplier = Mathf.Pow(1.04f, upgradeLevel);
         }
 
         return baseWeight * multiplier;
@@ -106,8 +99,7 @@ public class UpgradeSystem : MonoBehaviour
 
     /// <summary>
     /// Applique le bonus de luck aux poids d'un tableau d'options
-    /// Chaque option reçoit un bonus basé sur sa rareté de base
-    /// Les options rares bénéficient d'un bonus plus important
+    /// FORMULE DYNAMIQUE : redistribue progressivement vers 1/1 puis au-delà
     /// </summary>
     public void ApplyLuckBonus(SwordAttributesConfig.AttributeOption[] options, int upgradeLevel)
     {
@@ -116,18 +108,50 @@ public class UpgradeSystem : MonoBehaviour
 
         Debug.Log($"[UpgradeSystem] Applying luck bonus (Level {upgradeLevel}) to {options.Length} options");
 
-        // Calculer les nouveaux poids avec le système d'upgrade
-        for (int i = 0; i < options.Length; i++)
+        // Appliquer upgrade progressif niveau par niveau
+        for (int level = 1; level <= upgradeLevel; level++)
         {
-            float oldWeight = options[i].weight;
-            options[i].weight = CalculateUpgradedWeight(options[i].weight, upgradeLevel, options.Length);
-            
-            // Log pour les 3 plus rares
-            if (i >= options.Length - 3)
+            // Calculer le total actuel
+            float totalWeight = 0f;
+            foreach (var opt in options)
+                totalWeight += opt.weight;
+
+            // Appliquer la transformation à chaque option
+            for (int i = 0; i < options.Length; i++)
             {
-                float improvement = ((options[i].weight / oldWeight) - 1f) * 100f;
-                Debug.Log($"[UpgradeSystem]   {options[i].name}: {oldWeight:F6} → {options[i].weight:F6} (+{improvement:F2}%)");
+                float currentOdds = totalWeight / options[i].weight; // 1/X actuel
+                
+                // Si odds > 1 (rare) → diminuer odds (augmenter weight)
+                // Si odds < 1 (ultra commun post-1/1) → augmenter odds (diminuer weight)
+                // Point pivot à 1/1
+                
+                float multiplier;
+                if (currentOdds > 1.0f)
+                {
+                    // Rare : rapprocher de 1/1 en augmentant le weight
+                    // Plus c'est rare, plus on augmente fort
+                    float rarityFactor = Mathf.Log10(currentOdds + 1f); // Log pour progression douce
+                    multiplier = 1f + (rarityFactor * 0.08f); // 8% par niveau (était 4%)
+                }
+                else
+                {
+                    // Déjà au-delà de 1/1 : continuer à diminuer le weight
+                    multiplier = 0.92f; // -8% par niveau (était -4%)
+                }
+                
+                options[i].weight *= multiplier;
             }
+        }
+
+        // Log final
+        float finalTotal = 0f;
+        foreach (var opt in options)
+            finalTotal += opt.weight;
+        
+        for (int i = 0; i < Mathf.Min(5, options.Length); i++)
+        {
+            float odds = finalTotal / options[i].weight;
+            Debug.Log($"[UpgradeSystem]   {options[i].name}: 1/{odds:F2}");
         }
     }
 

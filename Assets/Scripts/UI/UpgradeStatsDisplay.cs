@@ -49,13 +49,13 @@ public class UpgradeStatsDisplay : MonoBehaviour
         sb.AppendLine($"Class: Lvl {UpgradeSystem.Instance.SwordClass.currentLevel}");
         sb.AppendLine($"Rarity: Lvl {UpgradeSystem.Instance.Rarity.currentLevel}");
         
-        sb.AppendLine("\n=== MOLDS TOP 3 (upgraded) ===");
-        DisplayTopOptions(sb, attributesConfig.moldOptions, UpgradeSystem.Instance.Molder.currentLevel);
+        sb.AppendLine("\n=== ALL MOLDS (upgraded) ===");
+        DisplayAllOptions(sb, attributesConfig.moldOptions, UpgradeSystem.Instance.Molder.currentLevel);
         
         statsText.text = sb.ToString();
     }
 
-    private void DisplayTopOptions(System.Text.StringBuilder sb, SwordAttributesConfig.AttributeOption[] options, int level)
+    private void DisplayAllOptions(System.Text.StringBuilder sb, SwordAttributesConfig.AttributeOption[] options, int level)
     {
         if (options == null || options.Length == 0)
             return;
@@ -72,13 +72,12 @@ public class UpgradeStatsDisplay : MonoBehaviour
         foreach (var opt in modifiedOptions)
             total += opt.weight;
 
-        // Afficher les 3 plus rares
-        int count = Mathf.Min(3, modifiedOptions.Length);
-        for (int i = modifiedOptions.Length - 1; i >= modifiedOptions.Length - count; i--)
+        // Afficher TOUS les molds
+        for (int i = 0; i < modifiedOptions.Length; i++)
         {
-            float percent = (modifiedOptions[i].weight / total) * 100f;
-            float odds = 1f / (modifiedOptions[i].weight / total);
-            sb.AppendLine($"{modifiedOptions[i].name}: {percent:F3}% (1/{odds:F1})");
+            float probability = modifiedOptions[i].weight / total;
+            float odds = 1f / probability;
+            sb.AppendLine($"{modifiedOptions[i].name}: 1/{odds:F1}");
         }
     }
 }
