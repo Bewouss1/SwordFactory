@@ -18,10 +18,8 @@ public class PlayerMoney : MonoBehaviour
 
     public void AddMoney(float amount)
     {
-        if (amount <= 0f)
-            return;
-
         currentMoney += amount;
+        currentMoney = Mathf.Max(0f, currentMoney); // Ne pas descendre en dessous de 0
         RefreshUI();
     }
 

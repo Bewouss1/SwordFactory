@@ -3,10 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 6f;
-    [SerializeField] private float jumpHeight = 2f;
-    [SerializeField] private float gravity = -9.81f;
-    [SerializeField] private float rotationSpeed = 10f;
+    [SerializeField] private float moveSpeed = GameConstants.DEFAULT_MOVE_SPEED;
+    [SerializeField] private float jumpHeight = GameConstants.DEFAULT_JUMP_HEIGHT;
+    [SerializeField] private float gravity = GameConstants.DEFAULT_GRAVITY;
+    [SerializeField] private float rotationSpeed = GameConstants.DEFAULT_ROTATION_SPEED;
 
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private Transform spawnPoint;  // Point de départ du joueur

@@ -3,15 +3,19 @@ using UnityEngine;
 public class ThirdPersonCamera : MonoBehaviour
 {
     [SerializeField] private Transform target;
-    [SerializeField] private float mouseSensitivity = 3f;
-    [SerializeField] private float cameraDistance = 4f;
-    [SerializeField] private float minY = -40f;
-    [SerializeField] private float maxY = 60f;
+    [SerializeField] private float mouseSensitivity = GameConstants.DEFAULT_MOUSE_SENSITIVITY;
+    [SerializeField] private float cameraDistance = GameConstants.DEFAULT_CAMERA_DISTANCE;
+    [SerializeField] private float minY = GameConstants.DEFAULT_CAMERA_MIN_Y;
+    [SerializeField] private float maxY = GameConstants.DEFAULT_CAMERA_MAX_Y;
     [SerializeField] private LayerMask collisionMask = ~0;
 
     private Transform pivot;
     private float rotationX;
     private float rotationY;
+    
+    // Cache pour éviter allocations à chaque frame
+    private Vector3 cachedDesiredPosition;
+    private Vector3 cachedDirection;
 
     void Start()
     {
@@ -32,18 +36,18 @@ public class ThirdPersonCamera : MonoBehaviour
         pivot.position = target.position;
         pivot.rotation = Quaternion.Euler(rotationY, rotationX, 0f);
 
-        // Détection de collision
-        Vector3 desiredPosition = pivot.position + pivot.rotation * new Vector3(0f, 0f, -cameraDistance);
-        Vector3 direction = desiredPosition - pivot.position;
-        float distance = direction.magnitude;
+        // Détection de collision - réutiliser les vecteurs en cache
+        cachedDesiredPosition = pivot.position + pivot.rotation * new Vector3(0f, 0f, -cameraDistance);
+        cachedDirection = cachedDesiredPosition - pivot.position;
+        float distance = cachedDirection.magnitude;
 
-        if (Physics.SphereCast(pivot.position, 0.1f, direction.normalized, out RaycastHit hit, distance, collisionMask))
+        if (Physics.SphereCast(pivot.position, 0.1f, cachedDirection.normalized, out RaycastHit hit, distance, collisionMask))
         {
-            transform.position = pivot.position + direction.normalized * Mathf.Max(hit.distance - 0.2f, 0.5f);
+            transform.position = pivot.position + cachedDirection.normalized * Mathf.Max(hit.distance - 0.2f, 0.5f);
         }
         else
         {
-            transform.position = desiredPosition;
+            transform.position = cachedDesiredPosition;
         }
     }
 }

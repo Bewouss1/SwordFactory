@@ -34,45 +34,12 @@ public class EnchantmentConfigGenerator : EditorWindow
             MessageType.Info);
     }
 
+    /// <summary>
+    /// Parse une chance au format texte - DÉLÉGUÉ À EditorHelpers
+    /// </summary>
     private static double ParseChance(string chanceStr)
     {
-        chanceStr = chanceStr.Replace(",", ".");
-        chanceStr = chanceStr.Trim();
-
-        double multiplier = 1.0;
-        if (chanceStr.EndsWith("Qd", System.StringComparison.OrdinalIgnoreCase))
-        {
-            multiplier = 1e15;
-            chanceStr = chanceStr.Substring(0, chanceStr.Length - 2).Trim();
-        }
-        else if (chanceStr.EndsWith("T", System.StringComparison.OrdinalIgnoreCase))
-        {
-            multiplier = 1e12;
-            chanceStr = chanceStr.Substring(0, chanceStr.Length - 1).Trim();
-        }
-        else if (chanceStr.EndsWith("B", System.StringComparison.OrdinalIgnoreCase))
-        {
-            multiplier = 1e9;
-            chanceStr = chanceStr.Substring(0, chanceStr.Length - 1).Trim();
-        }
-        else if (chanceStr.EndsWith("M", System.StringComparison.OrdinalIgnoreCase))
-        {
-            multiplier = 1e6;
-            chanceStr = chanceStr.Substring(0, chanceStr.Length - 1).Trim();
-        }
-        else if (chanceStr.EndsWith("K", System.StringComparison.OrdinalIgnoreCase))
-        {
-            multiplier = 1e3;
-            chanceStr = chanceStr.Substring(0, chanceStr.Length - 1).Trim();
-        }
-
-        if (double.TryParse(chanceStr, NumberStyles.Float, CultureInfo.InvariantCulture, out double value))
-        {
-            return value * multiplier;
-        }
-
-        Debug.LogError($"Could not parse chance: '{chanceStr}'");
-        return 1.0;
+        return EditorHelpers.ParseChance(chanceStr);
     }
 
     private void PopulateEnchantmentLevels()

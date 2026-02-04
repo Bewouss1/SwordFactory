@@ -41,6 +41,7 @@ public static class GameConstants
 
     // UI
     public const float DEFAULT_PROXIMITY_DISTANCE = 3f;
+    public static readonly Vector3 DEFAULT_PROXIMITY_OFFSET = new Vector3(0, 1, 0);
 
     // Formatting
     public static readonly string[] MONEY_SUFFIXES = { "", "k", "M", "B", "T", "Qd", "Qn" };

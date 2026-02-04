@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df29a3bdf66bf084582444af76af66b5, type: 3}
   m_Name: SwordAttributesConfig
   m_EditorClassIdentifier: Assembly-CSharp::SwordAttributesConfig
-  rarityRatio: 1.35
-  rarityMultiplierRatio: 1.21
   moldOptions:
   - name: Normal
     weight: 1
@@ -359,376 +357,375 @@ MonoBehaviour:
     color: {r: 1, g: 1, b: 1, a: 1}
   rarityOptions:
   - name: Basic-
-    weight: 9.788303e+11
+    weight: 2.4794323e+11
     multiplier: 1
     color: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
   - name: Basic
-    weight: 7.250595e+11
-    multiplier: 1.21
+    weight: 1.8642348e+11
+    multiplier: 1.2
     color: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
   - name: Basic+
-    weight: 5.370811e+11
-    multiplier: 1.4641001
+    weight: 1.4016802e+11
+    multiplier: 1.44
     color: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
   - name: Basic++
-    weight: 3.9783783e+11
-    multiplier: 1.7715611
+    weight: 1.0538949e+11
+    multiplier: 1.7280002
     color: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
   - name: Common-
-    weight: 2.9469468e+11
-    multiplier: 2.143589
+    weight: 7.924022e+10
+    multiplier: 2.0736003
     color: {r: 0.6, g: 0.6, b: 0.6, a: 1}
   - name: Common
-    weight: 2.1829236e+11
-    multiplier: 2.5937428
+    weight: 5.9579105e+10
+    multiplier: 2.4883206
     color: {r: 0.6, g: 0.6, b: 0.6, a: 1}
   - name: Common+
-    weight: 1.6169804e+11
-    multiplier: 3.138429
+    weight: 4.4796318e+10
+    multiplier: 2.9859848
     color: {r: 0.6, g: 0.6, b: 0.6, a: 1}
   - name: Common++
-    weight: 1.1977632e+11
-    multiplier: 3.7974992
+    weight: 3.368144e+10
+    multiplier: 3.5831819
     color: {r: 0.6, g: 0.6, b: 0.6, a: 1}
   - name: Uncommon-
-    weight: 8.87232e+10
-    multiplier: 4.594974
+    weight: 2.5324392e+10
+    multiplier: 4.2998185
     color: {r: 0, g: 0.5019608, b: 0, a: 1}
   - name: Uncommon
-    weight: 6.572089e+10
-    multiplier: 5.559919
+    weight: 1.9040895e+10
+    multiplier: 5.1597824
     color: {r: 0, g: 0.5019608, b: 0, a: 1}
   - name: Uncommon+
-    weight: 4.868214e+10
-    multiplier: 6.727502
+    weight: 1.4316462e+10
+    multiplier: 6.191739
     color: {r: 0, g: 0.5019608, b: 0, a: 1}
   - name: Uncommon++
-    weight: 3.6060844e+10
-    multiplier: 8.140278
+    weight: 1.0764257e+10
+    multiplier: 7.430087
     color: {r: 0, g: 0.5019608, b: 0, a: 1}
   - name: Rare-
-    weight: 2.6711734e+10
-    multiplier: 9.849736
+    weight: 8.093426e+9
+    multiplier: 8.916104
     color: {r: 0, g: 0.4, b: 1, a: 1}
   - name: Rare
-    weight: 1.978647e+10
-    multiplier: 11.918181
+    weight: 6.0852823e+9
+    multiplier: 10.6993265
     color: {r: 0, g: 0.4, b: 1, a: 1}
   - name: Rare+
-    weight: 1.4656644e+10
-    multiplier: 14.421
+    weight: 4.5754004e+9
+    multiplier: 12.839191
     color: {r: 0, g: 0.4, b: 1, a: 1}
   - name: Rare++
-    weight: 1.0856774e+10
-    multiplier: 17.449411
+    weight: 3.4401505e+9
+    multiplier: 15.407031
     color: {r: 0, g: 0.4, b: 1, a: 1}
   - name: Epic-
-    weight: 8.042054e+9
-    multiplier: 21.113787
+    weight: 2.5865792e+9
+    multiplier: 18.488438
     color: {r: 0.33333334, g: 0, b: 0.6, a: 1}
   - name: Epic
-    weight: 5.957077e+9
-    multiplier: 25.547684
+    weight: 1.9447963e+9
+    multiplier: 22.186127
     color: {r: 0.33333334, g: 0, b: 0.6, a: 1}
   - name: Epic+
-    weight: 4.4126495e+9
-    multiplier: 30.912699
+    weight: 1.4622528e+9
+    multiplier: 26.623352
     color: {r: 0.33333334, g: 0, b: 0.6, a: 1}
   - name: Epic++
-    weight: 3.2686292e+9
-    multiplier: 37.404366
+    weight: 1.0994382e+9
+    multiplier: 31.948025
     color: {r: 0.33333334, g: 0, b: 0.6, a: 1}
   - name: Legendary-
-    weight: 2.4212068e+9
-    multiplier: 45.259285
+    weight: 826645250
+    multiplier: 38.33763
     color: {r: 1, g: 0.64705884, b: 0, a: 1}
   - name: Legendary
-    weight: 1.7934865e+9
-    multiplier: 54.763737
+    weight: 621537700
+    multiplier: 46.005157
     color: {r: 1, g: 0.64705884, b: 0, a: 1}
   - name: Legendary+
-    weight: 1.3285085e+9
-    multiplier: 66.26412
+    weight: 467321600
+    multiplier: 55.206192
     color: {r: 1, g: 0.64705884, b: 0, a: 1}
   - name: Legendary++
-    weight: 984080300
-    multiplier: 80.17959
+    weight: 351369600
+    multiplier: 66.24744
     color: {r: 1, g: 0.64705884, b: 0, a: 1}
   - name: Mythical-
-    weight: 728948400
-    multiplier: 97.0173
+    weight: 264187660
+    multiplier: 79.496925
     color: {r: 1, g: 0, b: 0, a: 1}
   - name: Mythical
-    weight: 539961700
-    multiplier: 117.390945
+    weight: 198637340
+    multiplier: 95.39631
     color: {r: 1, g: 0, b: 0, a: 1}
   - name: Mythical+
-    weight: 399971680
-    multiplier: 142.04305
+    weight: 149351380
+    multiplier: 114.47558
     color: {r: 1, g: 0, b: 0, a: 1}
   - name: Mythical++
-    weight: 296275300
-    multiplier: 171.8721
+    weight: 112294264
+    multiplier: 137.3707
     color: {r: 1, g: 0, b: 0, a: 1}
   - name: Divine-
-    weight: 219463180
-    multiplier: 207.96524
+    weight: 84431780
+    multiplier: 164.84485
     color: {r: 0.8117647, g: 0, b: 0.8117647, a: 1}
   - name: Divine
-    weight: 162565310
-    multiplier: 251.63795
+    weight: 63482536
+    multiplier: 197.81383
     color: {r: 0.8117647, g: 0, b: 0.8117647, a: 1}
   - name: Divine+
-    weight: 120418750
-    multiplier: 304.48193
+    weight: 47731228
+    multiplier: 237.3766
     color: {r: 0.8117647, g: 0, b: 0.8117647, a: 1}
   - name: Divine++
-    weight: 89199070
-    multiplier: 368.42316
+    weight: 35888140
+    multiplier: 284.85193
     color: {r: 0.8117647, g: 0, b: 0.8117647, a: 1}
   - name: Super-
-    weight: 66073388
-    multiplier: 445.79202
+    weight: 26983564
+    multiplier: 341.82233
     color: {r: 0.07450981, g: 1, b: 0, a: 1}
   - name: Super
-    weight: 48943250
-    multiplier: 539.4084
+    weight: 20288392
+    multiplier: 410.1868
     color: {r: 0.07450981, g: 1, b: 0, a: 1}
   - name: Super+
-    weight: 36254256
-    multiplier: 652.68414
+    weight: 15254430
+    multiplier: 492.22418
     color: {r: 0.07450981, g: 1, b: 0, a: 1}
   - name: Super++
-    weight: 26855006
-    multiplier: 789.7478
+    weight: 11469496
+    multiplier: 590.66907
     color: {r: 0.07450981, g: 1, b: 0, a: 1}
   - name: Mega-
-    weight: 19892596
-    multiplier: 955.5949
+    weight: 8623681
+    multiplier: 708.8029
     color: {r: 1, g: 0, b: 0, a: 1}
   - name: Mega
-    weight: 14735256
-    multiplier: 1156.2699
+    weight: 6483970.5
+    multiplier: 850.5635
     color: {r: 1, g: 0, b: 0, a: 1}
   - name: Mega+
-    weight: 10915004
-    multiplier: 1399.0865
+    weight: 4875165.5
+    multiplier: 1020.6763
     color: {r: 1, g: 0, b: 0, a: 1}
   - name: Mega++
-    weight: 8085188.5
-    multiplier: 1692.8948
+    weight: 3665538
+    multiplier: 1224.8115
     color: {r: 1, g: 0, b: 0, a: 1}
   - name: Ultra-
-    weight: 5989028
-    multiplier: 2048.4028
+    weight: 2756043.5
+    multiplier: 1469.7739
     color: {r: 1, g: 0.2901961, b: 0.85882354, a: 1}
   - name: Ultra
-    weight: 4436317
-    multiplier: 2478.5674
+    weight: 2072213
+    multiplier: 1763.7288
     color: {r: 1, g: 0.2901961, b: 0.85882354, a: 1}
   - name: Ultra+
-    weight: 3286160.8
-    multiplier: 2999.0667
+    weight: 1558054.9
+    multiplier: 2116.4746
     color: {r: 1, g: 0.2901961, b: 0.85882354, a: 1}
   - name: Ultra++
-    weight: 2434193.2
-    multiplier: 3628.8708
+    weight: 1171469.8
+    multiplier: 2539.7695
     color: {r: 1, g: 0.2901961, b: 0.85882354, a: 1}
   - name: Omega-
-    weight: 1803106
-    multiplier: 4390.934
+    weight: 880804.3
+    multiplier: 3047.7236
     color: {r: 0, g: 0, b: 1, a: 1}
   - name: Omega
-    weight: 1335634
-    multiplier: 5313.0303
+    weight: 662258.9
+    multiplier: 3657.2686
     color: {r: 0, g: 0, b: 1, a: 1}
   - name: Omega+
-    weight: 989358.56
-    multiplier: 6428.7666
+    weight: 497938.97
+    multiplier: 4388.722
     color: {r: 0, g: 0, b: 1, a: 1}
   - name: Omega++
-    weight: 732858.2
-    multiplier: 7778.808
+    weight: 374390.2
+    multiplier: 5266.4673
     color: {r: 0, g: 0, b: 1, a: 1}
   - name: Extreme-
-    weight: 542857.9
-    multiplier: 9412.357
+    weight: 281496.38
+    multiplier: 6319.7607
     color: {r: 0.4, g: 1, b: 0.4, a: 1}
   - name: Extreme
-    weight: 402116.94
-    multiplier: 11388.953
+    weight: 211651.4
+    multiplier: 7583.7134
     color: {r: 0.4, g: 1, b: 0.4, a: 1}
   - name: Extreme+
-    weight: 297864.4
-    multiplier: 13780.634
+    weight: 159136.39
+    multiplier: 9100.456
     color: {r: 0.4, g: 1, b: 0.4, a: 1}
   - name: Extreme++
-    weight: 220640.3
-    multiplier: 16674.568
+    weight: 119651.42
+    multiplier: 10920.548
     color: {r: 0.4, g: 1, b: 0.4, a: 1}
   - name: Ultimate-
-    weight: 163437.25
-    multiplier: 20176.229
+    weight: 89963.47
+    multiplier: 13104.658
     color: {r: 1, g: 0.6, b: 1, a: 1}
   - name: Ultimate
-    weight: 121064.625
-    multiplier: 24413.236
+    weight: 67641.7
+    multiplier: 15725.59
     color: {r: 1, g: 0.6, b: 1, a: 1}
   - name: Ultimate+
-    weight: 89677.5
-    multiplier: 29540.018
+    weight: 50858.42
+    multiplier: 18870.709
     color: {r: 1, g: 0.6, b: 1, a: 1}
   - name: Ultimate++
-    weight: 66427.77
-    multiplier: 35743.42
+    weight: 38239.414
+    multiplier: 22644.852
     color: {r: 1, g: 0.6, b: 1, a: 1}
   - name: Insane-
-    weight: 49205.758
-    multiplier: 43249.543
+    weight: 28751.44
+    multiplier: 27173.822
     color: {r: 0.16078432, g: 0.16078432, b: 0.46666667, a: 1}
   - name: Insane
-    weight: 36448.71
-    multiplier: 52331.945
+    weight: 21617.623
+    multiplier: 32608.59
     color: {r: 0.16078432, g: 0.16078432, b: 0.46666667, a: 1}
   - name: Insane+
-    weight: 26999.045
-    multiplier: 63321.656
+    weight: 16253.851
+    multiplier: 39130.31
     color: {r: 0.16078432, g: 0.16078432, b: 0.46666667, a: 1}
   - name: Insane++
-    weight: 19999.291
-    multiplier: 76619.21
+    weight: 12220.94
+    multiplier: 46956.37
     color: {r: 0.16078432, g: 0.16078432, b: 0.46666667, a: 1}
   - name: Hyper-
-    weight: 14814.29
-    multiplier: 92709.24
+    weight: 9188.677
+    multiplier: 56347.65
     color: {r: 0, g: 0, b: 0, a: 1}
   - name: Hyper
-    weight: 10973.548
-    multiplier: 112178.19
+    weight: 6908.7793
+    multiplier: 67617.18
     color: {r: 0, g: 0, b: 0, a: 1}
   - name: Hyper+
-    weight: 8128.5537
-    multiplier: 135735.61
+    weight: 5194.5703
+    multiplier: 81140.62
     color: {r: 0, g: 0, b: 0, a: 1}
   - name: Hyper++
-    weight: 6021.151
-    multiplier: 164240.1
+    weight: 3905.6921
+    multiplier: 97368.75
     color: {r: 0, g: 0, b: 0, a: 1}
   - name: Godly-
-    weight: 4460.112
-    multiplier: 198730.53
+    weight: 2936.6104
+    multiplier: 116842.5
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Godly
-    weight: 3303.7864
-    multiplier: 240463.94
+    weight: 2207.9778
+    multiplier: 140211.02
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Godly+
-    weight: 2447.249
-    multiplier: 290961.38
+    weight: 1660.1335
+    multiplier: 168253.22
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Godly++
-    weight: 1812.7771
-    multiplier: 352063.28
+    weight: 1248.2207
+    multiplier: 201903.88
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Unique-
-    weight: 1342.7979
-    multiplier: 425996.6
+    weight: 938.5118
+    multiplier: 242284.66
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Unique
-    weight: 994.66504
-    multiplier: 515455.88
+    weight: 705.6479
+    multiplier: 290741.6
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Unique+
-    weight: 736.7889
-    multiplier: 623701.6
+    weight: 530.5623
+    multiplier: 348889.94
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Unique++
-    weight: 545.76953
-    multiplier: 754679
+    weight: 398.91904
+    multiplier: 418667.94
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Exotic-
-    weight: 404.27374
-    multiplier: 913161.6
+    weight: 299.93912
+    multiplier: 502401.53
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Exotic
-    weight: 299.462
-    multiplier: 1104925.6
+    weight: 225.51813
+    multiplier: 602881.9
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Exotic+
-    weight: 221.82372
-    multiplier: 1336960
+    weight: 169.56248
+    multiplier: 723458.25
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Exotic++
-    weight: 164.31386
-    multiplier: 1617721.6
+    weight: 127.49059
+    multiplier: 868149.94
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Supreme-
-    weight: 121.71397
-    multiplier: 1957443.2
+    weight: 95.85758
+    multiplier: 1041780
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Supreme
-    weight: 90.15849
-    multiplier: 2368506.5
+    weight: 72.07337
+    multiplier: 1250136
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Supreme+
-    weight: 66.784065
-    multiplier: 2865892.8
+    weight: 54.190502
+    multiplier: 1500163.2
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Supreme++
-    weight: 49.469677
-    multiplier: 3467730.5
+    weight: 40.744736
+    multiplier: 1800196
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Celestial-
-    weight: 36.644207
-    multiplier: 4195954
+    weight: 30.63514
+    multiplier: 2160235.2
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Celestial
-    weight: 27.143856
-    multiplier: 5077104.5
+    weight: 23.03394
+    multiplier: 2592282.5
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Celestial+
-    weight: 20.10656
-    multiplier: 6143296.5
+    weight: 17.31875
+    multiplier: 3110739
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Celestial++
-    weight: 14.893747
-    multiplier: 7433389
+    weight: 13.021616
+    multiplier: 3732887
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Eternal-
-    weight: 11.032405
-    multiplier: 8994401
+    weight: 9.7906885
+    multiplier: 4479464.5
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Eternal
-    weight: 8.172152
-    multiplier: 10883226
+    weight: 7.3614197
+    multiplier: 5375358
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Eternal+
-    weight: 6.053446
-    multiplier: 13168704
+    weight: 5.534902
+    multiplier: 6450429.5
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Eternal++
-    weight: 4.484034
-    multiplier: 15934132
+    weight: 4.16158
+    multiplier: 7740516
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Cosmic-
-    weight: 3.3215065
-    multiplier: 19280300
+    weight: 3.1290076
+    multiplier: 9288619
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Cosmic
-    weight: 2.460375
-    multiplier: 23329164
+    weight: 2.3526373
+    multiplier: 11146344
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Cosmic+
-    weight: 1.8225001
-    multiplier: 28228290
+    weight: 1.7689002
+    multiplier: 13375613
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Cosmic++
-    weight: 1.35
-    multiplier: 34156230
+    weight: 1.33
+    multiplier: 16050736
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Cosmic+3
     weight: 1
-    multiplier: 41329040
+    multiplier: 19260884
     color: {r: 1, g: 1, b: 1, a: 1}
-  enchantOptions: []
   enchantTextColor: {r: 0.8536844, g: 0, b: 1, a: 1}

@@ -167,38 +167,73 @@ public class SwordAssigner : MonoBehaviour
 
     private string PickRandomMold()
     {
-        return PickRandomAttribute(attributesConfig?.moldOptions) ?? string.Empty;
+        return PickRandomAttributeWithUpgrade(attributesConfig?.moldOptions, UpgradeSystem.Instance?.Molder.currentLevel ?? 0) ?? string.Empty;
     }
 
     private string PickRandomQuality()
     {
-        return PickRandomAttribute(attributesConfig?.qualityOptions) ?? string.Empty;
+        return PickRandomAttributeWithUpgrade(attributesConfig?.qualityOptions, UpgradeSystem.Instance?.Quality.currentLevel ?? 0) ?? string.Empty;
     }
 
     private string PickRandomClass()
     {
-        return PickRandomAttribute(attributesConfig?.classOptions) ?? string.Empty;
+        return PickRandomAttributeWithUpgrade(attributesConfig?.classOptions, UpgradeSystem.Instance?.SwordClass.currentLevel ?? 0) ?? string.Empty;
     }
 
     private string PickRandomRarity()
     {
-        return PickRandomAttribute(attributesConfig?.rarityOptions) ?? string.Empty;
+        return PickRandomAttributeWithUpgrade(attributesConfig?.rarityOptions, UpgradeSystem.Instance?.Rarity.currentLevel ?? 0) ?? string.Empty;
     }
 
     /// <summary>
-    /// Méthode générique pour choisir un attribut aléatoire pondéré
-    /// Utilise ProbabilityHelper pour une logique centralisée
+    /// Méthode générique pour choisir un attribut aléatoire pondéré avec bonus d'upgrade
     /// </summary>
-    private string PickRandomAttribute(SwordAttributesConfig.AttributeOption[] options)
+    private string PickRandomAttributeWithUpgrade(SwordAttributesConfig.AttributeOption[] options, int upgradeLevel)
     {
         if (options == null || options.Length == 0)
             return null;
 
-        var option = ProbabilityHelper.PickRandomWeighted(options, opt => opt.weight);
+        // Créer une copie des options pour ne pas modifier les originales
+        SwordAttributesConfig.AttributeOption[] modifiedOptions = new SwordAttributesConfig.AttributeOption[options.Length];
+        System.Array.Copy(options, modifiedOptions, options.Length);
+
+        // DEBUG: Afficher les poids AVANT upgrade
+        Debug.Log($"[SwordAssigner] === AVANT UPGRADE (Level {upgradeLevel}) ===");
+        LogWeights(options, "ORIGINAL");
+
+        // Appliquer le bonus de luck si un upgrade existe
+        if (upgradeLevel > 0 && UpgradeSystem.Instance != null)
+        {
+            UpgradeSystem.Instance.ApplyLuckBonus(modifiedOptions, upgradeLevel);
+            Debug.Log($"[SwordAssigner] === APRÈS UPGRADE (Level {upgradeLevel}) ===");
+            LogWeights(modifiedOptions, "UPGRADED");
+        }
+
+        var option = ProbabilityHelper.PickRandomWeighted(modifiedOptions, opt => opt.weight);
         
-        // DEBUG: Décommenter pour diagnostiquer les probabilités
-        // Debug.Log(ProbabilityHelper.GenerateWeightReport(options, opt => opt.weight, opt => opt.name));
+        Debug.Log($"[SwordAssigner] ✅ SELECTED: {option.name} (upgrade level: {upgradeLevel})");
         
         return option.name;
+    }
+
+    private void LogWeights(SwordAttributesConfig.AttributeOption[] options, string label)
+    {
+        float total = 0f;
+        foreach (var opt in options)
+            total += opt.weight;
+
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        sb.AppendLine($"--- {label} WEIGHTS (Total: {total:F6}) ---");
+        
+        // Afficher les 5 plus rares
+        int startIndex = Mathf.Max(0, options.Length - 5);
+        for (int i = startIndex; i < options.Length; i++)
+        {
+            float percent = (options[i].weight / total) * 100f;
+            float odds = 1f / (options[i].weight / total);
+            sb.AppendLine($"  {options[i].name}: {percent:F4}% (1/{odds:F1})");
+        }
+        
+        Debug.Log(sb.ToString());
     }
 }
