@@ -99,60 +99,125 @@ public class UpgradeSystem : MonoBehaviour
 
     /// <summary>
     /// Applique le bonus de luck aux poids d'un tableau d'options
-    /// FORMULE DYNAMIQUE : redistribue progressivement vers 1/1 puis au-delà
+    /// PROGRESSION EN CASCADE : Seul le mold de BASE le plus commun diminue jusqu'à exclusion,
+    /// puis le suivant, etc. Les autres molds restent INTACTS.
     /// </summary>
     public void ApplyLuckBonus(SwordAttributesConfig.AttributeOption[] options, int upgradeLevel)
     {
         if (options == null || options.Length == 0 || upgradeLevel <= 0)
             return;
 
-        Debug.Log($"[UpgradeSystem] Applying luck bonus (Level {upgradeLevel}) to {options.Length} options");
+        const float levelMultiplier = 0.90f; // progression 2x plus lente que 0.80
+        const float fadeMultiplier = 0.85f;  // lissage après seuil
+        const float excludeOdds = 100f;      // 1/100
+        const float minWeightFactor = 0.001f; // plancher (quasi impossible)
 
-        // Appliquer upgrade progressif niveau par niveau
-        for (int level = 1; level <= upgradeLevel; level++)
+        // Sauvegarder les poids de base (pour les seuils de fade)
+        float[] baseWeights = new float[options.Length];
+
+        // Trouver les molds par ordre de rareté de BASE (du plus commun au plus rare)
+        float baseTotal = 0f;
+        for (int i = 0; i < options.Length; i++)
         {
-            // Calculer le total actuel
-            float totalWeight = 0f;
-            foreach (var opt in options)
-                totalWeight += opt.weight;
+            baseWeights[i] = options[i].weight;
+            baseTotal += options[i].weight;
+        }
 
-            // Appliquer la transformation à chaque option
-            for (int i = 0; i < options.Length; i++)
+        // Créer une liste d'indices triés par odds DE BASE croissantes (plus commun d'abord)
+        var sortedIndices = BuildSortedIndices(options, baseTotal);
+
+        // Trouver l'index de Gold pour le tracking
+        int goldIndex = -1;
+        for (int i = 0; i < options.Length; i++)
+        {
+            if (options[i].name == "Gold")
             {
-                float currentOdds = totalWeight / options[i].weight; // 1/X actuel
-                
-                // Si odds > 1 (rare) → diminuer odds (augmenter weight)
-                // Si odds < 1 (ultra commun post-1/1) → augmenter odds (diminuer weight)
-                // Point pivot à 1/1
-                
-                float multiplier;
-                if (currentOdds > 1.0f)
-                {
-                    // Rare : rapprocher de 1/1 en augmentant le weight
-                    // Plus c'est rare, plus on augmente fort
-                    float rarityFactor = Mathf.Log10(currentOdds + 1f); // Log pour progression douce
-                    multiplier = 1f + (rarityFactor * 0.08f); // 8% par niveau (était 4%)
-                }
-                else
-                {
-                    // Déjà au-delà de 1/1 : continuer à diminuer le weight
-                    multiplier = 0.92f; // -8% par niveau (était -4%)
-                }
-                
-                options[i].weight *= multiplier;
+                goldIndex = i;
+                break;
             }
         }
 
-        // Log final
-        float finalTotal = 0f;
-        foreach (var opt in options)
-            finalTotal += opt.weight;
-        
-        for (int i = 0; i < Mathf.Min(5, options.Length); i++)
+        var goldProgression = new System.Text.StringBuilder();
+        goldProgression.AppendLine("\n========== GOLD PROGRESSION TRACKING ==========");
+
+        // Simuler niveau par niveau : PROGRESSION EN CASCADE
+        for (int level = 1; level <= upgradeLevel; level++)
         {
-            float odds = finalTotal / options[i].weight;
-            Debug.Log($"[UpgradeSystem]   {options[i].name}: 1/{odds:F2}");
+            // Trouver le premier mold encore actif (pas encore exclu/quasi-exclu)
+            int targetIndex = GetFirstActiveIndex(options, sortedIndices, baseWeights, minWeightFactor);
+
+            if (targetIndex < 0)
+                break; // Tous les molds exclus
+
+            // Appliquer le multiplicateur UNIQUEMENT au mold ciblé
+            options[targetIndex].weight *= levelMultiplier;
+
+            // Stabiliser le total pour maintenir les odds des autres molds INTACTS
+            float currentTotal = CalculateTotal(options);
+            float targetOdds = currentTotal / options[targetIndex].weight;
+
+            // Si le mold atteint le seuil 1/100, commencer à le fader
+            if (targetOdds >= excludeOdds)
+            {
+                float minWeight = baseWeights[targetIndex] * minWeightFactor;
+                
+                // Appliquer fade pour lisser la transition
+                if (options[targetIndex].weight > minWeight)
+                {
+                    options[targetIndex].weight *= fadeMultiplier;
+                }
+                else
+                {
+                    options[targetIndex].weight = 0f; // EXCLU définitivement
+                }
+            }
+
+            // Log Gold progression
+            if (goldIndex >= 0 && level <= 100 && options[goldIndex].weight > 0f)
+            {
+                float goldOdds = CalculateTotal(options) / options[goldIndex].weight;
+                goldProgression.AppendLine($"Level {level}: Gold = 1/{goldOdds:F2}");
+            }
         }
+
+        goldProgression.AppendLine("========== END GOLD PROGRESSION ==========");
+        Debug.Log(goldProgression.ToString());
+    }
+
+    private static float CalculateTotal(SwordAttributesConfig.AttributeOption[] options)
+    {
+        float total = 0f;
+        foreach (var opt in options)
+            total += opt.weight;
+        return total;
+    }
+
+    private static int GetFirstActiveIndex(SwordAttributesConfig.AttributeOption[] options, System.Collections.Generic.List<int> sortedIndices, float[] baseWeights, float minWeightFactor)
+    {
+        foreach (int idx in sortedIndices)
+        {
+            float minWeight = baseWeights[idx] * minWeightFactor;
+            if (options[idx].weight > minWeight)
+                return idx;
+        }
+
+        return -1;
+    }
+
+    private static System.Collections.Generic.List<int> BuildSortedIndices(SwordAttributesConfig.AttributeOption[] options, float baseTotal)
+    {
+        var sortedIndices = new System.Collections.Generic.List<int>();
+        for (int i = 0; i < options.Length; i++)
+            sortedIndices.Add(i);
+
+        sortedIndices.Sort((a, b) =>
+        {
+            float oddsA = baseTotal / options[a].weight;
+            float oddsB = baseTotal / options[b].weight;
+            return oddsA.CompareTo(oddsB); // Ordre croissant (1/1 avant 1/10)
+        });
+
+        return sortedIndices;
     }
 
     /// <summary>

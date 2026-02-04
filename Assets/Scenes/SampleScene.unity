@@ -5834,7 +5834,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  sellCountdownSeconds: 3000
+  sellCountdownSeconds: 2
   hideTimeTextWhenIdle: 0
   playerMoney: {fileID: 756938117}
   playerLevel: {fileID: 756938116}
@@ -7658,9 +7658,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSystem
   molder:
     name: Molder
-    currentLevel: 1
+    currentLevel: 0
     maxLevel: 1000
-    baseCost: 20
+    baseCost: 0
     costMultiplier: 0
   quality:
     name: Quality
