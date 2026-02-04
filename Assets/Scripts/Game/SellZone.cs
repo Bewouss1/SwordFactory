@@ -177,7 +177,7 @@ public class SellZone : MonoBehaviour
                 Debug.LogWarning("SellZone: PlayerMoney reference is missing, cannot add money.", this);
 
             if (playerLevel != null)
-                playerLevel.AddXp(10);
+                playerLevel.AddXp(GameConstants.XP_PER_SWORD_SOLD);
 
             Destroy(swordTransform.gameObject);
         }

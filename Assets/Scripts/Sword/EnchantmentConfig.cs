@@ -61,29 +61,18 @@ public class EnchantmentConfig : ScriptableObject
     
     /// <summary>
     /// Génère un niveau d'enchantement aléatoire pondéré
+    /// Utilise ProbabilityHelper pour une sélection cohérente
     /// </summary>
     public int PickRandomLevel()
     {
         if (levels == null || levels.Length == 0)
-            return 1;
-            
-        float totalWeight = 0f;
-        foreach (var level in levels)
-            totalWeight += Mathf.Max(0f, level.weight);
-            
-        if (totalWeight <= 0f)
-            return 1;
-            
-        float roll = Random.value * totalWeight;
-        foreach (var level in levels)
         {
-            float w = Mathf.Max(0f, level.weight);
-            if (roll <= w)
-                return level.level;
-            roll -= w;
+            Debug.LogWarning("EnchantmentConfig: No levels configured, defaulting to level 1");
+            return 1;
         }
-        
-        return levels[levels.Length - 1].level;
+
+        var selectedLevel = ProbabilityHelper.PickRandomWeighted(levels, lvl => lvl.weight);
+        return selectedLevel.level;
     }
     
     /// <summary>
@@ -108,7 +97,10 @@ public class EnchantmentConfig : ScriptableObject
     public EnchantmentLevel GetLevelData(int level)
     {
         if (levels == null || levels.Length == 0)
-            return new EnchantmentLevel { level = 1, valueMultiplier = 1f, damageMultiplier = 1f, healthMultiplier = 1f };
+        {
+            Debug.LogWarning($"EnchantmentConfig: No levels configured! Returning default for level {level}");
+            return new EnchantmentLevel { level = 1, weight = 1f, valueMultiplier = 1f, damageMultiplier = 1f, healthMultiplier = 1f };
+        }
             
         foreach (var lvl in levels)
         {
@@ -116,7 +108,8 @@ public class EnchantmentConfig : ScriptableObject
                 return lvl;
         }
         
-        // Fallback
-        return new EnchantmentLevel { level = level, valueMultiplier = 1f, damageMultiplier = 1f, healthMultiplier = 1f };
+        // Fallback : retourner le dernier niveau configuré avec un warning
+        Debug.LogWarning($"EnchantmentConfig: Level {level} not found. Using fallback.");
+        return new EnchantmentLevel { level = level, weight = 1f, valueMultiplier = 1f, damageMultiplier = 1f, healthMultiplier = 1f };
     }
 }

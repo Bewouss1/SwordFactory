@@ -187,67 +187,18 @@ public class SwordAssigner : MonoBehaviour
 
     /// <summary>
     /// Méthode générique pour choisir un attribut aléatoire pondéré
+    /// Utilise ProbabilityHelper pour une logique centralisée
     /// </summary>
     private string PickRandomAttribute(SwordAttributesConfig.AttributeOption[] options)
     {
         if (options == null || options.Length == 0)
             return null;
 
-        var option = PickRandomFromWeightedArray(options, opt => opt.weight);
+        var option = ProbabilityHelper.PickRandomWeighted(options, opt => opt.weight);
         
-        // DEBUG: Log les poids pour vérifier
-        LogWeightDebug(options, option.name);
+        // DEBUG: Décommenter pour diagnostiquer les probabilités
+        // Debug.Log(ProbabilityHelper.GenerateWeightReport(options, opt => opt.weight, opt => opt.name));
         
         return option.name;
-    }
-    
-    private void LogWeightDebug(SwordAttributesConfig.AttributeOption[] options, string selected)
-    {
-        float totalWeight = 0f;
-        foreach (var opt in options)
-            totalWeight += Mathf.Max(0f, opt.weight);
-        
-        System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        sb.AppendLine($"[SwordAssigner] Tirage - Sélectionné: {selected} (total weight: {totalWeight})");
-        
-        foreach (var opt in options)
-        {
-            float w = Mathf.Max(0f, opt.weight);
-            float percentage = totalWeight > 0 ? (w / totalWeight) * 100f : 0f;
-            sb.AppendLine($"  {opt.name}: weight={w:F10} ({percentage:F6}%)");
-        }
-        
-        Debug.Log(sb.ToString());
-    }
-
-    /// <summary>
-    /// Fonction générique pour choisir un élément aléatoire pondéré
-    /// </summary>
-    private T PickRandomFromWeightedArray<T>(T[] options, System.Func<T, float> getWeight)
-    {
-        if (options == null || options.Length == 0)
-        {
-            Debug.LogError("SwordAssigner: Options array is empty!");
-            return default;
-        }
-
-        float totalWeight = 0f;
-        foreach (var option in options)
-            totalWeight += Mathf.Max(0f, getWeight(option));
-
-        if (totalWeight <= 0f)
-            return options[0];
-
-        float roll = Random.value * totalWeight;
-        foreach (var option in options)
-        {
-            float w = Mathf.Max(0f, getWeight(option));
-            if (roll <= w)
-                return option;
-
-            roll -= w;
-        }
-
-        return options[options.Length - 1];
     }
 }

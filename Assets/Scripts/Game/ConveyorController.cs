@@ -32,9 +32,9 @@ public class ConveyorController : MonoBehaviour
             return;
         }
 
-        if (pausePoints == null || pausePoints.Length < 2)
+        if (pausePoints == null || pausePoints.Length < GameConstants.MIN_PAUSE_POINTS)
         {
-            Debug.LogError("ConveyorController: PausePoints array is invalid (needs at least 2 points)!", this);
+            Debug.LogError($"ConveyorController: PausePoints array is invalid (needs at least {GameConstants.MIN_PAUSE_POINTS} points)!", this);
             return;
         }
 

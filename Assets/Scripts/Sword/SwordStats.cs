@@ -142,7 +142,8 @@ public class SwordStats : MonoBehaviour
             if (mat != null)
             {
                 Color containerColor = IsAttributeEmpty(rarity) ? defaultColor : rarityColor;
-                Debug.Log($"[SwordStats] Rarity: '{rarity}' | IsEmpty: {IsAttributeEmpty(rarity)} | DefaultColor: {defaultColor} | RarityColor: {rarityColor} | ContainerColor: {containerColor}");
+                // Debug: Décommenter pour diagnostiquer les couleurs
+                // Debug.Log($"[SwordStats] Rarity: '{rarity}' | ContainerColor: {containerColor}");
                 containerColor.a = mat.color.a; // Conserver la transparence
                 mat.color = containerColor;
             }
@@ -189,7 +190,7 @@ public class SwordStats : MonoBehaviour
             }
         }
         
-        float levelMult = 1f + (Mathf.Max(0, level - 1) * 0.01f);
+        float levelMult = 1f + (Mathf.Max(0, level - 1) * GameConstants.LEVEL_MULTIPLIER_PER_LEVEL);
 
         return Mathf.Max(0f, baseValue * moldMult * qualityMult * classMult * rarityMult * enchantMult * levelMult);
     }
@@ -210,20 +211,26 @@ public class SwordStats : MonoBehaviour
         return 1f;
     }
 
+    /// <summary>
+    /// Formate une valeur monétaire avec suffixes (k, M, B, T, Qd, Qn)
+    /// Méthode statique publique réutilisable dans tout le projet
+    /// </summary>
     public static string FormatMoneyValue(float value)
     {
-        string[] suffixes = { "", "k", "M", "B", "T", "Qd", "Qn" };
+        if (value < 0f)
+            return "$0.00";
+
         int suffixIndex = 0;
         float displayValue = value;
 
-        while (displayValue >= 1000f && suffixIndex < suffixes.Length - 1)
+        while (displayValue >= 1000f && suffixIndex < GameConstants.MONEY_SUFFIXES.Length - 1)
         {
             displayValue /= 1000f;
             suffixIndex++;
         }
 
-        string formatted = displayValue.ToString("F2", System.Globalization.CultureInfo.InvariantCulture);
-        return $"${formatted}{suffixes[suffixIndex]}";
+        string formatted = displayValue.ToString(GameConstants.MONEY_FORMAT, System.Globalization.CultureInfo.InvariantCulture);
+        return $"${formatted}{GameConstants.MONEY_SUFFIXES[suffixIndex]}";
     }
 
     /// <summary>
