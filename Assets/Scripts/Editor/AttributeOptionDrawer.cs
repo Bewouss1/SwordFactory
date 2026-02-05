@@ -31,7 +31,7 @@ public class AttributeOptionDrawer : PropertyDrawer
             
             // Affiche chaque champ
             SerializedProperty nameProp = property.FindPropertyRelative("name");
-            SerializedProperty weightProp = property.FindPropertyRelative("weight");
+            SerializedProperty baseOddsProp = property.FindPropertyRelative("baseOdds");
             SerializedProperty multiplierProp = property.FindPropertyRelative("multiplier");
             SerializedProperty colorProp = property.FindPropertyRelative("color");
             
@@ -42,10 +42,10 @@ public class AttributeOptionDrawer : PropertyDrawer
             );
             yOffset += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             
-            // Weight
+            // Base Odds
             EditorGUI.PropertyField(
                 new Rect(position.x, yOffset, position.width, EditorGUIUtility.singleLineHeight),
-                weightProp
+                baseOddsProp
             );
             yOffset += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
             

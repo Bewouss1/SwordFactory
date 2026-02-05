@@ -7,9 +7,13 @@ public class SwordAttributesConfig : ScriptableObject
     public struct AttributeOption
     {
         public string name;      // wood, stone, epic, etc.
-        public float weight;     // pour le tirage aléatoire
+        [Tooltip("Base odds (1/X) - Lower number = more common. Example: 1 = always, 5 = 1 in 5, 1000 = 1 in 1000")]
+        public float baseOdds;   // Les odds de base (1/X) - plus facile à configurer
         public float multiplier; // pour la valeur
         public Color color;      // couleur associée à cet attribut
+        
+        [System.NonSerialized]
+        public float weight;     // Calculé automatiquement au runtime
     }
 
     [Header("Mold Options")]

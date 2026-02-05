@@ -7658,7 +7658,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSystem
   molder:
     name: Molder
-    currentLevel: 0
+    currentLevel: 1
     maxLevel: 1000
     baseCost: 0
     costMultiplier: 0

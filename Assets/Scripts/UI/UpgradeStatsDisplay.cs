@@ -50,12 +50,12 @@ public class UpgradeStatsDisplay : MonoBehaviour
         sb.AppendLine($"Rarity: Lvl {UpgradeSystem.Instance.Rarity.currentLevel}");
         
         sb.AppendLine("\n=== ALL MOLDS (upgraded) ===");
-        DisplayAllOptions(sb, attributesConfig.moldOptions, UpgradeSystem.Instance.Molder.currentLevel);
+        DisplayAllOptions(sb, attributesConfig.moldOptions, UpgradeSystem.Instance.Molder.currentLevel, UpgradeSystem.Instance.Molder);
         
         statsText.text = sb.ToString();
     }
 
-    private void DisplayAllOptions(System.Text.StringBuilder sb, SwordAttributesConfig.AttributeOption[] options, int level)
+    private void DisplayAllOptions(System.Text.StringBuilder sb, SwordAttributesConfig.AttributeOption[] options, int level, UpgradeSystem.UpgradeCategory category)
     {
         if (options == null || options.Length == 0)
             return;
@@ -64,20 +64,22 @@ public class UpgradeStatsDisplay : MonoBehaviour
         var modifiedOptions = new SwordAttributesConfig.AttributeOption[options.Length];
         System.Array.Copy(options, modifiedOptions, options.Length);
         
-        if (level > 0)
-            UpgradeSystem.Instance.ApplyLuckBonus(modifiedOptions, level);
+        if (level > 0 && category != null)
+            UpgradeSystem.Instance.ApplyLuckBonus(modifiedOptions, level, category);
 
-        // Calculer le total
-        float total = 0f;
-        foreach (var opt in modifiedOptions)
-            total += opt.weight;
-
-        // Afficher TOUS les molds
+        // Afficher TOUS les molds (avec indication si retiré)
         for (int i = 0; i < modifiedOptions.Length; i++)
         {
-            float probability = modifiedOptions[i].weight / total;
-            float odds = 1f / probability;
-            sb.AppendLine($"{modifiedOptions[i].name}: 1/{odds:F1}");
+            if (category != null && category.removedOptions.Contains(modifiedOptions[i].name))
+            {
+                sb.AppendLine($"{modifiedOptions[i].name}: REMOVED");
+            }
+            else
+            {
+                // weight contient maintenant directement les odds
+                float odds = modifiedOptions[i].weight;
+                sb.AppendLine($"{modifiedOptions[i].name}: 1/{odds:F1}");
+            }
         }
     }
 }

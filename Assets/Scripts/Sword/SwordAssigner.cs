@@ -60,8 +60,15 @@ public class SwordAssigner : MonoBehaviour
         AssignClass(swordStats);
         AssignRarity(swordStats);
         AssignEnchantments(swordStats);
+    }
 
-        Debug.Log($"[SwordAssigner] New sword created: {swordStats.GetSummary()}");
+    void Start()
+    {
+        // Debug : afficher la progression des niveaux 1-30 au démarrage
+        if (UpgradeSystem.Instance != null && attributesConfig != null && attributesConfig.moldOptions != null)
+        {
+            UpgradeSystem.Instance.LogProgressionLevels(attributesConfig.moldOptions, UpgradeSystem.Instance.Molder, 30);
+        }
     }
 
     /// <summary>
@@ -167,53 +174,92 @@ public class SwordAssigner : MonoBehaviour
 
     private string PickRandomMold()
     {
-        return PickRandomAttributeWithUpgrade(attributesConfig?.moldOptions, UpgradeSystem.Instance?.Molder.currentLevel ?? 0) ?? string.Empty;
+        return PickRandomAttributeWithUpgrade(attributesConfig?.moldOptions, UpgradeSystem.Instance?.Molder) ?? string.Empty;
     }
 
     private string PickRandomQuality()
     {
-        return PickRandomAttributeWithUpgrade(attributesConfig?.qualityOptions, UpgradeSystem.Instance?.Quality.currentLevel ?? 0) ?? string.Empty;
+        return PickRandomAttributeWithUpgrade(attributesConfig?.qualityOptions, UpgradeSystem.Instance?.Quality) ?? string.Empty;
     }
 
     private string PickRandomClass()
     {
-        return PickRandomAttributeWithUpgrade(attributesConfig?.classOptions, UpgradeSystem.Instance?.SwordClass.currentLevel ?? 0) ?? string.Empty;
+        return PickRandomAttributeWithUpgrade(attributesConfig?.classOptions, UpgradeSystem.Instance?.SwordClass) ?? string.Empty;
     }
 
     private string PickRandomRarity()
     {
-        return PickRandomAttributeWithUpgrade(attributesConfig?.rarityOptions, UpgradeSystem.Instance?.Rarity.currentLevel ?? 0) ?? string.Empty;
+        return PickRandomAttributeWithUpgrade(attributesConfig?.rarityOptions, UpgradeSystem.Instance?.Rarity) ?? string.Empty;
     }
 
     /// <summary>
     /// Méthode générique pour choisir un attribut aléatoire pondéré avec bonus d'upgrade
+    /// Utilise le système de fallback continu : test en cascade du plus rare au plus commun
     /// </summary>
-    private string PickRandomAttributeWithUpgrade(SwordAttributesConfig.AttributeOption[] options, int upgradeLevel)
+    private string PickRandomAttributeWithUpgrade(SwordAttributesConfig.AttributeOption[] options, UpgradeSystem.UpgradeCategory category)
     {
         if (options == null || options.Length == 0)
-            return null;
+            return string.Empty;
+
+        int upgradeLevel = category != null ? category.currentLevel : 0;
 
         // Créer une copie des options pour ne pas modifier les originales
         SwordAttributesConfig.AttributeOption[] modifiedOptions = new SwordAttributesConfig.AttributeOption[options.Length];
         System.Array.Copy(options, modifiedOptions, options.Length);
 
-        // DEBUG: Afficher les poids AVANT upgrade
-        Debug.Log($"[SwordAssigner] === AVANT UPGRADE (Level {upgradeLevel}) ===");
-        LogWeights(options, "ORIGINAL");
-
-        // Appliquer le bonus de luck si un upgrade existe
-        if (upgradeLevel > 0 && UpgradeSystem.Instance != null)
+        // Appliquer le bonus de luck avec la nouvelle logique
+        if (upgradeLevel > 0 && UpgradeSystem.Instance != null && category != null)
         {
-            UpgradeSystem.Instance.ApplyLuckBonus(modifiedOptions, upgradeLevel);
-            Debug.Log($"[SwordAssigner] === APRÈS UPGRADE (Level {upgradeLevel}) ===");
-            LogWeights(modifiedOptions, "UPGRADED");
+            UpgradeSystem.Instance.ApplyLuckBonus(modifiedOptions, upgradeLevel, category);
         }
 
-        var option = ProbabilityHelper.PickRandomWeighted(modifiedOptions, opt => opt.weight);
-        
-        Debug.Log($"[SwordAssigner] ✅ SELECTED: {option.name} (upgrade level: {upgradeLevel})");
+        // TEST EN CASCADE : partir du plus rare au plus commun
+        var option = PickRandomAttributeCascade(modifiedOptions, category);
         
         return option.name;
+    }
+
+    /// <summary>
+    /// Test en cascade : du plus rare au plus commun, le dernier non-retiré est le fallback
+    /// Utilise directement les odds (1/X) stockées dans weight
+    /// </summary>
+    private SwordAttributesConfig.AttributeOption PickRandomAttributeCascade(SwordAttributesConfig.AttributeOption[] options, UpgradeSystem.UpgradeCategory category)
+    {
+        if (options == null || options.Length == 0)
+            return options[0];
+
+        // Créer une liste triée par odds croissantes (du plus rare au plus commun)
+        var sortedByRarity = new System.Collections.Generic.List<SwordAttributesConfig.AttributeOption>();
+        foreach (var opt in options)
+        {
+            if (category == null || !category.removedOptions.Contains(opt.name))
+            {
+                sortedByRarity.Add(opt);
+            }
+        }
+
+        if (sortedByRarity.Count == 0)
+            return options[0];
+
+        // Trier : odds élevées (rare) d'abord
+        sortedByRarity.Sort((a, b) => b.weight.CompareTo(a.weight));
+
+        // Tester en cascade du plus rare au plus commun
+        foreach (var option in sortedByRarity)
+        {
+            // weight contient maintenant les odds (1/X)
+            float odds = option.weight;
+            float probability = 1f / odds;
+            
+            // Test : roll un nombre entre 0 et 1
+            if (Random.value < probability)
+            {
+                return option;
+            }
+        }
+
+        // Fallback : le plus commun (dernier de la liste triée)
+        return sortedByRarity[sortedByRarity.Count - 1];
     }
 
     private void LogWeights(SwordAttributesConfig.AttributeOption[] options, string label)

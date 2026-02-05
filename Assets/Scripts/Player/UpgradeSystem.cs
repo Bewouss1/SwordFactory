@@ -1,9 +1,11 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// Système d'upgrade pour améliorer les probabilités d'obtenir de meilleures raretés
-/// Chaque upgrade applique un multiplicateur sur les chances
+/// Utilise un système de fallback continu : le mold le plus commun (1/X minimal) stagne,
+/// tous les autres s'améliorent progressivement au coefficient 0.989
 /// </summary>
 public class UpgradeSystem : MonoBehaviour
 {
@@ -15,6 +17,14 @@ public class UpgradeSystem : MonoBehaviour
         public int maxLevel = 100;           // Niveau maximum
         public float baseCost = 100f;        // Coût de base
         public float costMultiplier = 1.15f; // Multiplicateur de coût par niveau
+        
+        // Système de fallback : track des molds plafonnés à 1/1 (deviennent le nouveau minimal)
+        [System.NonSerialized]
+        public List<string> cappedAt1Options = new List<string>();
+        
+        // Track des molds complètement retirés de l'affichage (quand un autre les remplace)
+        [System.NonSerialized]
+        public List<string> removedOptions = new List<string>();
         
         /// <summary>
         /// Calcule le coût pour passer au niveau suivant
@@ -98,126 +108,238 @@ public class UpgradeSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// Applique le bonus de luck aux poids d'un tableau d'options
-    /// PROGRESSION EN CASCADE : Seul le mold de BASE le plus commun diminue jusqu'à exclusion,
-    /// puis le suivant, etc. Les autres molds restent INTACTS.
+    /// Trouve l'index du mold minimal (celui avec les odds minimales = plus commun actuellement)
     /// </summary>
-    public void ApplyLuckBonus(SwordAttributesConfig.AttributeOption[] options, int upgradeLevel)
+    private int FindMinimalOptionIndex(SwordAttributesConfig.AttributeOption[] options, UpgradeCategory category)
+    {
+        int minimalIndex = -1;
+        float minOdds = float.MaxValue;
+
+        for (int i = 0; i < options.Length; i++)
+        {
+            // Vérifier si ce mold est dans la liste des retirés
+            if (category.removedOptions.Contains(options[i].name))
+                continue;
+
+            // Calculer les odds (1/X) pour ce mold
+            // Plus X est petit, plus c'est commun
+            if (options[i].weight > 0f)
+            {
+                float odds = 1f / options[i].weight;
+                if (odds < minOdds)
+                {
+                    minOdds = odds;
+                    minimalIndex = i;
+                }
+            }
+        }
+
+        return minimalIndex;
+    }
+
+    /// <summary>
+    /// Applique le bonus de luck avec le système de fallback continu basé sur les ODDS
+    /// Système : le mold minimal stagne, tous les autres voient leurs odds s'améliorer
+    /// Quand un mold atteint les odds du minimal, il devient le nouveau minimal et l'ancien est retiré
+    /// </summary>
+    public void ApplyLuckBonus(SwordAttributesConfig.AttributeOption[] options, int upgradeLevel, UpgradeCategory category = null)
     {
         if (options == null || options.Length == 0 || upgradeLevel <= 0)
             return;
 
-        const float levelMultiplier = 0.90f; // progression 2x plus lente que 0.80
-        const float fadeMultiplier = 0.85f;  // lissage après seuil
-        const float excludeOdds = 100f;      // 1/100
-        const float minWeightFactor = 0.001f; // plancher (quasi impossible)
+        // Coefficient d'amélioration : les odds diminuent (chances augmentent)
+        // 0.91 = environ 9% d'amélioration par upgrade
+        const float oddsImprovementFactor = 0.91f;
 
-        // Sauvegarder les poids de base (pour les seuils de fade)
-        float[] baseWeights = new float[options.Length];
-
-        // Trouver les molds par ordre de rareté de BASE (du plus commun au plus rare)
-        float baseTotal = 0f;
-        for (int i = 0; i < options.Length; i++)
+        // Créer des listes temporaires pour la simulation
+        var tempCappedOptions = new List<string>();
+        var tempRemovedOptions = new List<string>();
+        if (category != null)
         {
-            baseWeights[i] = options[i].weight;
-            baseTotal += options[i].weight;
+            tempCappedOptions.AddRange(category.cappedAt1Options);
+            tempRemovedOptions.AddRange(category.removedOptions);
         }
 
-        // Créer une liste d'indices triés par odds DE BASE croissantes (plus commun d'abord)
-        var sortedIndices = BuildSortedIndices(options, baseTotal);
-
-        // Trouver l'index de Gold pour le tracking
-        int goldIndex = -1;
+        // Initialiser les odds : utiliser 1 pour les cappés, baseOdds pour les autres
+        float[] currentOdds = new float[options.Length];
         for (int i = 0; i < options.Length; i++)
         {
-            if (options[i].name == "Gold")
+            if (tempCappedOptions.Contains(options[i].name))
             {
-                goldIndex = i;
-                break;
+                currentOdds[i] = 1f; // Les cappés restent à 1/1
+            }
+            else
+            {
+                currentOdds[i] = options[i].baseOdds;
             }
         }
 
-        var goldProgression = new System.Text.StringBuilder();
-        goldProgression.AppendLine("\n========== GOLD PROGRESSION TRACKING ==========");
-
-        // Simuler niveau par niveau : PROGRESSION EN CASCADE
+        // À chaque upgrade, améliorer les odds des non-minimaux
         for (int level = 1; level <= upgradeLevel; level++)
         {
-            // Trouver le premier mold encore actif (pas encore exclu/quasi-exclu)
-            int targetIndex = GetFirstActiveIndex(options, sortedIndices, baseWeights, minWeightFactor);
+            // Trouver l'index du minimal (celui avec les odds les plus basses parmi les actifs)
+            int minimalIndex = -1;
+            float minOdds = float.MaxValue;
 
-            if (targetIndex < 0)
-                break; // Tous les molds exclus
-
-            // Appliquer le multiplicateur UNIQUEMENT au mold ciblé
-            options[targetIndex].weight *= levelMultiplier;
-
-            // Stabiliser le total pour maintenir les odds des autres molds INTACTS
-            float currentTotal = CalculateTotal(options);
-            float targetOdds = currentTotal / options[targetIndex].weight;
-
-            // Si le mold atteint le seuil 1/100, commencer à le fader
-            if (targetOdds >= excludeOdds)
+            for (int i = 0; i < options.Length; i++)
             {
-                float minWeight = baseWeights[targetIndex] * minWeightFactor;
-                
-                // Appliquer fade pour lisser la transition
-                if (options[targetIndex].weight > minWeight)
+                if (tempRemovedOptions.Contains(options[i].name))
+                    continue;
+
+                if (currentOdds[i] < minOdds)
                 {
-                    options[targetIndex].weight *= fadeMultiplier;
+                    minOdds = currentOdds[i];
+                    minimalIndex = i;
+                }
+            }
+
+            if (minimalIndex < 0)
+                break;
+
+            // Améliorer les odds des non-minimaux
+            for (int i = 0; i < options.Length; i++)
+            {
+                if (tempRemovedOptions.Contains(options[i].name))
+                    continue;
+
+                if (i != minimalIndex)
+                {
+                    // Skip si déjà cappé à 1/1
+                    if (tempCappedOptions.Contains(options[i].name))
+                        continue;
+
+                    // Améliorer les odds
+                    float newOdds = currentOdds[i] * oddsImprovementFactor;
+                    
+                    // Si on atteint ou dépasse le minimal
+                    if (newOdds <= currentOdds[minimalIndex])
+                    {
+                        // Plafonner exactement au niveau du minimal
+                        currentOdds[i] = currentOdds[minimalIndex];
+                        
+                        // Si le minimal est à 1/1, marquer ce mold comme cappé aussi
+                        if (currentOdds[minimalIndex] <= 1f)
+                        {
+                            if (!tempCappedOptions.Contains(options[i].name))
+                            {
+                                tempCappedOptions.Add(options[i].name);
+                            }
+                            
+                            // Retirer l'ancien minimal de l'affichage
+                            if (!tempRemovedOptions.Contains(options[minimalIndex].name))
+                            {
+                                tempRemovedOptions.Add(options[minimalIndex].name);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        currentOdds[i] = newOdds;
+                    }
+                }
+            }
+        }
+        
+        // Mettre à jour les listes de la catégorie
+        if (category != null)
+        {
+            category.cappedAt1Options.Clear();
+            category.cappedAt1Options.AddRange(tempCappedOptions);
+            category.removedOptions.Clear();
+            category.removedOptions.AddRange(tempRemovedOptions);
+        }
+
+        // Stocker les odds finales dans les weights pour le système de tirage
+        // (le système de tirage en cascade les utilisera directement)
+        for (int i = 0; i < options.Length; i++)
+        {
+            if (tempRemovedOptions.Contains(options[i].name))
+            {
+                options[i].weight = 0f;
+            }
+            else
+            {
+                // Stocker les odds directement dans weight (sera utilisé par le test cascade)
+                options[i].weight = currentOdds[i];
+            }
+        }
+    }
+
+    /// <summary>
+    /// Applique le bonus de luck avec le système de fallback continu
+    /// Overload pour compatibilité avec l'ancien code (sans category)
+    /// </summary>
+    public void ApplyLuckBonus(SwordAttributesConfig.AttributeOption[] options, int upgradeLevel)
+    {
+        // Créer une catégorie temporaire pour tracker les retirés
+        var tempCategory = new UpgradeCategory { name = "Temp" };
+        ApplyLuckBonus(options, upgradeLevel, tempCategory);
+    }
+
+    /// <summary>
+    /// Debug : affiche la progression des probas du niveau 1 à maxLevel
+    /// </summary>
+    public void LogProgressionLevels(SwordAttributesConfig.AttributeOption[] baseOptions, UpgradeCategory category, int maxLevel = 50)
+    {
+        if (baseOptions == null || baseOptions.Length == 0)
+            return;
+
+        var sb = new System.Text.StringBuilder();
+        sb.AppendLine($"\n========== PROGRESSION {category.name} (Level 0 to {maxLevel}) ==========");
+
+        // Logger les odds de base
+        sb.Append("BASE ODDS: ");
+        foreach (var opt in baseOptions)
+        {
+            sb.Append($"{opt.name}=1/{opt.baseOdds:F1} ");
+        }
+        sb.AppendLine();
+        
+        // Logger le level 0
+        sb.Append("Level 0: ");
+        foreach (var opt in baseOptions)
+        {
+            sb.Append($"{opt.name}=1/{opt.baseOdds:F1} ");
+        }
+        sb.AppendLine();
+
+        // Simuler chaque niveau
+        for (int level = 1; level <= maxLevel; level++)
+        {
+            // Créer une copie pour ce niveau
+            var levelOptions = new SwordAttributesConfig.AttributeOption[baseOptions.Length];
+            System.Array.Copy(baseOptions, levelOptions, baseOptions.Length);
+            
+            var tempCategory = new UpgradeCategory { name = category.name };
+            ApplyLuckBonus(levelOptions, level, tempCategory);
+
+            // Calculer le total (sans les retirés)
+            float totalWeight = 0f;
+            foreach (var opt in levelOptions)
+            {
+                if (!tempCategory.removedOptions.Contains(opt.name))
+                    totalWeight += opt.weight;
+            }
+
+            // Logger ce niveau
+            sb.Append($"Level {level}: ");
+            foreach (var opt in levelOptions)
+            {
+                if (tempCategory.removedOptions.Contains(opt.name))
+                {
+                    sb.Append($"{opt.name}=REMOVED ");
                 }
                 else
                 {
-                    options[targetIndex].weight = 0f; // EXCLU définitivement
+                    // weight contient maintenant directement les odds
+                    sb.Append($"{opt.name}=1/{opt.weight:F1} ");
                 }
             }
-
-            // Log Gold progression
-            if (goldIndex >= 0 && level <= 100 && options[goldIndex].weight > 0f)
-            {
-                float goldOdds = CalculateTotal(options) / options[goldIndex].weight;
-                goldProgression.AppendLine($"Level {level}: Gold = 1/{goldOdds:F2}");
-            }
+            sb.AppendLine();
         }
 
-        goldProgression.AppendLine("========== END GOLD PROGRESSION ==========");
-        Debug.Log(goldProgression.ToString());
-    }
-
-    private static float CalculateTotal(SwordAttributesConfig.AttributeOption[] options)
-    {
-        float total = 0f;
-        foreach (var opt in options)
-            total += opt.weight;
-        return total;
-    }
-
-    private static int GetFirstActiveIndex(SwordAttributesConfig.AttributeOption[] options, System.Collections.Generic.List<int> sortedIndices, float[] baseWeights, float minWeightFactor)
-    {
-        foreach (int idx in sortedIndices)
-        {
-            float minWeight = baseWeights[idx] * minWeightFactor;
-            if (options[idx].weight > minWeight)
-                return idx;
-        }
-
-        return -1;
-    }
-
-    private static System.Collections.Generic.List<int> BuildSortedIndices(SwordAttributesConfig.AttributeOption[] options, float baseTotal)
-    {
-        var sortedIndices = new System.Collections.Generic.List<int>();
-        for (int i = 0; i < options.Length; i++)
-            sortedIndices.Add(i);
-
-        sortedIndices.Sort((a, b) =>
-        {
-            float oddsA = baseTotal / options[a].weight;
-            float oddsB = baseTotal / options[b].weight;
-            return oddsA.CompareTo(oddsB); // Ordre croissant (1/1 avant 1/10)
-        });
-
-        return sortedIndices;
+        sb.AppendLine("========== END PROGRESSION ==========\n");
+        Debug.Log(sb.ToString());
     }
 
     /// <summary>
