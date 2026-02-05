@@ -30,6 +30,11 @@ public class UpgradeUI : MonoBehaviour
     [Header("Panel")]
     [SerializeField] private GameObject upgradePanel;
     [SerializeField] private KeyCode toggleKey = KeyCode.U;
+    
+    [Header("F Image Position")]
+    [SerializeField] private RectTransform fImage;
+    [SerializeField] private Vector2 fImagePositionHidden;
+    [SerializeField] private Vector2 fImagePositionShown;
 
     void Start()
     {
@@ -81,6 +86,12 @@ public class UpgradeUI : MonoBehaviour
                     Cursor.lockState = CursorLockMode.Locked;
                     Cursor.visible = false;
                 }
+                
+                // Gérer la position de l'image F
+                if (fImage != null)
+                {
+                    fImage.anchoredPosition = newState ? fImagePositionShown : fImagePositionHidden;
+                }
             }
         }
 
@@ -89,6 +100,14 @@ public class UpgradeUI : MonoBehaviour
         {
             UpdateUI();
         }
+    }
+
+    /// <summary>
+    /// Vérifie si le panel d'upgrade est actuellement visible
+    /// </summary>
+    public bool IsUpgradePanelActive()
+    {
+        return upgradePanel != null && upgradePanel.activeSelf;
     }
 
     private void UpgradeMolder()

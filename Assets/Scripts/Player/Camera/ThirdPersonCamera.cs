@@ -29,9 +29,16 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         if (target == null || pivot == null) return;
 
-        rotationX += Input.GetAxis("Mouse X") * mouseSensitivity;
-        rotationY -= Input.GetAxis("Mouse Y") * mouseSensitivity;
-        rotationY = Mathf.Clamp(rotationY, minY, maxY);
+        // Vérifier si le panel d'upgrade est visible - ne pas bouger la caméra avec la souris dans ce cas
+        UpgradeUI upgradeUI = FindFirstObjectByType<UpgradeUI>();
+        bool upgradeUIActive = upgradeUI != null && upgradeUI.IsUpgradePanelActive();
+
+        if (!upgradeUIActive)
+        {
+            rotationX += Input.GetAxis("Mouse X") * mouseSensitivity;
+            rotationY -= Input.GetAxis("Mouse Y") * mouseSensitivity;
+            rotationY = Mathf.Clamp(rotationY, minY, maxY);
+        }
 
         pivot.position = target.position;
         pivot.rotation = Quaternion.Euler(rotationY, rotationX, 0f);
