@@ -52,6 +52,15 @@ public class UpgradeStatsDisplay : MonoBehaviour
         sb.AppendLine("\n=== MOLDS (upgraded) ===");
         DisplayAllOptions(sb, attributesConfig.moldOptions, UpgradeSystem.Instance.Molder.currentLevel, UpgradeSystem.Instance.Molder);
         
+        sb.AppendLine("\n=== QUALITIES (upgraded) ===");
+        DisplayAllOptions(sb, attributesConfig.qualityOptions, UpgradeSystem.Instance.Quality.currentLevel, UpgradeSystem.Instance.Quality);
+        
+        sb.AppendLine("\n=== CLASSES (upgraded) ===");
+        DisplayAllOptions(sb, attributesConfig.classOptions, UpgradeSystem.Instance.SwordClass.currentLevel, UpgradeSystem.Instance.SwordClass);
+        
+        sb.AppendLine("\n=== RARITIES (upgraded) ===");
+        DisplayAllOptions(sb, attributesConfig.rarityOptions, UpgradeSystem.Instance.Rarity.currentLevel, UpgradeSystem.Instance.Rarity);
+        
         statsText.text = sb.ToString();
     }
 

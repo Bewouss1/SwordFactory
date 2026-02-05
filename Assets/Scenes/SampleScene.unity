@@ -411,7 +411,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[I] Level 1 Enchanter
+  m_text: 'Level 1 Enchanter
 
 '
   m_isRightToLeft: 0
@@ -1068,7 +1068,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[I] Level 1 Classifier
+  m_text: 'Level 1 Classifier
 
 '
   m_isRightToLeft: 0
@@ -5598,7 +5598,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[I] Level 1 Conveyor
+  m_text: 'Level 1 Conveyor
 
 '
   m_isRightToLeft: 0
@@ -6547,7 +6547,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[I] Level 1 Appraiser
+  m_text: 'Level 1 Appraiser
 
 '
   m_isRightToLeft: 0
@@ -6723,7 +6723,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[I] Level 1 Molder
+  m_text: 'Level 1 Molder
 
 '
   m_isRightToLeft: 0
@@ -8038,7 +8038,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[I] Level 1 Upgrader'
+  m_text: Level 1 Upgrader
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c4fa0ecf054aec346871ebbf9daed129, type: 2}
   m_sharedMaterial: {fileID: 1851310325135207337, guid: c4fa0ecf054aec346871ebbf9daed129, type: 2}
@@ -8175,7 +8175,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[I] Level 1 Polisher
+  m_text: 'Level 1 Polisher
 
 '
   m_isRightToLeft: 0

@@ -163,8 +163,7 @@ public class UpgradeUI : MonoBehaviour
             }
             else
             {
-                int nextLevel = category.currentLevel + 1;
-                ui.upgradeCostText.text = $"Upgrade x{nextLevel} ({SwordStats.FormatMoneyValue(nextCost)})";
+                ui.upgradeCostText.text = $"Upgrade x1 ({SwordStats.FormatMoneyValue(nextCost)})";
                 ui.upgradeCostText.color = canAfford ? Color.white : Color.red;
             }
         }
