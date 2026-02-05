@@ -366,7 +366,7 @@ GameObject:
   - component: {fileID: 181861386}
   - component: {fileID: 181861385}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: LevelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -609,7 +609,7 @@ GameObject:
   - component: {fileID: 230128064}
   - component: {fileID: 230128066}
   m_Layer: 5
-  m_Name: Molder2
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -730,7 +730,7 @@ GameObject:
   - component: {fileID: 246202071}
   - component: {fileID: 246202073}
   m_Layer: 5
-  m_Name: Enchanter2
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -947,7 +947,7 @@ GameObject:
   - component: {fileID: 307957799}
   - component: {fileID: 307957798}
   m_Layer: 5
-  m_Name: Molder
+  m_Name: Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1023,7 +1023,7 @@ GameObject:
   - component: {fileID: 332796706}
   - component: {fileID: 332796705}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: LevelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1993,7 +1993,7 @@ GameObject:
   - component: {fileID: 428852576}
   - component: {fileID: 428852575}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2512,7 +2512,7 @@ GameObject:
   - component: {fileID: 501544625}
   - component: {fileID: 501544627}
   m_Layer: 5
-  m_Name: Conveyor2
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2698,7 +2698,7 @@ GameObject:
   - component: {fileID: 533070604}
   - component: {fileID: 533070603}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3747,7 +3747,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMoney
   moneyText: {fileID: 1440843855}
-  currentMoney: 0
+  currentMoney: 1e+21
 --- !u!1001 &776496363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4096,7 +4096,7 @@ GameObject:
   - component: {fileID: 922633009}
   - component: {fileID: 922633008}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4382,7 +4382,7 @@ GameObject:
   - component: {fileID: 1051790164}
   - component: {fileID: 1051790166}
   m_Layer: 5
-  m_Name: Upgrader2
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4807,7 +4807,7 @@ GameObject:
   - component: {fileID: 1177884965}
   - component: {fileID: 1177884964}
   m_Layer: 5
-  m_Name: Appraiser
+  m_Name: Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4883,7 +4883,7 @@ GameObject:
   - component: {fileID: 1178948613}
   - component: {fileID: 1178948612}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5433,7 +5433,7 @@ GameObject:
   - component: {fileID: 1289450913}
   - component: {fileID: 1289450915}
   m_Layer: 5
-  m_Name: Appraiser2
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5553,7 +5553,7 @@ GameObject:
   - component: {fileID: 1332954294}
   - component: {fileID: 1332954293}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: LevelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6502,7 +6502,7 @@ GameObject:
   - component: {fileID: 1442426808}
   - component: {fileID: 1442426807}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: LevelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6678,7 +6678,7 @@ GameObject:
   - component: {fileID: 1466945266}
   - component: {fileID: 1466945265}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: LevelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6817,7 +6817,7 @@ GameObject:
   - component: {fileID: 1485545841}
   - component: {fileID: 1485545840}
   m_Layer: 5
-  m_Name: Upgrader
+  m_Name: Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6918,20 +6918,20 @@ MonoBehaviour:
     upgradeCostText: {fileID: 428852575}
     upgradeButton: {fileID: 230128066}
   qualityUI:
-    categoryName: 
-    levelText: {fileID: 0}
-    upgradeCostText: {fileID: 0}
-    upgradeButton: {fileID: 0}
+    categoryName: Polisher
+    levelText: {fileID: 1793337027}
+    upgradeCostText: {fileID: 922633008}
+    upgradeButton: {fileID: 1948385222}
   classUI:
-    categoryName: 
-    levelText: {fileID: 0}
-    upgradeCostText: {fileID: 0}
-    upgradeButton: {fileID: 0}
+    categoryName: Classifier
+    levelText: {fileID: 332796705}
+    upgradeCostText: {fileID: 1764015272}
+    upgradeButton: {fileID: 1691233080}
   rarityUI:
-    categoryName: 
-    levelText: {fileID: 0}
-    upgradeCostText: {fileID: 0}
-    upgradeButton: {fileID: 0}
+    categoryName: Appraiser
+    levelText: {fileID: 1442426807}
+    upgradeCostText: {fileID: 1178948612}
+    upgradeButton: {fileID: 1289450915}
   upgradePanel: {fileID: 1034409660}
   toggleKey: 117
 --- !u!4 &1495533277
@@ -7027,7 +7027,7 @@ GameObject:
   - component: {fileID: 1587106399}
   - component: {fileID: 1587106398}
   m_Layer: 5
-  m_Name: Conveyor
+  m_Name: Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7140,7 +7140,7 @@ GameObject:
   - component: {fileID: 1614699054}
   - component: {fileID: 1614699053}
   m_Layer: 5
-  m_Name: Classifier
+  m_Name: Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7519,7 +7519,7 @@ GameObject:
   - component: {fileID: 1691233078}
   - component: {fileID: 1691233080}
   m_Layer: 5
-  m_Name: Classifier2
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7659,24 +7659,24 @@ MonoBehaviour:
   molder:
     name: Molder
     currentLevel: 1
-    maxLevel: 1000
-    baseCost: 0
-    costMultiplier: 0
+    maxLevel: 100
+    baseCost: 20
+    costMultiplier: 1.15
   quality:
     name: Quality
-    currentLevel: 0
+    currentLevel: 1
     maxLevel: 100
     baseCost: 30
     costMultiplier: 1.15
   swordClass:
     name: Class
-    currentLevel: 0
+    currentLevel: 1
     maxLevel: 100
     baseCost: 40
     costMultiplier: 1.15
   rarity:
     name: Rarity
-    currentLevel: 0
+    currentLevel: 1
     maxLevel: 100
     baseCost: 50
     costMultiplier: 1.15
@@ -7856,7 +7856,7 @@ GameObject:
   - component: {fileID: 1764015273}
   - component: {fileID: 1764015272}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7993,7 +7993,7 @@ GameObject:
   - component: {fileID: 1764597271}
   - component: {fileID: 1764597270}
   m_Layer: 5
-  m_Name: UpgradeLevel
+  m_Name: LevelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8130,7 +8130,7 @@ GameObject:
   - component: {fileID: 1793337028}
   - component: {fileID: 1793337027}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: LevelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8269,7 +8269,7 @@ GameObject:
   - component: {fileID: 1817649295}
   - component: {fileID: 1817649294}
   m_Layer: 5
-  m_Name: Polisher
+  m_Name: Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9000,7 +9000,7 @@ GameObject:
   - component: {fileID: 1948385220}
   - component: {fileID: 1948385222}
   m_Layer: 5
-  m_Name: Polisher2
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9252,7 +9252,7 @@ GameObject:
   - component: {fileID: 1971743406}
   - component: {fileID: 1971743405}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9420,7 +9420,7 @@ GameObject:
   - component: {fileID: 2054359262}
   - component: {fileID: 2054359261}
   m_Layer: 5
-  m_Name: UpgradeCost
+  m_Name: CostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9632,7 +9632,7 @@ GameObject:
   - component: {fileID: 2075006731}
   - component: {fileID: 2075006730}
   m_Layer: 5
-  m_Name: Enchanter
+  m_Name: Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

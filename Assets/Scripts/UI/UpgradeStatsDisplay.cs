@@ -49,7 +49,7 @@ public class UpgradeStatsDisplay : MonoBehaviour
         sb.AppendLine($"Class: Lvl {UpgradeSystem.Instance.SwordClass.currentLevel}");
         sb.AppendLine($"Rarity: Lvl {UpgradeSystem.Instance.Rarity.currentLevel}");
         
-        sb.AppendLine("\n=== ALL MOLDS (upgraded) ===");
+        sb.AppendLine("\n=== MOLDS (upgraded) ===");
         DisplayAllOptions(sb, attributesConfig.moldOptions, UpgradeSystem.Instance.Molder.currentLevel, UpgradeSystem.Instance.Molder);
         
         statsText.text = sb.ToString();

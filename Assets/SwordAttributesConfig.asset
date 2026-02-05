@@ -119,613 +119,613 @@ MonoBehaviour:
     color: {r: 0.9019608, g: 0.6039216, b: 1, a: 1}
   qualityOptions:
   - name: Broken
-    baseOdds: 0
+    baseOdds: 1
     multiplier: 1
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Rough
-    baseOdds: 0
+    baseOdds: 3
     multiplier: 1.25
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Bad
-    baseOdds: 0
+    baseOdds: 9
     multiplier: 1.5
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Okay
-    baseOdds: 0
+    baseOdds: 27
     multiplier: 2
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Fine
-    baseOdds: 0
+    baseOdds: 81
     multiplier: 3
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Good
-    baseOdds: 0
+    baseOdds: 243
     multiplier: 4.5
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Great
-    baseOdds: 0
+    baseOdds: 729
     multiplier: 6
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Awesome
-    baseOdds: 0
+    baseOdds: 2187
     multiplier: 9
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Excellent
-    baseOdds: 0
+    baseOdds: 6561
     multiplier: 12.5
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Perfect
-    baseOdds: 0
+    baseOdds: 19683
     multiplier: 18
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Best
-    baseOdds: 0
+    baseOdds: 59049
     multiplier: 27.5
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Incredible
-    baseOdds: 0
+    baseOdds: 177147
     multiplier: 40
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Tremendous
-    baseOdds: 0
+    baseOdds: 531441
     multiplier: 55
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Fantastic
-    baseOdds: 0
+    baseOdds: 1594323
     multiplier: 70
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Absurd
-    baseOdds: 0
+    baseOdds: 4782969
     multiplier: 90
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Exquisite
-    baseOdds: 0
+    baseOdds: 14348907
     multiplier: 125
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Remarkable
-    baseOdds: 0
+    baseOdds: 43046720
     multiplier: 145
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Extravagant
-    baseOdds: 0
+    baseOdds: 129140160
     multiplier: 175
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Phenomenal
-    baseOdds: 0
+    baseOdds: 387420480
     multiplier: 210
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Brilliant
-    baseOdds: 0
+    baseOdds: 1.1622615e+9
     multiplier: 250
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Astounding
-    baseOdds: 0
+    baseOdds: 3.4867845e+9
     multiplier: 300
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Marvelous
-    baseOdds: 0
+    baseOdds: 1.0460354e+10
     multiplier: 360
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Spectacular
-    baseOdds: 0
+    baseOdds: 3.138106e+10
     multiplier: 430
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Extraordinary
-    baseOdds: 0
+    baseOdds: 9.414318e+10
     multiplier: 510
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Fabulous
-    baseOdds: 0
+    baseOdds: 2.8242952e+11
     multiplier: 620
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Splendid
-    baseOdds: 0
+    baseOdds: 8.472886e+11
     multiplier: 745
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Glorious
-    baseOdds: 0
+    baseOdds: 2.541866e+12
     multiplier: 900
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Magnificent
-    baseOdds: 0
+    baseOdds: 7.6255975e+12
     multiplier: 1075
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Terrific
-    baseOdds: 0
+    baseOdds: 2.2876793e+13
     multiplier: 1290
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Wondrous
-    baseOdds: 0
+    baseOdds: 6.8630377e+13
     multiplier: 1550
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Astonishing
-    baseOdds: 0
+    baseOdds: 2.0589114e+14
     multiplier: 1850
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Miraculous
-    baseOdds: 0
+    baseOdds: 6.176734e+14
     multiplier: 2200
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Unlimited
-    baseOdds: 0
+    baseOdds: 1.8530202e+15
     multiplier: 2500
     color: {r: 1, g: 1, b: 1, a: 1}
   classOptions:
   - name: Regular
-    baseOdds: 0
+    baseOdds: 1
     multiplier: 1
     color: {r: 0.9019608, g: 0.9019608, b: 0.9019608, a: 1}
   - name: Nice
-    baseOdds: 0
+    baseOdds: 4
     multiplier: 1.15
     color: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
   - name: Cool
-    baseOdds: 0
+    baseOdds: 16
     multiplier: 1.3
     color: {r: 0, g: 0, b: 1, a: 1}
   - name: Decent
-    baseOdds: 0
+    baseOdds: 64
     multiplier: 1.5
     color: {r: 0.023529412, g: 0.27058825, b: 0.6784314, a: 1}
   - name: Strong
-    baseOdds: 0
+    baseOdds: 256
     multiplier: 2
     color: {r: 0, g: 1, b: 1, a: 1}
   - name: Tough
-    baseOdds: 0
+    baseOdds: 1024
     multiplier: 2.75
     color: {r: 0.47058824, g: 1, b: 0.47058824, a: 1}
   - name: Solid
-    baseOdds: 0
+    baseOdds: 4096
     multiplier: 4
     color: {r: 0, g: 1, b: 0, a: 1}
   - name: Powerful
-    baseOdds: 0
+    baseOdds: 16384
     multiplier: 5.25
     color: {r: 1, g: 1, b: 0, a: 1}
   - name: Crazy
-    baseOdds: 0
+    baseOdds: 65536
     multiplier: 7.5
     color: {r: 1, g: 0.64705884, b: 0, a: 1}
   - name: Unstoppable
-    baseOdds: 0
+    baseOdds: 262144
     multiplier: 11
     color: {r: 1, g: 0, b: 0, a: 1}
   - name: Impossible
-    baseOdds: 0
+    baseOdds: 1048576
     multiplier: 20
     color: {r: 1, g: 0, b: 1, a: 1}
   - name: Ethereal
-    baseOdds: 0
+    baseOdds: 4194304
     multiplier: 32.5
     color: {r: 0.5019608, g: 0, b: 0.5019608, a: 1}
   - name: Unimaginable
-    baseOdds: 0
+    baseOdds: 16777216
     multiplier: 45
     color: {r: 0.47058824, g: 1, b: 0.47058824, a: 1}
   - name: Outrageous
-    baseOdds: 0
+    baseOdds: 67108864
     multiplier: 65
     color: {r: 0.6, g: 1, b: 0, a: 1}
   - name: Limitless
-    baseOdds: 0
+    baseOdds: 268435460
     multiplier: 90
     color: {r: 1, g: 0.64705884, b: 0, a: 1}
   - name: Invincible
-    baseOdds: 0
+    baseOdds: 1.0737418e+9
     multiplier: 125
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Chaotic
-    baseOdds: 0
+    baseOdds: 4.2949673e+9
     multiplier: 150
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Unbeatable
-    baseOdds: 0
+    baseOdds: 1.717987e+10
     multiplier: 180
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Colossal
-    baseOdds: 0
+    baseOdds: 6.871948e+10
     multiplier: 215
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Unbreakable
-    baseOdds: 0
+    baseOdds: 2.748779e+11
     multiplier: 260
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Indomitable
-    baseOdds: 0
+    baseOdds: 1.0995116e+12
     multiplier: 310
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Omnipotent
-    baseOdds: 0
+    baseOdds: 4.3980465e+12
     multiplier: 375
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Vigorous
-    baseOdds: 0
+    baseOdds: 1.7592186e+13
     multiplier: 450
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Ruthless
-    baseOdds: 0
+    baseOdds: 7.0368744e+13
     multiplier: 540
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Mighty
-    baseOdds: 0
+    baseOdds: 2.8147498e+14
     multiplier: 645
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Immortal
-    baseOdds: 0
+    baseOdds: 1.1258999e+15
     multiplier: 750
     color: {r: 1, g: 1, b: 1, a: 1}
   rarityOptions:
   - name: Basic-
-    baseOdds: 0
+    baseOdds: 1
     multiplier: 1
     color: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
   - name: Basic
-    baseOdds: 0
+    baseOdds: 1.33
     multiplier: 1.2
     color: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
   - name: Basic+
-    baseOdds: 0
+    baseOdds: 1.77
     multiplier: 1.44
     color: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
   - name: Basic++
-    baseOdds: 0
+    baseOdds: 2.37
     multiplier: 1.7280002
     color: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
   - name: Common-
-    baseOdds: 0
+    baseOdds: 3.16
     multiplier: 2.0736003
     color: {r: 0.6, g: 0.6, b: 0.6, a: 1}
   - name: Common
-    baseOdds: 0
+    baseOdds: 4.21
     multiplier: 2.4883206
     color: {r: 0.6, g: 0.6, b: 0.6, a: 1}
   - name: Common+
-    baseOdds: 0
+    baseOdds: 5.62
     multiplier: 2.9859848
     color: {r: 0.6, g: 0.6, b: 0.6, a: 1}
   - name: Common++
-    baseOdds: 0
+    baseOdds: 7.49
     multiplier: 3.5831819
     color: {r: 0.6, g: 0.6, b: 0.6, a: 1}
   - name: Uncommon-
-    baseOdds: 0
+    baseOdds: 10
     multiplier: 4.2998185
     color: {r: 0, g: 0.5019608, b: 0, a: 1}
   - name: Uncommon
-    baseOdds: 0
+    baseOdds: 13.33
     multiplier: 5.1597824
     color: {r: 0, g: 0.5019608, b: 0, a: 1}
   - name: Uncommon+
-    baseOdds: 0
+    baseOdds: 17.78
     multiplier: 6.191739
     color: {r: 0, g: 0.5019608, b: 0, a: 1}
   - name: Uncommon++
-    baseOdds: 0
+    baseOdds: 23.71
     multiplier: 7.430087
     color: {r: 0, g: 0.5019608, b: 0, a: 1}
   - name: Rare-
-    baseOdds: 0
+    baseOdds: 31.62
     multiplier: 8.916104
     color: {r: 0, g: 0.4, b: 1, a: 1}
   - name: Rare
-    baseOdds: 0
+    baseOdds: 42.16
     multiplier: 10.6993265
     color: {r: 0, g: 0.4, b: 1, a: 1}
   - name: Rare+
-    baseOdds: 0
+    baseOdds: 56.23
     multiplier: 12.839191
     color: {r: 0, g: 0.4, b: 1, a: 1}
   - name: Rare++
-    baseOdds: 0
+    baseOdds: 74.98
     multiplier: 15.407031
     color: {r: 0, g: 0.4, b: 1, a: 1}
   - name: Epic-
-    baseOdds: 0
+    baseOdds: 100
     multiplier: 18.488438
     color: {r: 0.33333334, g: 0, b: 0.6, a: 1}
   - name: Epic
-    baseOdds: 0
+    baseOdds: 133.35
     multiplier: 22.186127
     color: {r: 0.33333334, g: 0, b: 0.6, a: 1}
   - name: Epic+
-    baseOdds: 0
+    baseOdds: 177.82
     multiplier: 26.623352
     color: {r: 0.33333334, g: 0, b: 0.6, a: 1}
   - name: Epic++
-    baseOdds: 0
+    baseOdds: 237.13
     multiplier: 31.948025
     color: {r: 0.33333334, g: 0, b: 0.6, a: 1}
   - name: Legendary-
-    baseOdds: 0
+    baseOdds: 316.22
     multiplier: 38.33763
     color: {r: 1, g: 0.64705884, b: 0, a: 1}
   - name: Legendary
-    baseOdds: 0
+    baseOdds: 421.69
     multiplier: 46.005157
     color: {r: 1, g: 0.64705884, b: 0, a: 1}
   - name: Legendary+
-    baseOdds: 0
+    baseOdds: 562.34
     multiplier: 55.206192
     color: {r: 1, g: 0.64705884, b: 0, a: 1}
   - name: Legendary++
-    baseOdds: 0
+    baseOdds: 749.89
     multiplier: 66.24744
     color: {r: 1, g: 0.64705884, b: 0, a: 1}
   - name: Mythical-
-    baseOdds: 0
+    baseOdds: 1000
     multiplier: 79.496925
     color: {r: 1, g: 0, b: 0, a: 1}
   - name: Mythical
-    baseOdds: 0
+    baseOdds: 1334
     multiplier: 95.39631
     color: {r: 1, g: 0, b: 0, a: 1}
   - name: Mythical+
-    baseOdds: 0
+    baseOdds: 1778
     multiplier: 114.47558
     color: {r: 1, g: 0, b: 0, a: 1}
   - name: Mythical++
-    baseOdds: 0
+    baseOdds: 2371
     multiplier: 137.3707
     color: {r: 1, g: 0, b: 0, a: 1}
   - name: Divine-
-    baseOdds: 0
+    baseOdds: 3162
     multiplier: 164.84485
     color: {r: 0.8117647, g: 0, b: 0.8117647, a: 1}
   - name: Divine
-    baseOdds: 0
+    baseOdds: 4217
     multiplier: 197.81383
     color: {r: 0.8117647, g: 0, b: 0.8117647, a: 1}
   - name: Divine+
-    baseOdds: 0
+    baseOdds: 5623
     multiplier: 237.3766
     color: {r: 0.8117647, g: 0, b: 0.8117647, a: 1}
   - name: Divine++
-    baseOdds: 0
+    baseOdds: 7499
     multiplier: 284.85193
     color: {r: 0.8117647, g: 0, b: 0.8117647, a: 1}
   - name: Super-
-    baseOdds: 0
+    baseOdds: 10000
     multiplier: 341.82233
     color: {r: 0.07450981, g: 1, b: 0, a: 1}
   - name: Super
-    baseOdds: 0
+    baseOdds: 13335
     multiplier: 410.1868
     color: {r: 0.07450981, g: 1, b: 0, a: 1}
   - name: Super+
-    baseOdds: 0
+    baseOdds: 17783
     multiplier: 492.22418
     color: {r: 0.07450981, g: 1, b: 0, a: 1}
   - name: Super++
-    baseOdds: 0
+    baseOdds: 23714
     multiplier: 590.66907
     color: {r: 0.07450981, g: 1, b: 0, a: 1}
   - name: Mega-
-    baseOdds: 0
+    baseOdds: 31623
     multiplier: 708.8029
     color: {r: 1, g: 0, b: 0, a: 1}
   - name: Mega
-    baseOdds: 0
+    baseOdds: 42170
     multiplier: 850.5635
     color: {r: 1, g: 0, b: 0, a: 1}
   - name: Mega+
-    baseOdds: 0
+    baseOdds: 56234
     multiplier: 1020.6763
     color: {r: 1, g: 0, b: 0, a: 1}
   - name: Mega++
-    baseOdds: 0
+    baseOdds: 74989
     multiplier: 1224.8115
     color: {r: 1, g: 0, b: 0, a: 1}
   - name: Ultra-
-    baseOdds: 0
+    baseOdds: 100000
     multiplier: 1469.7739
     color: {r: 1, g: 0.2901961, b: 0.85882354, a: 1}
   - name: Ultra
-    baseOdds: 0
+    baseOdds: 133352
     multiplier: 1763.7288
     color: {r: 1, g: 0.2901961, b: 0.85882354, a: 1}
   - name: Ultra+
-    baseOdds: 0
+    baseOdds: 177828
     multiplier: 2116.4746
     color: {r: 1, g: 0.2901961, b: 0.85882354, a: 1}
   - name: Ultra++
-    baseOdds: 0
+    baseOdds: 237137
     multiplier: 2539.7695
     color: {r: 1, g: 0.2901961, b: 0.85882354, a: 1}
   - name: Omega-
-    baseOdds: 0
+    baseOdds: 316228
     multiplier: 3047.7236
     color: {r: 0, g: 0, b: 1, a: 1}
   - name: Omega
-    baseOdds: 0
+    baseOdds: 421697
     multiplier: 3657.2686
     color: {r: 0, g: 0, b: 1, a: 1}
   - name: Omega+
-    baseOdds: 0
+    baseOdds: 562341
     multiplier: 4388.722
     color: {r: 0, g: 0, b: 1, a: 1}
   - name: Omega++
-    baseOdds: 0
+    baseOdds: 749894
     multiplier: 5266.4673
     color: {r: 0, g: 0, b: 1, a: 1}
   - name: Extreme-
-    baseOdds: 0
+    baseOdds: 1000000
     multiplier: 6319.7607
     color: {r: 0.4, g: 1, b: 0.4, a: 1}
   - name: Extreme
-    baseOdds: 0
+    baseOdds: 1333000
     multiplier: 7583.7134
     color: {r: 0.4, g: 1, b: 0.4, a: 1}
   - name: Extreme+
-    baseOdds: 0
+    baseOdds: 1778000
     multiplier: 9100.456
     color: {r: 0.4, g: 1, b: 0.4, a: 1}
   - name: Extreme++
-    baseOdds: 0
+    baseOdds: 2371000
     multiplier: 10920.548
     color: {r: 0.4, g: 1, b: 0.4, a: 1}
   - name: Ultimate-
-    baseOdds: 0
+    baseOdds: 3162000
     multiplier: 13104.658
     color: {r: 1, g: 0.6, b: 1, a: 1}
   - name: Ultimate
-    baseOdds: 0
+    baseOdds: 4216000
     multiplier: 15725.59
     color: {r: 1, g: 0.6, b: 1, a: 1}
   - name: Ultimate+
-    baseOdds: 0
+    baseOdds: 5623000
     multiplier: 18870.709
     color: {r: 1, g: 0.6, b: 1, a: 1}
   - name: Ultimate++
-    baseOdds: 0
+    baseOdds: 7498000
     multiplier: 22644.852
     color: {r: 1, g: 0.6, b: 1, a: 1}
   - name: Insane-
-    baseOdds: 0
+    baseOdds: 10000000
     multiplier: 27173.822
     color: {r: 0.16078432, g: 0.16078432, b: 0.46666667, a: 1}
   - name: Insane
-    baseOdds: 0
+    baseOdds: 13330000
     multiplier: 32608.59
     color: {r: 0.16078432, g: 0.16078432, b: 0.46666667, a: 1}
   - name: Insane+
-    baseOdds: 0
+    baseOdds: 17780000
     multiplier: 39130.31
     color: {r: 0.16078432, g: 0.16078432, b: 0.46666667, a: 1}
   - name: Insane++
-    baseOdds: 0
+    baseOdds: 23710000
     multiplier: 46956.37
     color: {r: 0.16078432, g: 0.16078432, b: 0.46666667, a: 1}
   - name: Hyper-
-    baseOdds: 0
+    baseOdds: 31620000
     multiplier: 56347.65
     color: {r: 0, g: 0, b: 0, a: 1}
   - name: Hyper
-    baseOdds: 0
+    baseOdds: 42160000
     multiplier: 67617.18
     color: {r: 0, g: 0, b: 0, a: 1}
   - name: Hyper+
-    baseOdds: 0
+    baseOdds: 56230000
     multiplier: 81140.62
     color: {r: 0, g: 0, b: 0, a: 1}
   - name: Hyper++
-    baseOdds: 0
+    baseOdds: 74980000
     multiplier: 97368.75
     color: {r: 0, g: 0, b: 0, a: 1}
   - name: Godly-
-    baseOdds: 0
+    baseOdds: 100000000
     multiplier: 116842.5
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Godly
-    baseOdds: 0
+    baseOdds: 200000000
     multiplier: 140211.02
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Godly+
-    baseOdds: 0
+    baseOdds: 400000000
     multiplier: 168253.22
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Godly++
-    baseOdds: 0
+    baseOdds: 800000000
     multiplier: 201903.88
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Unique-
-    baseOdds: 0
+    baseOdds: 1.6e+9
     multiplier: 242284.66
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Unique
-    baseOdds: 0
+    baseOdds: 3.2e+9
     multiplier: 290741.6
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Unique+
-    baseOdds: 0
+    baseOdds: 6.4e+9
     multiplier: 348889.94
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Unique++
-    baseOdds: 0
+    baseOdds: 1.28e+10
     multiplier: 418667.94
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Exotic-
-    baseOdds: 0
+    baseOdds: 2.56e+10
     multiplier: 502401.53
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Exotic
-    baseOdds: 0
+    baseOdds: 5.12e+10
     multiplier: 602881.9
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Exotic+
-    baseOdds: 0
+    baseOdds: 1.024e+11
     multiplier: 723458.25
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Exotic++
-    baseOdds: 0
+    baseOdds: 2.048e+11
     multiplier: 868149.94
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Supreme-
-    baseOdds: 0
+    baseOdds: 4.096e+11
     multiplier: 1041780
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Supreme
-    baseOdds: 0
+    baseOdds: 8.192e+11
     multiplier: 1250136
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Supreme+
-    baseOdds: 0
+    baseOdds: 1.638e+12
     multiplier: 1500163.2
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Supreme++
-    baseOdds: 0
+    baseOdds: 3.276e+12
     multiplier: 1800196
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Celestial-
-    baseOdds: 0
+    baseOdds: 6.553e+12
     multiplier: 2160235.2
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Celestial
-    baseOdds: 0
+    baseOdds: 1.31e+13
     multiplier: 2592282.5
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Celestial+
-    baseOdds: 0
+    baseOdds: 2.621e+13
     multiplier: 3110739
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Celestial++
-    baseOdds: 0
+    baseOdds: 5.242e+13
     multiplier: 3732887
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Eternal-
-    baseOdds: 0
+    baseOdds: 1.048e+14
     multiplier: 4479464.5
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Eternal
-    baseOdds: 0
+    baseOdds: 2.097e+14
     multiplier: 5375358
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Eternal+
-    baseOdds: 0
+    baseOdds: 4.194e+14
     multiplier: 6450429.5
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Eternal++
-    baseOdds: 0
+    baseOdds: 8.388e+14
     multiplier: 7740516
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Cosmic-
-    baseOdds: 0
+    baseOdds: 1.67e+15
     multiplier: 9288619
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Cosmic
-    baseOdds: 0
+    baseOdds: 3.35e+15
     multiplier: 11146344
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Cosmic+
-    baseOdds: 0
+    baseOdds: 6.71e+15
     multiplier: 13375613
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Cosmic++
-    baseOdds: 0
+    baseOdds: 1.342e+16
     multiplier: 16050736
     color: {r: 1, g: 1, b: 1, a: 1}
   - name: Cosmic+3
-    baseOdds: 0
+    baseOdds: 2.684e+16
     multiplier: 19260884
     color: {r: 1, g: 1, b: 1, a: 1}
   enchantTextColor: {r: 0.8536844, g: 0, b: 1, a: 1}
