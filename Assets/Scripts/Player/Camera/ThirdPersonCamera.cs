@@ -8,10 +8,12 @@ public class ThirdPersonCamera : MonoBehaviour
     [SerializeField] private float minY = GameConstants.DEFAULT_CAMERA_MIN_Y;
     [SerializeField] private float maxY = GameConstants.DEFAULT_CAMERA_MAX_Y;
     [SerializeField] private LayerMask collisionMask = ~0;
+    [SerializeField] private KeyCode toggleCursorKey = KeyCode.F;
 
     private Transform pivot;
     private float rotationX;
     private float rotationY;
+    private bool cursorUnlocked;
     
     // Cache pour éviter allocations à chaque frame
     private Vector3 cachedDesiredPosition;
@@ -21,8 +23,7 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         pivot = transform.parent;
         transform.localPosition = new Vector3(0f, 0f, -cameraDistance);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        SetCursorState(false);
     }
 
     void LateUpdate()
@@ -33,7 +34,16 @@ public class ThirdPersonCamera : MonoBehaviour
         UpgradeUI upgradeUI = FindFirstObjectByType<UpgradeUI>();
         bool upgradeUIActive = upgradeUI != null && upgradeUI.IsUpgradePanelActive();
 
-        if (!upgradeUIActive)
+        if (upgradeUIActive && !cursorUnlocked)
+        {
+            SetCursorState(true);
+        }
+        else if (!upgradeUIActive && Input.GetKeyDown(toggleCursorKey))
+        {
+            SetCursorState(!cursorUnlocked);
+        }
+
+        if (!upgradeUIActive && !cursorUnlocked)
         {
             rotationX += Input.GetAxis("Mouse X") * mouseSensitivity;
             rotationY -= Input.GetAxis("Mouse Y") * mouseSensitivity;
@@ -56,5 +66,12 @@ public class ThirdPersonCamera : MonoBehaviour
         {
             transform.position = cachedDesiredPosition;
         }
+    }
+
+    private void SetCursorState(bool unlocked)
+    {
+        cursorUnlocked = unlocked;
+        Cursor.lockState = unlocked ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = unlocked;
     }
 }

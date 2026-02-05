@@ -156,7 +156,7 @@ public class SellZone : MonoBehaviour
             {
                 lastDisplayed = display;
                 if (timeText != null)
-                    timeText.text = display.ToString();
+                    timeText.text = $"Selling in {display}s";
             }
 
             yield return new WaitForSeconds(1f);
@@ -164,7 +164,7 @@ public class SellZone : MonoBehaviour
         }
 
         if (timeText != null)
-            timeText.text = "0";
+            timeText.text = "Sold!";
 
         if (swordTransform != null)
         {
