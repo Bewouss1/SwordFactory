@@ -234,6 +234,36 @@ public class SwordStats : MonoBehaviour
     }
 
     /// <summary>
+    /// Formate un nombre avec suffixes (k, M, B, T, Qd, Qn) sans symbole monétaire
+    /// Utilisé pour afficher des odds compactes (ex: 1/1B)
+    /// </summary>
+    public static string FormatCompactNumber(float value)
+    {
+        if (value <= 0f)
+            return "0";
+
+        int suffixIndex = 0;
+        float displayValue = value;
+
+        while (displayValue >= 1000f && suffixIndex < GameConstants.MONEY_SUFFIXES.Length - 1)
+        {
+            displayValue /= 1000f;
+            suffixIndex++;
+        }
+
+        string formatted;
+        if (displayValue >= 100f)
+            formatted = displayValue.ToString("F0", System.Globalization.CultureInfo.InvariantCulture);
+        else if (displayValue >= 10f)
+            formatted = displayValue.ToString("F1", System.Globalization.CultureInfo.InvariantCulture);
+        else
+            formatted = displayValue.ToString("F2", System.Globalization.CultureInfo.InvariantCulture);
+
+        formatted = formatted.TrimEnd('0').TrimEnd('.');
+        return $"{formatted}{GameConstants.MONEY_SUFFIXES[suffixIndex]}";
+    }
+
+    /// <summary>
     /// Récupère la couleur associée à un attribut
     /// ATTENTION: Cette méthode retourne Color.white si aucune correspondance,
     /// car elle est utilisée pour les TEXTES uniquement.
