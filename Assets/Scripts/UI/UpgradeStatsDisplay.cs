@@ -74,7 +74,17 @@ public class UpgradeStatsDisplay : MonoBehaviour
         System.Array.Copy(options, modifiedOptions, options.Length);
         
         if (level > 0 && category != null)
+        {
             UpgradeSystem.Instance.ApplyLuckBonus(modifiedOptions, level, category);
+        }
+        else
+        {
+            // Si pas d'upgrade, initialiser weight à baseOdds
+            for (int i = 0; i < modifiedOptions.Length; i++)
+            {
+                modifiedOptions[i].weight = modifiedOptions[i].baseOdds;
+            }
+        }
 
         // Afficher TOUS les molds (avec indication si retiré)
         for (int i = 0; i < modifiedOptions.Length; i++)

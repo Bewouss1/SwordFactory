@@ -7,7 +7,7 @@ using System;
 /// Génère dynamiquement la liste des molds dans le ScrollView
 /// Duplique un prefab pour chaque mold avec ses stats, couleurs et position Y
 /// </summary>
-public class MoldListGenerator : MonoBehaviour
+public class ListGenerator : MonoBehaviour
 {
     public enum ListType
     {
